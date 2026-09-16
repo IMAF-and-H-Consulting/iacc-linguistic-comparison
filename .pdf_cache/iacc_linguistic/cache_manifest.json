@@ -1,0 +1,250 @@
+{
+ "version": 2,
+ "files": {
+  "autism/uspstf_report_to_congress_2016.pdf": {
+   "sha256": "f89c1d967b3094cd8524ed08509a4af65d3b4bee6bd8ff84b143dd1a365f7f57",
+   "bytes": 384734
+  },
+  "general/2009_letter_to_nvac.pdf": {
+   "sha256": "47c407e01f5169d1ee4c2075c27d6d24501ea4d20e7005722acb4a6b8714fe46",
+   "bytes": 106764
+  },
+  "general/2011/iacc_response_letter_sebelius_wandering_032311.pdf": {
+   "sha256": "9dd5caaad914374d6325da44d82a3eead526733ac4a9f25d5f971327f7da573a",
+   "bytes": 36726
+  },
+  "general/2011/letter_seclusion_restraint_090711.pdf": {
+   "sha256": "09cabbe385a5149d209730e517041f62ef6d294d1ed8a48a802625dab63734e4",
+   "bytes": 153348
+  },
+  "general/2011/letter_wandering_020911.pdf": {
+   "sha256": "ab13a5f480cc0cc9a55acb9881a66c529ad47bfefba8142df4acd8dfaf78a053",
+   "bytes": 136695
+  },
+  "general/2013/a_res_67_82.pdf": {
+   "sha256": "61f188e43d2f2bd4fcabdc0db9d46c4f585a48789bd336f5527ef658308a0bb8",
+   "bytes": 76782
+  },
+  "general/2013/iacc_response_letter_sebelius_coverage_070213.pdf": {
+   "sha256": "7d3ab82044734d6d412c606f5f7e0d06f8184f2c6b6f8220ab258d9644c22307",
+   "bytes": 44385
+  },
+  "general/2014/letter_gao_response_040314.pdf": {
+   "sha256": "3b7356af6f7c25f550e7cc46786591f48716628a362fa27aa1504fe6b0a35ddc",
+   "bytes": 118426
+  },
+  "general/2014/letter_iacc_gao_public_member_response_030614.pdf": {
+   "sha256": "dd9b3e435bc1589959b6fe0f13c8d0e2fadebbdcf2a350fabccd1536920504e6",
+   "bytes": 163931
+  },
+  "international-portfolio-analysis/2016/portfolio_analysis_2016.pdf": {
+   "sha256": "fd56ec3851337bd84c84d03a4b1c4130d5ca922386c485c57a5424e81931332d",
+   "bytes": 621588
+  },
+  "portfolio-analysis/2008/portfolio_analysis_2008.pdf": {
+   "sha256": "0bb7478c6a097bed866863008e074320a1c1d1cc343c588bed5c7bd37ef63615",
+   "bytes": 646968
+  },
+  "portfolio-analysis/2009/portfolio_analysis_2009.pdf": {
+   "sha256": "35f5f8e2c292dfd30b2e32656bb24d1219b0efb66a20a6dcb5b32d00e6e8993c",
+   "bytes": 2374941
+  },
+  "portfolio-analysis/2010/portfolio_analysis_2010.pdf": {
+   "sha256": "8409d095993e7d71825db40e5fb8c0d665b5972a2190019ddf9de79ecd319575",
+   "bytes": 3616082
+  },
+  "portfolio-analysis/2012/portfolio_analysis_2012.pdf": {
+   "sha256": "6a621b9b3fbebef84fc1e32f686f4dcaebe8b214b2180b3d2db1dda38a037a6d",
+   "bytes": 4520038
+  },
+  "portfolio-analysis/2013/portfolio_analysis_2013.pdf": {
+   "sha256": "3f68b9694c34183167c0ab314dda5338b2725d721d769901be92a1c727537096",
+   "bytes": 14245834
+  },
+  "portfolio-analysis/2015/portfolio_analysis_2015.pdf": {
+   "sha256": "f326874ea46a478abc98265b09d7a58df0ede6869792b38a79ae95cb5805c99d",
+   "bytes": 5089207
+  },
+  "portfolio-analysis/2016/portfolio_analysis_2016.pdf": {
+   "sha256": "9127f934ddee9036cf6622762e9df91363fc07bcc60cc82386d2cb8360550988",
+   "bytes": 17284885
+  },
+  "portfolio-analysis/2018/portfolio_analysis_2018.pdf": {
+   "sha256": "6eadaabe66e59396f26259e2c4573c6219bed0ca7065bbac96beb16a5c79c88b",
+   "bytes": 5657814
+  },
+  "portfolio-analysis/2020/at-a-glance.pdf": {
+   "sha256": "e3bb99e103818bd37e117c47805c931138dcee5f0ea941fe4c04b9a31ef36511",
+   "bytes": 955344
+  },
+  "portfolio-analysis/2020/portfolio_analysis_2020.pdf": {
+   "sha256": "6642474b726b5cc04ac6a4c1895f684cdee9e320b70a8a2a6976bc0c202666ca",
+   "bytes": 15373714
+  },
+  "portfolio-analysis/2022/2021-22_AutismPortfolioAnalysisReport.pdf": {
+   "sha256": "8e08ae070867bf813a441eb0aecb44bfc646fc441b5119015133dd36bbca6b78",
+   "bytes": 19231798
+  },
+  "portfolio-analysis/2022/2021-22_AutismPortfolioAnalysisReport_AtAGlance.pdf": {
+   "sha256": "1b23d8bf4e5723c925dd1cf155eead892459adb5713034eef4abff2d45039a86",
+   "bytes": 504567
+  },
+  "publications-analysis/2012/publications_analysis_2012.pdf": {
+   "sha256": "f6f7e28ab7c2ac92a645381271731b189cf997c4ee8123512ae60c783ec54f4b",
+   "bytes": 5857878
+  },
+  "report-to-congress/2009/report_to_congress_2009.pdf": {
+   "sha256": "3d79bd88c69f2b12825ce035e86ece4285eb0f241c1e06a5950ee216cb1d8b2f",
+   "bytes": 1343597
+  },
+  "report-to-congress/2012/report_to_congress_2012.pdf": {
+   "sha256": "715aa221a07024071f8a846fa6712c6e1fcbaa45b37c52a11d739d4167278c55",
+   "bytes": 2660211
+  },
+  "report-to-congress/2017/report_to_congress_2017.pdf": {
+   "sha256": "8b7aec52acac41939b32ce399945f7018967a844a1b2b95f0ed82f4b2f9a45c5",
+   "bytes": 2053539
+  },
+  "report-to-congress/2018/report_to_congress_2018.pdf": {
+   "sha256": "f837f84767622c59d64b89b820d99e5c32bdbcfa4188128ed39413b89503044e",
+   "bytes": 2250485
+  },
+  "report-to-congress/2021/report_to_congress_2021.pdf": {
+   "sha256": "9d24fed858468e40c42b9d12cfb061dcc9b83b90031b0863ac54398598325d38",
+   "bytes": 7071806
+  },
+  "report-to-congress/2022/report_to_congress_2022.pdf": {
+   "sha256": "eaab3b8a7b0773d693506031643e63676b4ee2ec65fd52c09afce3e65fe04851",
+   "bytes": 5097194
+  },
+  "report-to-congress/2023/report_to_congress_2023.pdf": {
+   "sha256": "a3a51ef1d9d3b934f95d67cb870702b1df24f88d9abf56b4fb113125e1109ca7",
+   "bytes": 10065406
+  },
+  "strategic-plan/2009/strategic_plan_2009.pdf": {
+   "sha256": "0844b11964aeea986a9568653232fb0cd98cb25bc66e8a3b37338e2e83f57d7e",
+   "bytes": 1362075
+  },
+  "strategic-plan/2010/strategic_plan_2010.pdf": {
+   "sha256": "9c6bc30ec87f3dbedcc253bc3409091604131a5134b58da109431fe1af99e4dc",
+   "bytes": 1200959
+  },
+  "strategic-plan/2011/strategic_plan_2011.pdf": {
+   "sha256": "cfd558919b07910c969f59ba67605280cadd6d66c138e4c2f91f8113e6e6caa4",
+   "bytes": 873800
+  },
+  "strategic-plan/2012/strategic_plan_2012.pdf": {
+   "sha256": "ad0ee845e7a52a3a628025ad8fff35cc7cae289c24853c7b7b7d0fb5e1ecfaff",
+   "bytes": 1124880
+  },
+  "strategic-plan/2013/strategic_plan_2013.pdf": {
+   "sha256": "ea99586ed6003a9bfb7d01cf2a6a4f228747f04e52d493dbd810e687f4099e1b",
+   "bytes": 8358739
+  },
+  "strategic-plan/2017/strategic_plan_2017.pdf": {
+   "sha256": "d49558dc189ffa1fa80dace18407aeb5a83e86af08b6d91b8d4d05478f10e5a8",
+   "bytes": 4695682
+  },
+  "strategic-plan/2019/strategic_plan_2019.pdf": {
+   "sha256": "a4da1103b3f8d053262db6852b12d921ee6cb4fcf90e643f18f54620ec9455c4",
+   "bytes": 5741543
+  },
+  "strategic-plan/2023/strategic_plan_2023.pdf": {
+   "sha256": "2b750fb86b59ad6fe79b6dd103c32c2217d056913053536f64df2c240e6029d8",
+   "bytes": 6897814
+  },
+  "strategic-plan/2023/strategic_plan_2023_easy_read.pdf": {
+   "sha256": "7b5a6d2668c97ebb5484a8a5238496ef88b11683b1fa31a11a5339768d243212",
+   "bytes": 1261831
+  },
+  "summary-of-advances/2007/summary_of_advances_2007.pdf": {
+   "sha256": "73089fc60c872bf3786832788e25b87441b9b7aaed9badd3d1ca279ecd00571f",
+   "bytes": 165809
+  },
+  "summary-of-advances/2008/summary_of_advances_2008.pdf": {
+   "sha256": "03e00adb347fed90fde2730fedae86e2675aa0c7a96709757489cdfd97f5d978",
+   "bytes": 277782
+  },
+  "summary-of-advances/2009/summary_of_advances_2009.pdf": {
+   "sha256": "42acb07f9442ae11d36775a56d5734f4c9abf2e75ac21c7d1b7687cdcefbf48d",
+   "bytes": 839994
+  },
+  "summary-of-advances/2010/summary_of_advances_2010.pdf": {
+   "sha256": "019b0a2018f3256454cdd9fdae6fde0d0d77c06f7e6b2a17ecf05db82a3d09f6",
+   "bytes": 495128
+  },
+  "summary-of-advances/2011/summary_of_advances_2011.pdf": {
+   "sha256": "e02ecc9503ce56af864b3eb268ee1dd285e18b3021757b1f1339aed313d56a07",
+   "bytes": 564850
+  },
+  "summary-of-advances/2012/summary_of_advances_2012.pdf": {
+   "sha256": "107b19382454b436030ff6d116e5f396bc422932bf0f08433d397e9567f536ad",
+   "bytes": 997294
+  },
+  "summary-of-advances/2013/summary_of_advances_2013.pdf": {
+   "sha256": "817eb1be65e352e76803a5e9ab56b9db204835c7e6fb936af80ee9b31eee39f1",
+   "bytes": 3711023
+  },
+  "summary-of-advances/2014/summary_of_advances_2014.pdf": {
+   "sha256": "2d6648643b506be4fa2afa487547a66902c32f5c7012699e7e6b55c3f8b0078f",
+   "bytes": 5001089
+  },
+  "summary-of-advances/2015/summary_of_advances_2015.pdf": {
+   "sha256": "47ebd31daa14c04fefc9aaead74e962422b273f4808868413b2f56e4b9a0cef5",
+   "bytes": 3126336
+  },
+  "summary-of-advances/2016/summary_of_advances_2016.pdf": {
+   "sha256": "c43bc90866f07e39ba0dcef384b07ccdfffc4df9faad7e29ca0ad147d53c21ee",
+   "bytes": 2156635
+  },
+  "summary-of-advances/2017/summary_of_advances_2017.pdf": {
+   "sha256": "e7df0e96a1461b15484dd1ce49fd322bb86d75ced9f5e5a2811c290ee85c3e03",
+   "bytes": 5399885
+  },
+  "summary-of-advances/2018/summary_of_advances_2018.pdf": {
+   "sha256": "e617588309bbb14ae68d60896f3eaf17ad67905afe040895b1481b2cb53c2655",
+   "bytes": 1624093
+  },
+  "summary-of-advances/2019/summary_of_advances_2019.pdf": {
+   "sha256": "9d5bd7adf3a6aa4a097b9211354fd9ba143d47aa51a17d7c87b31746ca99c079",
+   "bytes": 1705378
+  },
+  "summary-of-advances/2020/summary_of_advances_2020.pdf": {
+   "sha256": "88414484a98cc509a2430d8f24b0ad5e832492deda521d69f95f419b6e9360b0",
+   "bytes": 3379557
+  },
+  "summary-of-advances/2020/summary_of_advances_2020_easy_read.pdf": {
+   "sha256": "8c4634cd833065869e8ee4c2b365a744cf9b7ed94eed616d5e431ad783359954",
+   "bytes": 425889
+  },
+  "summary-of-advances/2021/summary_of_advances_2021.pdf": {
+   "sha256": "3c1e91d577e02bcd773c9f4cbc78e2da5bb74c1fb06bab08a9a61b0d2472f091",
+   "bytes": 1316223
+  },
+  "summary-of-advances/2021/summary_of_advances_2021_easy_read.pdf": {
+   "sha256": "4fd5ff385409ae46eaa4aee98209c0e8e98887de6e4d6844e464f2aa8927bf18",
+   "bytes": 166502
+  },
+  "summary-of-advances/2022/summary_of_advances_2022.pdf": {
+   "sha256": "3994e6624efedd957f51af7e5b1920428519f27c38d48ac9eaef306f52cc5c53",
+   "bytes": 10816456
+  },
+  "summary-of-advances/2022/summary_of_advances_2022_easy_read.pdf": {
+   "sha256": "d4cb628c8a2f42fe9ba2a1ac78d20d51448e8f2ff8cd974f57fdc27bdaf48c1a",
+   "bytes": 1543905
+  },
+  "summary-of-advances/2023/summary_of_advances_2023.pdf": {
+   "sha256": "3217714a355d3278080e8fbf3ca25549fa5a4112527f7115977691510bc4d952",
+   "bytes": 1596820
+  },
+  "summary-of-advances/2023/summary_of_advances_2023_easy_read.pdf": {
+   "sha256": "daa1eab83895caa165fb4627908f66e1dc0ca6de2d1790adb515b921f4f4a576",
+   "bytes": 274393
+  }
+ },
+ "draft": {
+  "name": "IACC Strategic Plan Working Draft July 17.pdf",
+  "sha256": "82ee989e62fcb8c2924fc0a0cde9d8ff16bf8d2abd33a99d33c731e174ee56a8",
+  "bytes": 1579159
+ }
+}
