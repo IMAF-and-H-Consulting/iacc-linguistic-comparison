@@ -1,8 +1,12 @@
 # IACC Linguistic Comparison
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb)
+
 **How does the July 2026 IACC Strategic Plan working draft differ from everything the Interagency Autism Coordinating Committee published between 2007 and 2023?** This repository contains a single Jupyter notebook that answers that question quantitatively — style, vocabulary, naming conventions, similarity, text reuse, and 17-year trends — plus all of its precomputed results.
 
 ## Run it — no PDFs needed
+
+**One-click:** the Colab badge above opens the notebook straight from this repo; its first cell auto-fetches the text cache (~18 MB), then *Run all* reproduces every number in a couple of minutes. (If GitHub's own notebook viewer balks at the file size, use [nbviewer](https://nbviewer.org/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb) for reading.)
 
 The extracted, cleaned text of all 61 documents (60 archive publications + the draft) ships in `.pdf_cache/iacc_linguistic/`, keyed by content hash with a `cache_manifest.json`. On a fresh clone the notebook detects the missing PDFs and runs entirely from that cache:
 
