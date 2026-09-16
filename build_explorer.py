@@ -73,7 +73,7 @@ STYLE_PICK = {
 }
 sfi = sp.set_index("doc_id")
 style_series = [
-    {"label": label, "vals": [f2(sfi.loc[d, col], 3) for d in doc_ids]}
+    {"feature": col, "label": label, "vals": [f2(sfi.loc[d, col], 3) for d in doc_ids]}
     for col, label in STYLE_PICK.items()
 ]
 
