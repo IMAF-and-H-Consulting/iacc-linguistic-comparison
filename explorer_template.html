@@ -62,6 +62,11 @@ h2{font-size:24px;font-weight:400;margin:0 0 6px}
 .zval b{color:var(--ink);font-weight:600}
 .zlegend{font-family:var(--mono);font-size:11px;color:var(--muted);margin:14px 0 0}
 .sw{display:inline-block;width:10px;height:10px;margin:0 5px -1px 14px}
+.zrow{position:relative;cursor:help}
+.tipbox{display:none;position:absolute;left:0;bottom:calc(100% + 6px);z-index:30;max-width:380px;background:var(--paper);border:1px solid var(--line);box-shadow:3px 3px 0 rgba(30,28,25,.08);padding:10px 13px;font-size:12.5px;line-height:1.55;color:var(--ink);cursor:default;text-align:left}
+.tipbox .tt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.tipbox .tn{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:6px;border-top:1px solid var(--hair);padding-top:5px}
+.zrow:hover .tipbox,.zrow:focus-within .tipbox{display:block}
 .toggle{font-family:var(--mono);font-size:11.5px;margin:0 0 16px}
 .toggle button{background:none;border:1px solid var(--line);color:var(--muted);padding:4px 12px;cursor:pointer;font:inherit}
 .toggle button.on{border-color:var(--red);color:var(--red)}
@@ -129,7 +134,7 @@ footer .links{margin-top:10px}
     <button data-m="sp" class="on">vs earlier strategic plans</button><button data-m="all">vs all 45 earlier documents</button>
   </div>
   <div id="zbars"></div>
-  <p class="zlegend"><span class="sw" style="background:var(--red)"></span>|z| &gt; 2 "unlike any prior plan"<span class="sw" style="background:var(--orange)"></span>|z| &gt; 1 notable<span class="sw" style="background:#9a958a"></span>within range · axis clipped at ±6</p>
+  <p class="zlegend"><span class="sw" style="background:var(--red)"></span>|z| &gt; 2 "unlike any prior plan"<span class="sw" style="background:var(--orange)"></span>|z| &gt; 1 notable<span class="sw" style="background:#9a958a"></span>within range · axis clipped at ±6 · <b>hover a row for a plain-English explanation</b></p>
 </section>
 
 <section id="trends">
@@ -234,6 +239,39 @@ try{
 }catch(e){err('stats: '+e.message)}
 
 /* ---------- z bars ---------- */
+/* Plain-English explanations for each style measure, shown on hover/focus. */
+const TIP={
+words_per_sentence:'Average sentence length, in words. Longer sentences make readers hold more in memory before the period arrives.',
+sentence_len_sd:'How much sentence lengths vary. High means a lurching mix of short and very long sentences; low means a steady rhythm.',
+sentence_len_p90:'The length of the longest tenth of sentences — how tough it gets at the extreme end.',
+letters_per_word:'Average word length in letters. It creeps up when plain words are swapped for technical ones.',
+syllables_per_word:'Average syllables per word — the raw ingredient inside every readability formula.',
+long_words_pct:'Share of words with seven or more letters. "Medication" counts; "drug" does not.',
+polysyllable_pct:'Share of words with three or more syllables — "implementation" counts, "plan" does not.',
+flesch_reading_ease:'Flesch Reading Ease, a 0–100 scale where higher means easier. 60 is plain English; below 30 is academic-journal territory. The draft scores 0.6.',
+flesch_kincaid_grade:'U.S. school grade needed to follow the text, from sentence length and syllables. 12 means high-school senior; the draft is at ~18, past a bachelor\u2019s degree.',
+gunning_fog:'Gunning Fog grade level, from sentence length and 3+-syllable words. 17+ is graduate-school prose.',
+smog:'SMOG grade level, based on polysyllables per sentence. Health materials for patients are usually written at 9 or below.',
+coleman_liau:'Coleman–Liau grade level, computed from letters and sentences instead of syllables — a machine-friendly cousin of the others.',
+ari:'Automated Readability Index: grade level from characters per word and words per sentence. Same idea, different yardstick.',
+mattr:'Vocabulary variety in a sliding 500-word window (moving-average type–token ratio). Higher means the text keeps introducing new words instead of repeating itself.',
+types_per_10k:'How many distinct words appear in a typical 10,000-word stretch. Higher means a wider working vocabulary.',
+passive_per_100_sent:'Passive-voice sentences per 100 sentences ("was funded", "is required"). Passive constructions hide who is supposed to act.',
+questions_per_100_sent:'Direct questions per 100 sentences. Earlier plans regularly posed questions to the reader; the draft almost never does.',
+first_plural_per_1k:'"We / our / us" per 1,000 words — the sound of the authors speaking as themselves.',
+committee_per_1k:'"The Committee" per 1,000 words — how often the text talks about the body that wrote it.',
+modals_per_1k:'Modal verbs per 1,000 words (must, shall, should, will, would, may, might, can, could) — the dial between describing the world and directing it.',
+deontic_index:'Share of modal verbs that impose obligation (must, shall, should, "required to") rather than predict or permit. The draft\u2019s 0.66 means two-thirds of its modals are marching orders.',
+must_per_1k:'"Must" per 1,000 words — hard obligation.',
+should_per_1k:'"Should" per 1,000 words — soft obligation. The draft uses it ten times as often as any earlier plan.',
+will_per_1k:'"Will" per 1,000 words — plain prediction or promise. Earlier plans leaned on it; the draft avoids it.',
+may_might_per_1k:'"May / might" per 1,000 words — permission and possibility, the language of open options.',
+hedges_per_1k:'Hedging language per 1,000 words ("may", "suggests", "appears", "not yet known", "limited evidence") — how carefully the text qualifies its claims.',
+boosters_per_1k:'Booster words per 1,000 ("clearly", "proven", "critical", "established") — how emphatically the text asserts its claims.',
+nominalisation_pct:'Share of words that are verbs turned into abstract nouns ("implementation", "assessment", "coordination"). The "analyse the analysis" pattern: nouns multiply while actors disappear.',
+acronyms_per_1k:'Initialisms per 1,000 words (IACC, CMS, NIH), excluding ordinary words the document also writes in lowercase.',
+numerals_per_1k:'Digits and percentages per 1,000 words — how quantified the prose is.',
+ref_markers_per_1k:'Citation markers per 1,000 words ([12], "et al.", "(Smith 2019)", PMIDs) — how visibly the text leans on sources.'};
 let zmode='sp';
 function drawZ(){
   try{
@@ -254,8 +292,17 @@ function drawZ(){
       row.appendChild(bar);
       const val=el('div','zval');
       val.innerHTML='<b>z '+(z>=0?'+':'')+fmt(z,1)+'</b> · '+fmt(r.draft,2)+' vs '+fmt(r.spMean,2);
-      row.title=r.feature+': draft '+fmt(r.draft,3)+', earlier plans '+fmt(r.spMean,3)+' ± '+fmt(r.spSd,3);
       row.appendChild(val);
+      const desc=TIP[r.feature];
+      if(desc){
+        row.tabIndex=0;
+        row.setAttribute('aria-label',r.feature+': '+desc);
+        const tip=el('div','tipbox');
+        tip.innerHTML='<div class="tt">'+r.feature+'</div>'+desc+'<div class="tn">draft '+fmt(r.draft,2)+' · earlier plans '+fmt(r.spMean,2)+' ± '+fmt(r.spSd,2)+'</div>';
+        row.appendChild(tip);
+      }else{
+        row.title=r.feature+': draft '+fmt(r.draft,3)+', earlier plans '+fmt(r.spMean,3)+' ± '+fmt(r.spSd,3);
+      }
       host.appendChild(row);
     });
   }catch(e){err('zbars: '+e.message)}
