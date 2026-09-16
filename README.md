@@ -2,6 +2,8 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb)
 
+**Interactive explorer:** [sablister.github.io/iacc-linguistic-comparison](https://sablister.github.io/iacc-linguistic-comparison/) — poke at every result (z-score shifts, distinctive vocabulary, 17-year trends, text reuse, section-by-section match) in a single self-contained page, no install. Rebuilt from the analysis CSVs by `build_explorer.py`.
+
 **How does the July 2026 IACC Strategic Plan working draft differ from everything the Interagency Autism Coordinating Committee published between 2007 and 2023?** This repository contains a single Jupyter notebook that answers that question quantitatively — style, vocabulary, naming conventions, similarity, text reuse, and 17-year trends — plus all of its precomputed results.
 
 ## Run it — no PDFs needed
