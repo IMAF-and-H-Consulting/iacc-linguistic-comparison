@@ -23,16 +23,24 @@ def f2(v, nd=3):
 
 payload = {}
 
+# Headline tiles are anchored on SP-2023, the plan this draft replaces. Comparing
+# against the mean of eight plans 2009-2023 inflates several of these figures,
+# because SP-2023 had already made part of the move (notably on "ASD" and
+# person-first naming) -- see the comparator note in the methods section.
 payload["headline"] = [
-    {"v": '10.5<small> /1k</small>', "l": '"should" — earlier plans 1.1 (z = +31)'},
-    {"v": "0.6", "l": "Flesch Reading Ease — earlier plans 28"},
-    {"v": "0.03<small>%</small>", "l": "inherited text — earlier plans averaged 24%"},
-    {"v": '55<small> of 80</small>', "l": "long-run vocabulary trends reversed"},
-    {"v": "1.2", "l": '"ASD" per 10k words — earlier plans 157'},
+    {"v": '108<small> /10k</small>', "l": 'references to autism or autistic people — SP-2023: 278'},
+    {"v": '10.5<small> /1k</small>', "l": '"should" — SP-2023: 1.4 (7.8x)'},
+    {"v": "1.5<small>:1</small>", "l": "federal agencies named per autism reference — SP-2023: 0.04:1"},
+    {"v": "0", "l": '"on the spectrum" — SP-2023: 32 per 10k'},
+    {"v": "0.02<small>%</small>", "l": "text inherited from SP-2023 — SP-2023 inherited 0.94% from SP-2019"},
 ]
 
 # --- z-scores ---
 z = pd.read_csv(OUT / "draft_zscores.csv", index_col=0)
+# SP-2023 values for the pairwise "vs the plan this replaces" view. A z-score is
+# undefined against a single document, so that mode shows the ratio instead.
+_sf_all = pd.read_csv(OUT / "style_features.csv").set_index("doc_id")
+_sp23 = _sf_all.loc["SP-2023"]
 payload["zscores"] = [
     {
         "feature": idx,
@@ -42,6 +50,7 @@ payload["zscores"] = [
         "spSd": f2(r["prior SP sd"]),
         "zSP": f2(r["z vs prior SP"], 2),
         "zAll": f2(r["z vs all prior"], 2),
+        "sp23": f2(_sp23[idx]) if idx in _sp23.index else None,
         "flag": r["flag"] if isinstance(r["flag"], str) else "",
     }
     for idx, r in z.iterrows()
@@ -87,7 +96,41 @@ lexicon_series = [
     }
     for _, r in lex.iterrows()
 ]
+# --- how often the document names its own subject ---
+# Counts every explicit reference to autism or to autistic people in one
+# non-overlapping pass (person-first phrases, identity-first phrases, "on the
+# spectrum", self-advocate/autistic-community, then bare autism / ASD), so the
+# total does not depend on which naming convention is in fashion.
+ref = pd.read_csv(OUT / "autism_reference_by_plan.csv").set_index("doc_id")
+REF_PICK = {
+    "total_p10k": "references to autism or autistic people, per 10k words",
+    "person_p10k": "references to autistic *people*, per 10k words",
+    "abstract_p10k": "autism/ASD as a topic (not person-referring), per 10k",
+    "agency_p10k": "federal agency acronyms, per 10k words",
+    "agency_autism_ratio": "agency names per autism reference",
+}
+style_series += [
+    {"feature": col, "label": label, "kind": "ref",
+     "vals": [f2(ref.loc[d, col], 3) if d in ref.index else None for d in doc_ids]}
+    for col, label in REF_PICK.items()
+]
+payload["reference"] = [
+    {"id": d, "year": int(ref.loc[d, "year"]), "total": f2(ref.loc[d, "total_p10k"], 1),
+     "person": f2(ref.loc[d, "person_p10k"], 1), "agency": f2(ref.loc[d, "agency_p10k"], 1),
+     "ratio": f2(ref.loc[d, "agency_autism_ratio"], 2)}
+    for d in doc_ids if d in ref.index
+]
+
 payload["trends"] = {"docs": docs, "lexicon": lexicon_series, "style": style_series}
+
+# --- leave-one-out control for the trend-reversal count ---
+ctl = pd.read_csv(OUT / "trend_reversal_control.csv")
+payload["control"] = [
+    {"id": r.held_out_document.replace("SP-2026-DRAFT", "2026 draft"),
+     "n": int(r.trends_reversed), "tot": int(r.n_trend_terms),
+     "draft": r.held_out_document == "SP-2026-DRAFT"}
+    for r in ctl.sort_values("trends_reversed", ascending=False).itertuples()
+]
 
 # --- keyness (all rows embedded; display is capped/filtered in the page) ---
 def keyness_slice(fname, n_each=None):
@@ -117,9 +160,14 @@ payload["vocab"]["dropped"] = [
 # --- term trend reversals ---
 tt = pd.read_csv(OUT / "term_trends.csv")
 tt = tt[tt["spearman_rho"].abs() >= 0.5]
+# "strong" = a reversal that also clears a magnitude floor: the term was used at
+# least 5 times per 10k in the 2018+ documents and the draft at most halves it.
+# Without a floor the verdict fires on terms used once or twice per document.
 payload["termTrends"] = [
     {"term": r.term, "rho": f2(r.spearman_rho, 2), "early": f2(r.mean_per10k_before_2013, 2),
-     "late": f2(r.mean_per10k_2018_on, 2), "draft": f2(r.draft_per10k, 2), "verdict": r.draft_verdict}
+     "late": f2(r.mean_per10k_2018_on, 2), "draft": f2(r.draft_per10k, 2), "verdict": r.draft_verdict,
+     "strong": bool("revers" in str(r.draft_verdict) and r.mean_per10k_2018_on >= 5
+                    and (r.draft_per10k + 0.1) / (r.mean_per10k_2018_on + 0.1) <= 0.5)}
     for r in tt.itertuples()
 ]
 

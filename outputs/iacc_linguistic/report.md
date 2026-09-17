@@ -1,14 +1,19 @@
-# IACC Strategic Plan Working Draft July 17.pdf - linguistic comparison with the IACC publication record
+# The 2026 IACC Strategic Plan working draft, measured against the IACC publication record
+
+Source document: `IACC Strategic Plan Working Draft July 17.pdf` - working draft, marked subject to errors and revision. Figures are quoted against SP-2023, the plan it replaces, with the mean of the 8 earlier plans second.
 
 Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other publications, 1 draft); 15 inventoried documents excluded as too short or easy-read/at-a-glance editions.
 
 ## Size and shape
 - Draft: 81,788 words on 271 pages of prose (65 reference pages removed, trailing reference list from p.272); earlier plans averaged 32,326 words (max 60,494, SP-2023).
-- Sentences: 19.2 words per sentence vs 21.2 in earlier plans; Flesch-Kincaid grade 17.9 vs 14.6; Flesch Reading Ease 1 vs 28.
-- Lexical diversity (MATTR-500): 0.551 vs 0.490.
+- Sentences: 19.2 words per sentence vs 28.4 in SP-2023 (21.2 across earlier plans) - the draft's sentences are the shorter ones.
+- Word length: 6.62 letters and 2.21 syllables per word vs 5.90 and 1.95 in SP-2023; 49.4% of words run 7+ letters vs 40.6%, and 35.4% are polysyllabic vs 26.4% - the highest in the record on both.
+- Readability, all six formulas, with the draft's rank among the 46 analysed documents (1 = hardest): flesch reading ease 0.6 (rank 1); flesch kincaid grade 17.9 (rank 3); gunning fog 21.8 (rank 2); smog 18.0 (rank 3); coleman liau 21.6 (rank 1); ari 19.3 (rank 3). The draft is the most extreme document on Flesch Reading Ease and Coleman-Liau, which weight word length most heavily, but ranks behind SP-2023 on the four grade-level formulas because its sentences are shorter. The defensible claim is the word-length one, not that it is the least readable document by every measure; Flesch Reading Ease below about 10 is an extrapolation past the calibrated floor of that scale.
+- Lexical diversity (MATTR-500): 0.551 vs 0.486 in SP-2023 (0.490 across earlier plans).
 
 ## Voice
-- Deontic index (share of must/shall/should among modals): 0.66 vs 0.21; 'should' 10.5 per 1,000 words vs 1.1 (9.8x); 'will' 0.2 vs 2.8.
+- Deontic index (share of must/shall/should among modals): 0.66 vs 0.19 in SP-2023 (0.21 across earlier plans).
+- 'should': 10.5 per 1,000 words vs 1.4 in SP-2023 (7.8x) and 1.1 across earlier plans (9.8x). The study's most extreme measurement, and the one least sensitive to the choice of comparator. 'will' 0.2 vs 3.0.
 - Passive constructions: 18.4 per 100 sentences vs 25.1. Hedges 4.8/1k vs 7.7; boosters 2.6/1k vs 2.2.
 - First-person plural 0.09/1k vs 1.19; acronyms 28.9/1k vs 27.8.
 
@@ -25,19 +30,24 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - flesch_reading_ease: draft 0.57, earlier plans 27.92 +/- 8.21 (z = -3.3)
 - will_per_1k: draft 0.23, earlier plans 2.76 +/- 0.84 (z = -3.0)
 
-## Naming autism (per 10,000 words; draft vs mean of earlier plans)
-- person-first ('people with autism'): 2.6 vs 54.8
-- identity-first ('autistic people'): 22.0 vs 9.2
-- 'on the (autism) spectrum': 0.0 vs 9.9
-- 'autistic' (any use): 24.8 vs 12.6
-- ASD (cs): 1.2 vs 156.9
-- 'autism spectrum disorder(s)': 0.1 vs 5.2
-- 'disorder(s)': 4.8 vs 21.3
-- 'condition(s)': 26.9 vs 15.6
-- 'profound autism': 5.5 vs 0.0
-- nonspeaking / minimally verbal: 3.5 vs 2.2
-- neurodivers*: 0.0 vs 0.2
-- identity-first share of naming phrases in the draft: 90% (2021-2023 plan: 75%).
+## Naming autism (per 10,000 words; draft vs SP-2023 vs mean of earlier plans)
+- person-first ('people with autism'): 2.6 vs 19.2 vs 54.8
+- identity-first ('autistic people'): 22.0 vs 58.7 vs 9.2
+- 'on the (autism) spectrum': 0.0 vs 32.9 vs 9.9
+- 'autistic' (any use): 24.8 vs 72.7 vs 12.6
+- ASD (cs): 1.2 vs 21.2 vs 156.9
+- 'autism spectrum disorder(s)': 0.1 vs 1.0 vs 5.2
+- 'disorder(s)': 4.8 vs 9.3 vs 21.3
+- 'condition(s)': 26.9 vs 24.5 vs 15.6
+- 'profound autism': 5.5 vs 0.0 vs 0.0
+- nonspeaking / minimally verbal: 3.5 vs 1.2 vs 2.2
+- neurodivers*: 0.0 vs 0.7 vs 0.2
+- identity-first share of naming phrases in the draft: 90% (SP-2023: 75%) - but this is a share of a shrinking denominator: identity-first phrasing is 22.0 per 10k in the draft against 58.7 in SP-2023. Person-first usage has also been falling across autism writing for a decade by community preference, so no single naming term separates this draft's choices from its era's. See the next section for the measure that does.
+
+## How often the draft names its own subject
+- Every explicit reference to autism or autistic people, counted once each: 108 per 10,000 words, against 278 in SP-2023 and 268 +/- 33 across the 8 earlier plans, whose range is 199-314 (z = -4.8).
+- Both components fall: references to autistic people 28 vs 113 per 10k, and autism-as-a-topic mentions 81 vs 164. The finding does not depend on which naming convention is in fashion, nor on the choice of baseline.
+- Federal agency acronyms 167 per 10k vs 12: the draft names agencies 1.54 times per autism reference, where every plan from 2009 to 2023 sat between 0.03 and 0.12.
 
 ## Largest lexicon shifts vs earlier plans (per 10,000 words)
 - Naming autism | ASD (cs): 1.2 vs 156.9
@@ -69,9 +79,11 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 
 ## Text reuse
 - Effectively none of the draft is inherited text: 0.03% of its 8-word shingles occur anywhere in the earlier record (68 shared shingles in total, the most - 14 - with SP-2023; the longest shared passage is 16 words).
-- Earlier plans inherited on average 24% of their shingles from earlier publications and 11% from the plan immediately before them (range 1-41%); the draft inherits 0.02% from SP-2023.
+- The draft inherits 0.02% from SP-2023. The like-for-like comparison is the recent one, not the 24% all-plans average: that average is carried by the annual-update era, when each plan was a revision of the last (SP-2010 53%, SP-2011 31%, SP-2012 3%). The modern plans were already near-clean-sheet documents: SP-2017 took 1.12% from its predecessor and 4.4% from the record; SP-2019 took 5.89% from its predecessor and 19.4% from the record; SP-2023 took 0.94% from its predecessor and 14.7% from the record. Against that recent norm the draft is roughly 54x lower, not the ~812x the historical average implies.
 
 ## Trends across 2007-2023 and the draft
+- Of the 80 terms with a strong monotonic trend (|rho| >= 0.5), the draft reverses 55. This needs its control: holding out each document in turn and scoring it by the same rule gives SP-2011 79, SP-2013 79, SP-2010 78, SP-2009 77, SP-2012 75, SP-2017 59, SP-2019 50, SP-2023 38, SOA-2023 36, RTC-2023 33. The draft's count is the highest among the post-2018 documents, and that is all this measure establishes - a trend fitted across 45 documents and scored against a group mean, with no minimum size of change, fires on almost anything.
+- 13 reversals clear a magnitude floor (used 5+ per 10k in the 2018-on documents and at least halved by the draft): health (111.1 -> 47.0), disparities (19.8 -> 1.3), living (14.5 -> 5.4), adulthood (11.9 -> 2.2), experience (11.5 -> 4.0), receive (11.4 -> 4.0), physical (10.8 -> 2.7), racial (9.5 -> 0.7), improving (8.2 -> 2.4), meet (7.9 -> 2.7), suicide (6.6 -> 2.2), sex (5.4 -> 1.6), justice (5.1 -> 0.0). Report these rather than the full 55.
 - Rising terms the draft continues: care, regulation, accountability, outcomes, access, timely, accommodations, participation, conditions, dysregulation, employers, primary, transportation, consistent, barriers.
 - Rising terms the draft reverses: college, veterans, accessibility, suicide, prefer, equity, arts, ensuring, demographic, leadership, inpatient, justice, health, living, sex.
 - Falling terms the draft continues to drop: developing, prevented, clues, caused, concerned, happening.
@@ -87,6 +99,7 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - 01_corpus_timeline.png
 - 04_identity_first_share.png
 - 04_lexicon_strategic_plans.png
+- 04_subject_reference.png
 - 05_draft_style_zscores.png
 - 06_keyness_draft_vs_prior_plans.png
 - 07_content_map_mds.png
@@ -94,10 +107,13 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - 07_style_dendrogram.png
 - 08_inherited_text_by_plan.png
 - 09_lexicon_trends.png
+- 09_reversal_control.png
 - 09_strategic_plan_drift.png
 - 09_style_trends.png
 - 10_draft_section_novelty.png
+- autism_reference_by_plan.csv
 - content_similarity.csv
+- dashboard_review_checks.csv
 - documents.csv
 - draft_sections.csv
 - draft_zscores.csv
@@ -112,6 +128,12 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - strategic_plan_drift.csv
 - style_delta.csv
 - style_features.csv
+- substantial_reversals.csv
 - term_trends.csv
+- trend_reversal_control.csv
 
-Method notes: sentence splitting, syllable counting and passive detection are heuristic and applied identically to every document; reference lists, running headers/footers and tables of contents were removed before measuring; easy-read/at-a-glance editions and documents under 2000 words were excluded from comparisons.
+## Method notes
+- Sentence splitting, syllable counting and passive detection are heuristic and applied identically to every document; reference lists, running headers/footers and tables of contents were removed before measuring; easy-read/at-a-glance editions and documents under 2000 words were excluded from comparisons.
+- Comparator: figures are quoted against SP-2023 first because that is the plan this draft replaces. The 8-plan mean overstates several changes - 'ASD' fell from 157 per 10k across the plan series to 21 in SP-2023 before the draft took it to 1.2 - and on identity-first naming the two comparators disagree in sign.
+- Z-scores rest on 8 stylistically consistent plans, so their denominators are small and their magnitudes inflated: read direction from them and size from the pairwise comparison.
+- What this cannot show: intent. A genre change, a jargon-dense register and near-zero inherited text are equally consistent with a committee working without a handoff under deadline, which the draft's preface states. The document is also a working draft released for public comment, measured against finished publications.

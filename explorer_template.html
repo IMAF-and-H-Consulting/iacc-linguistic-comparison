@@ -109,14 +109,14 @@ footer .links{margin-top:10px}
 <body>
 <nav><div class="wrap">
   <a class="brand" href="#top">IACC × 2026</a>
-  <a class="lnk" href="#style">style</a><a class="lnk" href="#trends">trends</a><a class="lnk" href="#keyness">keyness</a><a class="lnk" href="#vocab">coined &amp; retired</a><a class="lnk" href="#reversals">reversals</a><a class="lnk" href="#memory">memory</a><a class="lnk" href="#sections">sections</a><a class="lnk" href="#methods">methods</a>
+  <a class="lnk" href="#style">style</a><a class="lnk" href="#trends">trends</a><a class="lnk" href="#subject">subject</a><a class="lnk" href="#reversals">reversals</a><a class="lnk" href="#keyness">keyness</a><a class="lnk" href="#vocab">coined &amp; retired</a><a class="lnk" href="#memory">memory</a><a class="lnk" href="#sections">sections</a><a class="lnk" href="#methods">methods</a>
 </div></nav>
 
 <div class="wrap" id="top">
 <header>
-  <div class="eyebrow">IACC Strategic Plan working draft · July 17, 2026 · read against the 2007–2023 record</div>
+  <div class="eyebrow">"IACC Strategic Plan 2026–2028: A New Federal Framework for Autism" · working draft, marked subject to errors and revision, released for public review and discussion 31 July 2026 · read against the 2007–2023 record</div>
   <h1>The 2026 draft, measured.</h1>
-  <p class="sub">An interactive companion to the linguistic comparison of the IACC's July 2026 working draft against every document the committee published from 2007 to 2023 — 46 documents, all analysis reproducible from the linked notebook.</p>
+  <p class="sub">An interactive companion to the linguistic comparison of the IACC's 2026 working draft against every document the committee published from 2007 to 2023 — 46 documents in the comparison set, all analysis reproducible from the linked notebook. Figures are quoted against <b>SP-2023</b>, the plan this draft replaces; the eight-plan average and the full 45-document baseline are one click away in each section.</p>
   <div class="links">
     <a href="https://github.com/SABLISTER/iacc-linguistic-comparison">github repo</a>
     <a href="https://colab.research.google.com/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb">run in colab</a>
@@ -131,27 +131,50 @@ footer .links{margin-top:10px}
 <section id="style">
   <div class="kicker">01 · style fingerprint</div>
   <h2>Where the draft's style sits versus every earlier plan</h2>
-  <p class="lede">Each bar is one style measurement, expressed as a z-score against the eight earlier strategic plans (2009–2023). <b>Red: |z| &gt; 2</b> — outside anything the committee has published before. The draft's prose is the most obligation-laden ("should" ×10), longest-worded, most nominalised, and least readable in the record.</p>
+  <p class="lede">Each bar is one style measurement. The first two views express it as a z-score — against the eight earlier strategic plans, or against all 45 earlier documents; <b>red: |z| &gt; 2</b>, outside anything the committee has published before. The third view is the pairwise comparison with <b>SP-2023, the plan this draft replaces</b>, shown as a ratio, because a z-score is undefined against a single document. The draft's prose is the most obligation-laden ("should" ×7.8 versus SP-2023) and uses the longest, most polysyllabic words in the record; on grade-level readability it is as dense as the 2017 and 2023 plans rather than denser.</p>
   <div class="toggle" id="ztoggle">
-    <button data-m="sp" class="on">vs earlier strategic plans</button><button data-m="all">vs all 45 earlier documents</button>
+    <button data-m="sp23" class="on">vs SP-2023 (the plan it replaces)</button><button data-m="sp">z vs 8 earlier plans</button><button data-m="all">z vs all 45 earlier documents</button>
   </div>
   <div id="zbars"></div>
-  <p class="zlegend"><span class="sw" style="background:var(--red)"></span>|z| &gt; 2 "unlike any prior plan"<span class="sw" style="background:var(--orange)"></span>|z| &gt; 1 notable<span class="sw" style="background:#9a958a"></span>within range · axis clipped at ±6 · <b>hover a row for a plain-English explanation</b></p>
+  <p class="lede" style="font-size:14px"><b>Where the register hits its limit.</b> Appendix C (pp. 270–271) is the draft's highest-grade section — Flesch–Kincaid <b>30.6</b> against the document's 17.9 — and the mechanism is a formatting one: it is a bulleted list with the bullets removed. Its clinical-protocol block runs 373 words in 5 sentences, with 58 semicolon-delimited items, a longest sentence of 121 words, and 1.1 finite verbs per 100 words against 3.6 across the draft. There are 26 such blocks in the draft, 1,790 words in all (2.1% of the text, 207 enumerated items) — against 3 blocks in SP-2023. Two things follow: setting them as numbered lists is the cheapest fix in the document, and removing all of them changes the draft's grade level by 0.1, so the readability result is about the main prose rather than the appendices.</p>
+  <p class="zlegend"><span class="sw" style="background:var(--red)"></span>large (|z|&nbsp;&gt;&nbsp;2, or ≥2× vs SP-2023)<span class="sw" style="background:var(--orange)"></span>notable (|z|&nbsp;&gt;&nbsp;1, or ≥1.4×)<span class="sw" style="background:#9a958a"></span>within range · bars are log-scaled and clipped · <b>hover a row for a plain-English explanation</b><br>Z magnitudes against only eight prior plans are inflated by their small spread — read the direction, and use the SP-2023 view for the size of the change.</p>
 </section>
 
 <section id="trends">
   <div class="kicker">02 · the record over time</div>
   <h2>Seventeen years of language, one discontinuity</h2>
-  <p class="lede">Pick a term or style measure. Lines track the eight earlier strategic plans (2009–2023); the <b>gold star</b> is the 2026 draft. The dashed segment is the jump from the last published plan to the draft.</p>
+  <p class="lede">Pick a measure. The selector is grouped in the order that matters: <b>how the prose is written</b> first, then <b>how often the document names its own subject</b>, then the domain lexicon — because how a document is written does not depend on which naming convention was in fashion in a given year, and the individual naming terms do. It opens on "should", the study's most extreme and most baseline-robust measurement. Lines track the eight earlier strategic plans (2009–2023); the <b>gold star</b> is the 2026 draft, and the dashed segment is the jump from the last published plan to it. Hover the note under the selector for a plain-English gloss of each measure.</p>
   <select id="termsel"></select>
   <div class="termnote" id="termnote"></div>
   <div class="chartbox"><svg id="trendsvg" viewBox="0 0 780 380" width="100%" role="img"></svg>
   <div class="chartnote" id="trendnote"></div></div>
 </section>
 
+<section id="subject">
+  <div class="kicker">03 · the document's own subject</div>
+  <h2>The draft names autism less than half as often as any plan before it</h2>
+  <p class="lede">Which label a document prefers — "people with autism", "autistic people", "on the spectrum" — changes with the field, and person-first usage has been falling across autism writing for a decade by deliberate community preference. So count them all together instead: every explicit reference to autism or to autistic people, in one pass, whichever wording is used. That total sat in a band of <b>199–314 per 10,000 words for seventeen years</b> (mean 268, sd 33). The draft is at <b>108</b> — <b>4.8 standard deviations</b> below the series mean, 2.6× below SP-2023 and 1.8× below even the lowest earlier plan (SP-2013, 199 per 10k). Both halves of the total fall: references to autistic <i>people</i> drop from 113 to 28 per 10k, and autism-as-a-topic mentions from 164 to 81. The identity-first "share" rises only because the denominator collapsed.</p>
+  <p class="lede">Meanwhile the names that fill the space are federal ones. Every plan from 2009 to 2023 named autism between 8× and 36× more often than it named a federal agency (agency acronyms 8–32 per 10k). The draft carries 167 agency acronyms per 10k and names agencies <b>1.5× more often than it names autism at all</b>.</p>
+  <div id="refbars"></div>
+  <p class="zlegend"><span class="sw" style="background:var(--blue)"></span>references to autism or autistic people, per 10k words<span class="sw" style="background:var(--orange)"></span>federal agency acronyms, per 10k words · same cleaned text, running headers and reference lists removed · full counts in <code>autism_reference_by_plan.csv</code>, regenerated by the notebook</p>
+</section>
+
+<section id="reversals">
+  <div class="kicker">04 · trend reversals</div>
+  <h2>Fifty-five of eighty trends reversed — but so does almost any document</h2>
+  <p class="lede">Every content word with a strong monotonic trend across 2007–2023 (|Spearman ρ| ≥ 0.5), and whether the draft continues or reverses it (judged against the 2018-onwards average). <b>Read this section with its control.</b> Hold any single document out of the corpus and score it by the same rule and it "reverses" 41–99% of the same 80 trends — SP-2017 reverses 59 and the early annual-update plans 75–79. A trend fitted across 45 documents and then scored against a mean, with no minimum size of change, fires on almost anything. The draft's 55 is the highest of any post-2018 document (SP-2019: 50, SP-2023: 38) but below every plan from 2009 to 2017, and that is all this measure establishes.</p>
+  <div id="ctlbars"></div>
+  <p class="zlegend" style="margin-bottom:22px">same rule, one document held out at a time · <span style="color:var(--red)">red</span> = the 2026 draft</p>
+  <p class="lede">The <b>substantial reversals</b> view applies a floor: the term was used at least 5 times per 10,000 words in the 2018+ documents <i>and</i> the draft at least halves it. Thirteen terms clear it — including health, disparities, adulthood, racial, suicide, sex and justice.</p>
+  <div class="toggle" id="ttoggle">
+    <button data-t="strong" class="on">substantial reversals</button><button data-t="all">all 80</button><button data-t="reverses trend">reversed</button><button data-t="continues trend">continued</button>
+  </div>
+  <div id="ttable"></div>
+</section>
+
 <section id="keyness">
-  <div class="kicker">03 · keyness</div>
-  <h2>What the draft says more — and what it stopped saying</h2>
+  <div class="kicker">05 · keyness</div>
+  <h2>What the draft says more and what it stopped saying</h2>
   <p class="lede">Statistically distinctive vocabulary (weighted log-odds z, Monroe et al. 2008). Positive z: over-used by the draft; negative z: under-used. Every measured term is embedded below (3,579 words, 4,939 bigrams) — search any word, or sort by z. Rare brand-new terms (leucovorin, NAPTI, dashboard) carry modest z-scores by design of the estimator; find them under <i>coined &amp; retired</i>. Raw CSVs are in the repo.</p>
   <div class="toggle" id="ktoggle">
     <button data-k="words" class="on">words vs plans 2009–2023</button><button data-k="bigrams">bigrams</button><button data-k="vs2023">words vs SP-2023 alone</button>
@@ -161,7 +184,7 @@ footer .links{margin-top:10px}
 </section>
 
 <section id="vocab">
-  <div class="kicker">04 · vocabulary turnover</div>
+  <div class="kicker">06 · vocabulary turnover</div>
   <h2>Coined here. Retired here.</h2>
   <p class="lede"><b>Coined:</b> words used 5+ times in the draft that never appeared in any earlier IACC publication. <b>Retired:</b> words used in at least 3 earlier strategic plans that the draft never uses. Dashed chips are names of people or organisations.</p>
   <input type="text" id="vsearch" placeholder="filter…" style="width:220px;margin-bottom:6px">
@@ -171,38 +194,32 @@ footer .links{margin-top:10px}
   <div class="chips" id="dropchips"></div>
 </section>
 
-<section id="reversals">
-  <div class="kicker">05 · trend reversals</div>
-  <h2>Fifty-five of eighty long-run trends, reversed</h2>
-  <p class="lede">Every content word with a strong monotonic trend across 2007–2023 (|Spearman ρ| ≥ 0.5), and whether the draft continues or reverses it (judged against the 2018-onwards average).</p>
-  <div class="toggle" id="ttoggle">
-    <button data-t="all" class="on">all</button><button data-t="reverses trend">reversed</button><button data-t="continues trend">continued</button>
-  </div>
-  <div id="ttable"></div>
-</section>
 
 <section id="memory">
-  <div class="kicker">06 · institutional memory</div>
+  <div class="kicker">07 · institutional memory</div>
   <h2>Almost nothing carried forward</h2>
-  <p class="lede">Share of each plan's 8-word sequences already present in earlier IACC publications. Earlier plans inherited 24% on average; the draft inherits <b>0.03%</b>. The draft's own preface offers a partial explanation:</p>
+  <p class="lede">Share of each plan's 8-word sequences already present in earlier IACC publications. The draft inherits <b>0.03%</b> from the record and <b>0.02%</b> from SP-2023. The 24% average often quoted for earlier plans is carried by the annual-update era — SP-2010 inherited 53%, SP-2013 40% — when each plan was a revision of the last. <b>The like-for-like comparison is the recent one:</b> SP-2023 took 0.94% of its text from SP-2019 and SP-2017 took 1.1% from SP-2013, so modern plans were already near-clean-sheet documents. The draft is roughly 50× below that recent norm, not 800× below the historical one. Its preface offers a partial explanation:</p>
   <blockquote>“Our drafting process did not have the benefit of a complete institutional record or formal handoff from the prior planning cycle.”</blockquote>
   <div id="carrybars"></div>
   <p class="zlegend"><span class="sw" style="background:var(--blue)"></span>inherited from the immediately preceding plan<span class="sw" style="background:var(--orange)"></span>inherited from any earlier publication</p>
 </section>
 
 <section id="sections">
-  <div class="kicker">07 · inside the draft</div>
+  <div class="kicker">08 · inside the draft</div>
   <h2>Thirty-seven sections, all of it new text</h2>
   <p class="lede">Each outline section profiled the same way: readability (FK grade), prescriptiveness ("should" per 1,000 words), share of text found nowhere in the earlier record, and its nearest earlier document by content. Click a column to sort.</p>
   <div id="sectable"></div>
 </section>
 
 <section id="methods" style="border-bottom:none">
-  <div class="kicker">08 · methods &amp; caveats</div>
+  <div class="kicker">09 · methods &amp; caveats</div>
   <h2>How the numbers are made</h2>
   <p class="lede" style="max-width:none">
   Rates are normalised per 1,000 or 10,000 words so documents of different lengths compare fairly. Readability uses Flesch/Flesch–Kincaid plus four corroborating formulas. Lexical diversity is MATTR-500. The <b>deontic index</b> is the share of obligation modals (must/shall/should/required-to) among all modal verbs. <b>Nominalisation</b> counts words ending -tion/-ment/-ness/-ity — verbs frozen into nouns. Keyness is the weighted log-odds ratio with an informative Dirichlet prior. Text reuse counts shared 8-word shingles. Trends are Spearman correlations of term rates with publication year.<br><br>
-  Sentence splitting, syllable counting, and passive detection are heuristic but applied identically to every document. Z-scores compare against only eight earlier plans, so magnitudes are inflated; directions are reliable. Reference lists, running headers/footers, and tables of contents were removed before measuring; easy-read editions and documents under 2,000 words were excluded. Everything re-runs from the shipped text cache in the repo — no PDFs required.</p>
+  Sentence splitting, syllable counting, and passive detection are heuristic but applied identically to every document. Reference lists, running headers/footers, and tables of contents were removed before measuring; easy-read/at-a-glance editions and documents under 2,000 words were excluded (15 of the 61 inventoried publications). Everything re-runs from the shipped text cache in the repo, no PDFs required.<br><br>
+  <b>Which comparator.</b> This page defaults to <b>SP-2023</b>, the plan the draft replaces. Averaging the eight plans from 2009 to 2023 overstates several changes, because SP-2023 had already made part of the move: "ASD" had fallen from a 157-per-10k plan average to 21 by 2023 before the draft took it to 1.2, and person-first naming from 55 to 19 before the draft took it to 2.6. On one measure the comparator flips the sign — identity-first naming is above the eight-plan average but <b>2.7× below SP-2023</b>, which is why this page reports the combined subject-reference total in section 03 rather than any single naming convention. Z-scores against eight stylistically consistent plans have small denominators and inflated magnitudes (a z of +31 means "far outside the range", not a precise distance); read direction from the z views and size from the SP-2023 view.<br><br>
+  <b>Readability.</b> Six formulas are computed. The draft is the most extreme in the record on Flesch Reading Ease (0.6) and Coleman–Liau, both of which weight word length heavily; on Flesch–Kincaid grade, Gunning Fog, SMOG and ARI it ranks second or third, behind SP-2023, because its sentences are shorter (19.2 words vs 28.4). The claim this page makes is therefore the word-length one — 49% of its words run 7+ letters against 41% in SP-2023, the highest in the record — and not that it is the least readable document by every measure. FRE below about 10 is an extrapolation past the bottom of a scale calibrated on schoolbook prose; it is reported for continuity with the other documents, not as a precise reading level.<br><br>
+  <b>What this analysis cannot show.</b> Intent. A genre change, a jargon-dense register and near-zero inherited text are equally consistent with a committee working without a handoff under deadline — which the draft's preface states — as with a deliberate break. The document is also a working draft issued for public comment and marked "subject to errors and revision"; the published plans it is measured against are finished products, which matters for anything downstream of editing and polish, including the absence of a plain-language companion.</p>
 </section>
 
 <footer>
@@ -274,14 +291,30 @@ boosters_per_1k:'Booster words per 1,000 ("clearly", "proven", "critical", "esta
 nominalisation_pct:'Share of words that are verbs turned into abstract nouns ("implementation", "assessment", "coordination"). The "analyse the analysis" pattern: nouns multiply while actors disappear.',
 acronyms_per_1k:'Initialisms per 1,000 words (IACC, CMS, NIH), excluding ordinary words the document also writes in lowercase.',
 numerals_per_1k:'Digits and percentages per 1,000 words — how quantified the prose is.',
-ref_markers_per_1k:'Citation markers per 1,000 words ([12], "et al.", "(Smith 2019)", PMIDs) — how visibly the text leans on sources.'};
-let zmode='sp';
+ref_markers_per_1k:'Citation markers per 1,000 words ([12], "et al.", "(Smith 2019)", PMIDs) — how visibly the text leans on sources.',
+total_p10k:'Every explicit reference to autism or to autistic people, counted in one non-overlapping pass — person-first and identity-first phrasings, "on the spectrum", self-advocate/autistic-community, then bare "autism" and "ASD". Independent of which naming convention was in fashion. Held 199–314 per 10k for seventeen years (mean 268, sd 33); the draft is at 108.',
+person_p10k:'The person-referring subset: phrases that point at autistic people rather than at autism as a topic. Peaked at 113 per 10k in SP-2023; the draft is at 28.',
+abstract_p10k:'Autism or ASD named as a topic, without reference to a person. Also falls by half in the draft, which is why this is not a naming-convention effect.',
+agency_p10k:'Federal agency acronyms (HHS, NIH, CDC, FDA, CMS, HRSA…) per 10,000 words — how much of the text is about the machinery rather than the subject.',
+agency_autism_ratio:'Agency names per autism reference. Every plan from 2009 to 2023 sat between 0.03 and 0.12 — naming autism 8 to 36 times more often than any agency. The draft is at 1.54.'};
+let zmode='sp23';
+/* log2 ratio draft:SP-2023, so a doubling and a halving are the same bar length
+   in opposite directions. Undefined (0 in the comparator) is clipped to the end. */
+const lr=(r)=>{
+  if(r.sp23===null||r.sp23===undefined||r.draft===null)return null;
+  if(r.sp23===0&&r.draft===0)return 0;
+  if(r.sp23===0)return 6; if(r.draft===0)return -6;
+  return Math.log2(r.draft/r.sp23);
+};
+const zof=(r)=>zmode==='sp'?r.zSP:zmode==='all'?r.zAll:lr(r);
 function drawZ(){
   try{
     const host=$('#zbars');host.innerHTML='';
-    const rows=[...DATA.zscores].sort((a,b)=>Math.abs(zmode==='sp'?b.zSP:b.zAll)-Math.abs(zmode==='sp'?a.zSP:a.zAll));
+    const rows=[...DATA.zscores].filter(r=>zof(r)!==null)
+      .sort((a,b)=>Math.abs(zof(b))-Math.abs(zof(a)));
     rows.forEach(r=>{
-      const z=zmode==='sp'?r.zSP:r.zAll;
+      const z=zof(r);
+      const ratioMode=(zmode==='sp23');
       const row=el('div','zrow');
       row.appendChild(el('div','name',r.feature));
       const bar=el('div','zbar');
@@ -290,18 +323,25 @@ function drawZ(){
       const f=el('div','fill '+(z>=0?'pos':'neg'));
       const w=Math.min(Math.abs(z),6)/6*50;
       f.style.width=w+'%';
-      f.style.background=Math.abs(z)>2?'var(--red)':Math.abs(z)>1?'var(--orange)':'#9a958a';
+      const hot=ratioMode?1:2, warm=ratioMode?0.5:1;   /* ratio mode: 2x / 1.4x */
+      f.style.background=Math.abs(z)>hot?'var(--red)':Math.abs(z)>warm?'var(--orange)':'#9a958a';
       bar.appendChild(f);
       row.appendChild(bar);
       const val=el('div','zval');
-      val.innerHTML='<b>z '+(z>=0?'+':'')+fmt(z,1)+'</b> · '+fmt(r.draft,2)+' vs '+fmt(r.spMean,2);
+      if(ratioMode){
+        const x=Math.pow(2,z);
+        const lab=r.draft===0?'0 uses':r.sp23===0?'new':(x>=1?'×'+fmt(x,1):'÷'+fmt(1/x,1));
+        val.innerHTML='<b>'+lab+'</b> · '+fmt(r.draft,2)+' vs '+fmt(r.sp23,2);
+      }else{
+        val.innerHTML='<b>z '+(z>=0?'+':'')+fmt(z,1)+'</b> · '+fmt(r.draft,2)+' vs '+fmt(r.spMean,2);
+      }
       row.appendChild(val);
       const desc=TIP[r.feature];
       if(desc){
         row.tabIndex=0;
         row.setAttribute('aria-label',r.feature+': '+desc);
         const tip=el('div','tipbox');
-        tip.innerHTML='<div class="tt">'+r.feature+'</div>'+desc+'<div class="tn">draft '+fmt(r.draft,2)+' · earlier plans '+fmt(r.spMean,2)+' ± '+fmt(r.spSd,2)+'</div>';
+        tip.innerHTML='<div class="tt">'+r.feature+'</div>'+desc+'<div class="tn">draft '+fmt(r.draft,2)+' · SP-2023 '+fmt(r.sp23,2)+' · earlier plans '+fmt(r.spMean,2)+' ± '+fmt(r.spSd,2)+'</div>';
         row.appendChild(tip);
       }else{
         row.title=r.feature+': draft '+fmt(r.draft,3)+', earlier plans '+fmt(r.spMean,3)+' ± '+fmt(r.spSd,3);
@@ -394,18 +434,31 @@ const TERM_TIP={
 "urgen* / crisis / epidemic / emergency":"Crisis vocabulary — escalation rhetoric.",
 "hope* / promis* / opportunit*":"Hope vocabulary — the optimism framing earlier plans preferred."};
 function describeSeries(s){
-  if(s.kind==='sty')return TIP[s.feature]||'';
+  if(s.kind==='sty'||s.kind==='ref')return TIP[s.feature]||'';
   return TERM_TIP[s.term]||GROUP_TIP[s.group]||'';
 }
 const docs=DATA.trends.docs;
-const allSeries=[...DATA.trends.lexicon.map(x=>({...x,kind:'lex'})),...DATA.trends.style.map(x=>({...x,kind:'sty'}))];
+const allSeries=[...DATA.trends.lexicon.map(x=>({...x,kind:'lex'})),...DATA.trends.style.map(x=>({...x,kind:x.kind||'sty'}))];
 const sel=$('#termsel');
-const gLex=document.createElement('optgroup');gLex.label='domain lexicon (per 10k words)';
-const gSty=document.createElement('optgroup');gSty.label='style features';
-allSeries.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s.label;(s.kind==='lex'?gLex:gSty).appendChild(o);});
-sel.appendChild(gLex);sel.appendChild(gSty);
-const ASD=DATA.trends.lexicon.findIndex(x=>x.term==='ASD (cs)');
-sel.value=ASD>=0?ASD:0;
+/* Style first, then the subject-reference measures, then the domain lexicon:
+   how the document is written is the part that does not depend on which naming
+   convention was in fashion in a given year. The 91 lexicon terms are
+   sub-grouped by their seven categories rather than listed flat, so the
+   selector stays navigable. */
+const groups={},order=[];
+const grp=(key,label)=>{if(!groups[key]){const g=document.createElement('optgroup');g.label=label;groups[key]=g;order.push(key);}return groups[key];};
+grp('sty','how the prose is written');
+grp('ref','how often it names its own subject');
+allSeries.forEach((s,i)=>{
+  const o=document.createElement('option');o.value=i;
+  const g=s.kind==='lex'?grp('lex:'+s.group,'lexicon · '+s.group):grp(s.kind,'');
+  o.textContent=s.kind==='lex'?s.term:s.label;
+  g.appendChild(o);
+});
+order.forEach(k=>sel.appendChild(groups[k]));
+/* Open on "should" — the study's most extreme and most baseline-robust measure. */
+const DEF=allSeries.findIndex(x=>x.feature==='should_per_1k');
+sel.value=DEF>=0?DEF:0;
 
 function star(cx,cy,r,fill){
   let p='';
@@ -458,7 +511,7 @@ drawTrend();
 sel.addEventListener('change',drawTrend);
 
 /* ---------- keyness ---------- */
-let ktab='words',ksort='z',kdir=-1,kq='';
+let ktab='words',ksort='z',kdir=-1,kq='',kexp=false;
 function ktable(){
   try{
     const host=$('#ktable');
@@ -468,14 +521,28 @@ function ktable(){
       if(typeof va==='string')return kdir*va.localeCompare(vb);
       return kdir*(va-vb);
     });
-    const lim=rows.slice(0,400);
-    let h='<div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px">'+rows.length+' terms'+(rows.length>lim.length?' (showing first 400 — refine the filter)':'')+' · positive z = more in the draft</div>';
+    /* Keyness is about the ends of the distribution, not the middle. Default to
+       the 25 most over-used and 25 most under-used terms; kexp shows all (capped
+       at 400 rows so the page stays usable). Searching or re-sorting keeps the
+       same window, applied to whatever the user asked for. */
+    let lim,note;
+    if(!kexp&&!kq&&ksort==='z'){
+      const top=rows.slice(0,25),bot=rows.slice(-25);
+      lim=top.concat(bot); note=' · showing the 25 most over- and 25 most under-used';
+    }else{
+      lim=rows.slice(0,400); note=rows.length>400?' (first 400 — refine the filter)':'';
+    }
+    let h='<div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px">'+rows.length+' terms'+note+' · positive z = more in the draft'+
+      (!kq&&ksort==='z'?' · <a href="#keyness" id="kexpand" style="color:var(--red)">'+(kexp?'show the ends only':'show all')+'</a>':'')+'</div>';
     h+='<table><thead><tr><th data-c="term">term</th><th data-c="1" class="num">z</th><th data-c="2" class="num">draft /10k</th><th data-c="3" class="num">earlier /10k</th><th class="num">draft uses</th><th class="num">earlier uses</th></tr></thead><tbody>';
-    lim.forEach(r=>{
+    lim.forEach((r,i)=>{
+      if(!kexp&&!kq&&ksort==='z'&&i===25)h+='<tr><td colspan="6" style="padding:6px 0;color:var(--muted);font-family:var(--mono);font-size:11px;border-bottom:none">\u22ee  '+(rows.length-50).toLocaleString()+' terms between the two ends</td></tr>';
       h+='<tr><td class="t">'+r[0]+'</td><td class="num" style="color:'+(r[1]>0?'var(--red)':'var(--blue)')+'">'+fmt(r[1],1)+'</td><td class="num">'+fmt(r[2],1)+'</td><td class="num">'+fmt(r[3],1)+'</td><td class="num" style="color:var(--muted)">'+r[4]+'</td><td class="num" style="color:var(--muted)">'+r[5]+'</td></tr>';
     });
     host.innerHTML=h+'</tbody></table>';
     host.querySelectorAll('th').forEach(th=>th.onclick=()=>{const c=th.dataset.c;if(ksort===c)kdir*=-1;else{ksort=c==='term'?'term':+c;kdir=c==='term'?1:-1;}ktable();});
+    const x=host.querySelector('#kexpand');
+    if(x)x.onclick=(ev)=>{ev.preventDefault();kexp=!kexp;ktable();};
   }catch(e){err('keyness: '+e.message)}
 }
 ktable();
@@ -504,11 +571,27 @@ vfilter();
 $('#vsearch').addEventListener('input',vfilter);
 
 /* ---------- trend reversals ---------- */
-let tmode='all',tsort='rho',tdir=-1;
+try{
+  const host=$('#ctlbars');
+  const mx=Math.max(...DATA.control.map(r=>r.tot));
+  DATA.control.forEach(r=>{
+    const row=el('div','zrow');
+    row.style.gridTemplateColumns='130px 1fr 90px';
+    row.appendChild(el('div','name',r.id));
+    const bar=el('div');bar.style.cssText='position:relative;height:14px';
+    const b=el('div');b.style.cssText='position:absolute;left:0;top:2px;bottom:2px;width:'+(100*r.n/mx)+'%;background:'+(r.draft?'var(--red)':'#8a96a6');
+    bar.appendChild(b);row.appendChild(bar);
+    row.appendChild(el('div','zval',r.n+' of '+r.tot));
+    row.title=r.id+' held out: '+r.n+' of '+r.tot+' trends scored as reversed';
+    host.appendChild(row);
+  });
+}catch(e){err('control: '+e.message)}
+
+let tmode='strong',tsort='late',tdir=-1;
 function ttable(){
   try{
     const host=$('#ttable');
-    let rows=DATA.termTrends.filter(r=>tmode==='all'||r.verdict===tmode);
+    let rows=DATA.termTrends.filter(r=>tmode==='all'?true:tmode==='strong'?r.strong:r.verdict===tmode);
     rows=[...rows].sort((a,b)=>tdir*(a[tsort]>b[tsort]?1:a[tsort]<b[tsort]?-1:0));
     let h='<div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px">'+rows.length+' terms</div>';
     h+='<table><thead><tr><th data-c="term">term</th><th data-c="rho" class="num">ρ 2007–23</th><th data-c="early" class="num">/10k before 2013</th><th data-c="late" class="num">/10k 2018+</th><th data-c="draft" class="num">draft /10k</th><th>verdict</th></tr></thead><tbody>';
@@ -521,6 +604,27 @@ function ttable(){
 }
 ttable();
 $('#ttoggle').addEventListener('click',(ev)=>{const b=ev.target.closest('button');if(!b)return;tmode=b.dataset.t;document.querySelectorAll('#ttoggle button').forEach(x=>x.classList.toggle('on',x===b));ttable();});
+
+/* ---------- subject reference (autism vs agencies) ---------- */
+try{
+  const host=$('#refbars');
+  const mx=Math.max(...DATA.reference.map(r=>Math.max(r.total,r.agency)));
+  DATA.reference.forEach(r=>{
+    const row=el('div','zrow');
+    row.style.gridTemplateColumns='130px 1fr 150px';
+    row.appendChild(el('div','name',r.id==='SP-2026-DRAFT'?'2026 draft':r.id));
+    const bar=el('div');bar.style.cssText='position:relative;height:16px';
+    const b1=el('div');b1.style.cssText='position:absolute;left:0;top:1px;bottom:8px;width:'+(100*r.total/mx)+'%;background:var(--blue)';
+    const b2=el('div');b2.style.cssText='position:absolute;left:0;top:9px;bottom:1px;width:'+(100*r.agency/mx)+'%;background:var(--orange)';
+    bar.appendChild(b1);bar.appendChild(b2);
+    row.appendChild(bar);
+    const v=el('div','zval');
+    v.innerHTML='<b>'+fmt(r.total,0)+'</b> vs '+fmt(r.agency,0)+' · '+fmt(r.ratio,2)+':1';
+    row.appendChild(v);
+    row.title=r.id+': '+fmt(r.total,1)+' autism references and '+fmt(r.agency,1)+' agency acronyms per 10k words ('+fmt(r.person,1)+' of the autism references are to autistic people)';
+    host.appendChild(row);
+  });
+}catch(e){err('refbars: '+e.message)}
 
 /* ---------- carryover ---------- */
 try{
