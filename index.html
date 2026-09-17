@@ -151,7 +151,7 @@ footer .links{margin-top:10px}
 
 <section id="keyness">
   <div class="kicker">03 · keyness</div>
-  <h2>What the draft says more — and what it stopped saying</h2>
+  <h2>What the draft says more and what it stopped saying</h2>
   <p class="lede">Statistically distinctive vocabulary (weighted log-odds z, Monroe et al. 2008). Positive z: over-used by the draft; negative z: under-used. Every measured term is embedded below (3,579 words, 4,939 bigrams) — search any word, or sort by z. Rare brand-new terms (leucovorin, NAPTI, dashboard) carry modest z-scores by design of the estimator; find them under <i>coined &amp; retired</i>. Raw CSVs are in the repo.</p>
   <div class="toggle" id="ktoggle">
     <button data-k="words" class="on">words vs plans 2009–2023</button><button data-k="bigrams">bigrams</button><button data-k="vs2023">words vs SP-2023 alone</button>
@@ -202,7 +202,7 @@ footer .links{margin-top:10px}
   <h2>How the numbers are made</h2>
   <p class="lede" style="max-width:none">
   Rates are normalised per 1,000 or 10,000 words so documents of different lengths compare fairly. Readability uses Flesch/Flesch–Kincaid plus four corroborating formulas. Lexical diversity is MATTR-500. The <b>deontic index</b> is the share of obligation modals (must/shall/should/required-to) among all modal verbs. <b>Nominalisation</b> counts words ending -tion/-ment/-ness/-ity — verbs frozen into nouns. Keyness is the weighted log-odds ratio with an informative Dirichlet prior. Text reuse counts shared 8-word shingles. Trends are Spearman correlations of term rates with publication year.<br><br>
-  Sentence splitting, syllable counting, and passive detection are heuristic but applied identically to every document. Z-scores compare against only eight earlier plans, so magnitudes are inflated; directions are reliable. Reference lists, running headers/footers, and tables of contents were removed before measuring; easy-read editions and documents under 2,000 words were excluded. Everything re-runs from the shipped text cache in the repo — no PDFs required.</p>
+  Sentence splitting, syllable counting, and passive detection are heuristic but applied identically to every document. Z-scores compare against only eight earlier plans, so magnitudes are inflated; directions are reliable. Reference lists, running headers/footers, and tables of contents were removed before measuring; easy-read editions and documents under 2,000 words were excluded. Everything re-runs from the shipped text cache in the repo, no PDFs required.</p>
 </section>
 
 <footer>
