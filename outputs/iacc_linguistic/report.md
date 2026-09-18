@@ -82,7 +82,8 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - The draft inherits 0.02% from SP-2023. The like-for-like comparison is the recent one, not the 24% all-plans average: that average is carried by the annual-update era, when each plan was a revision of the last (SP-2010 53%, SP-2011 31%, SP-2012 3%). The modern plans were already near-clean-sheet documents: SP-2017 took 1.12% from its predecessor and 4.4% from the record; SP-2019 took 5.89% from its predecessor and 19.4% from the record; SP-2023 took 0.94% from its predecessor and 14.7% from the record. Against that recent norm the draft is roughly 54x lower, not the ~812x the historical average implies.
 
 ## Trends across 2007-2023 and the draft
-- Of the 80 terms with a strong monotonic trend (|rho| >= 0.5), the draft reverses 55. This needs its control: holding out each document in turn and scoring it by the same rule gives SP-2011 79, SP-2013 79, SP-2010 78, SP-2009 77, SP-2012 75, SP-2017 59, SP-2019 50, SP-2023 38, SOA-2023 36, RTC-2023 33. The draft's count is the highest among the post-2018 documents, and that is all this measure establishes - a trend fitted across 45 documents and scored against a group mean, with no minimum size of change, fires on almost anything.
+- Of the 80 terms with a strong monotonic trend (|rho| >= 0.5), the draft reverses 55 (68.8% of its trend set). Control: every earlier document scored the same way - trends refitted on the documents before it, judged against its own trailing 8-year window - reverses 25.0-75.9% (median 48.2%), so a reversal share near half is the corpus norm and the measure has no magnitude floor. The draft is nonetheless at the top of that distribution: rank 2 of 29 documents, and the highest of the strategic plans (SP-2013 25.0%, SP-2017 60.6%, SP-2019 42.1%, SP-2023 48.2%, draft 68.8%).
+- Plan against plan, on one fixed vocabulary of 386 terms: the draft changes 62.2% of it by 2x or more against SP-2023 (45.1% at least halved), the largest step in the series - the seven earlier steps run 13.0-50.5% - and the median term ends at 0.6x its SP-2023 rate, so the change is near-uniform contraction rather than substitution. On the stricter pairwise reversal rule (trend fitted on the plan series only, 2x magnitude floor) the draft reverses 32.4% against SP-2023's 42.8%: it is the most divergent plan-to-plan step in the record, but not the most trend-reversing one.
 - 13 reversals clear a magnitude floor (used 5+ per 10k in the 2018-on documents and at least halved by the draft): health (111.1 -> 47.0), disparities (19.8 -> 1.3), living (14.5 -> 5.4), adulthood (11.9 -> 2.2), experience (11.5 -> 4.0), receive (11.4 -> 4.0), physical (10.8 -> 2.7), racial (9.5 -> 0.7), improving (8.2 -> 2.4), meet (7.9 -> 2.7), suicide (6.6 -> 2.2), sex (5.4 -> 1.6), justice (5.1 -> 0.0). Report these rather than the full 55.
 - Rising terms the draft continues: care, regulation, accountability, outcomes, access, timely, accommodations, participation, conditions, dysregulation, employers, primary, transportation, consistent, barriers.
 - Rising terms the draft reverses: college, veterans, accessibility, suicide, prefer, equity, arts, ensuring, demographic, leadership, inpatient, justice, health, living, sex.
@@ -106,12 +107,14 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - 07_similarity_strategic_plans.png
 - 07_style_dendrogram.png
 - 08_inherited_text_by_plan.png
+- 09_consecutive_plan_change.png
 - 09_lexicon_trends.png
 - 09_reversal_control.png
 - 09_strategic_plan_drift.png
 - 09_style_trends.png
 - 10_draft_section_novelty.png
 - autism_reference_by_plan.csv
+- consecutive_plan_change.csv
 - content_similarity.csv
 - dashboard_review_checks.csv
 - documents.csv
@@ -122,15 +125,19 @@ Corpus: 46 documents in the analysis set (8 earlier strategic plans, 37 other pu
 - keyness_words_vs_SP-2023.csv
 - keyness_words_vs_prior_plans.csv
 - lexicon_per10k.csv
+- list_as_prose_blocks.csv
 - new_vocabulary.csv
+- pairwise_reversal_detail.csv
 - reuse_carryover_by_plan.csv
 - reuse_draft_vs_each_doc.csv
+- reversal_control_by_term.csv
 - strategic_plan_drift.csv
 - style_delta.csv
 - style_features.csv
 - substantial_reversals.csv
 - term_trends.csv
 - trend_reversal_control.csv
+- trend_reversal_walkforward.csv
 
 ## Method notes
 - Sentence splitting, syllable counting and passive detection are heuristic and applied identically to every document; reference lists, running headers/footers and tables of contents were removed before measuring; easy-read/at-a-glance editions and documents under 2000 words were excluded from comparisons.

@@ -161,10 +161,11 @@ footer .links{margin-top:10px}
 
 <section id="reversals">
   <div class="kicker">04 · trend reversals</div>
-  <h2>Fifty-five of eighty trends reversed — but so does almost any document</h2>
-  <p class="lede">Every content word with a strong monotonic trend across 2007–2023 (|Spearman ρ| ≥ 0.5), and whether the draft continues or reverses it (judged against the 2018-onwards average). <b>Read this section with its control.</b> Hold any single document out of the corpus and score it by the same rule and it "reverses" 41–99% of the same 80 trends — SP-2017 reverses 59 and the early annual-update plans 75–79. A trend fitted across 45 documents and then scored against a mean, with no minimum size of change, fires on almost anything. The draft's 55 is the highest of any post-2018 document (SP-2019: 50, SP-2023: 38) but below every plan from 2009 to 2017, and that is all this measure establishes.</p>
+  <h2>Fifty-five of eighty trends reversed — in a corpus where reversing half is normal</h2>
+  <p class="lede">Every content word with a strong monotonic trend across 2007–2023 (|Spearman ρ| ≥ 0.5), and whether the draft continues or reverses it, judged against the average of the 2018-onwards documents. <b>Read this section with its control.</b> The control applies the draft's own rule to every earlier document <i>against its own past</i> — trends refitted on the documents published before it, judged against its own trailing eight-year window — because a document that predates a fixed recent window sits on the reversing side of any time trend by construction, and scoring it that way would flatter the draft. On that like-for-like basis the 28 earlier documents reverse <b>25–76%</b> of their own trend sets (median <b>48%</b>): a reversal share near half is the corpus norm, and this measure has no minimum size of change. The draft's <b>69%</b> is second of 29 documents and the highest of the strategic plans on that measure — SP-2013 25%, SP-2019 42%, SP-2023 48%, SP-2017 61% — but that version has no magnitude floor and mixes document types, and the stricter pairwise test below does not agree with it.</p>
   <div id="ctlbars"></div>
-  <p class="zlegend" style="margin-bottom:22px">same rule, one document held out at a time · <span style="color:var(--red)">red</span> = the 2026 draft</p>
+  <p class="lede" style="font-size:14px"><b>The pairwise check, with no window and no baseline choice.</b> Comparing each plan only with the plan immediately before it, on one fixed vocabulary of 386 terms: the draft changes <b>62.2%</b> of it by a factor of two or more — the largest step in the series, against 50.5% for 2019-vs-2017 and 13–35% across the annual-update era — with <b>45.1% of terms at least halved</b> and the median term at <b>0.60×</b> its SP-2023 rate. That is the rupture finding in its strongest form, because it needs no trend fit and no baseline. On the strict pairwise <i>reversal</i> rule, though — plan-series trend, judged against the predecessor's own level, with a 2× magnitude floor — the draft reverses 32.4% and <b>SP-2023 reverses 42.8%</b>: SP-2023 was an expansionary rewrite whose increases reversed falling trends, while the draft mostly pushes already-falling terms further down. The draft is the most divergent plan-to-plan step in the record, not the most trend-reversing one. Full table in <code>consecutive_plan_change.csv</code>.</p>
+  <p class="zlegend">red = the 2026 draft · each document scored by the draft's rule against its own past · the per-term working for the retrospective diagnostic (876 judgements across 11 documents) is in <code>reversal_control_by_term.csv</code>, and the walk-forward figures in <code>trend_reversal_walkforward.csv</code> · no term is reversed by the draft alone, and 61 of the 80 are reversed by 8 or more documents — the measure is noisy, which is why the 13 substantial reversals below are the ones to quote.</p>
   <p class="lede">The <b>substantial reversals</b> view applies a floor: the term was used at least 5 times per 10,000 words in the 2018+ documents <i>and</i> the draft at least halves it. Thirteen terms clear it — including health, disparities, adulthood, racial, suicide, sex and justice.</p>
   <div class="toggle" id="ttoggle">
     <button data-t="strong" class="on">substantial reversals</button><button data-t="all">all 80</button><button data-t="reverses trend">reversed</button><button data-t="continues trend">continued</button>
@@ -573,16 +574,16 @@ $('#vsearch').addEventListener('input',vfilter);
 /* ---------- trend reversals ---------- */
 try{
   const host=$('#ctlbars');
-  const mx=Math.max(...DATA.control.map(r=>r.tot));
+  const mx=100;  /* bars are percentages: each document has its own trend-set size */
   DATA.control.forEach(r=>{
     const row=el('div','zrow');
-    row.style.gridTemplateColumns='130px 1fr 90px';
+    row.style.gridTemplateColumns='130px 1fr 130px';
     row.appendChild(el('div','name',r.id));
     const bar=el('div');bar.style.cssText='position:relative;height:14px';
-    const b=el('div');b.style.cssText='position:absolute;left:0;top:2px;bottom:2px;width:'+(100*r.n/mx)+'%;background:'+(r.draft?'var(--red)':'#8a96a6');
+    const b=el('div');b.style.cssText='position:absolute;left:0;top:2px;bottom:2px;width:'+(r.pct/mx*100)+'%;background:'+(r.draft?'var(--red)':'#8a96a6');
     bar.appendChild(b);row.appendChild(bar);
-    row.appendChild(el('div','zval',r.n+' of '+r.tot));
-    row.title=r.id+' held out: '+r.n+' of '+r.tot+' trends scored as reversed';
+    row.appendChild(el('div','zval',fmt(r.pct,0)+'% · '+r.n+' of '+r.tot));
+    row.title=r.id+' scored against its own past: '+r.n+' of '+r.tot+' strong trends reversed ('+fmt(r.pct,1)+'%)';
     host.appendChild(row);
   });
 }catch(e){err('control: '+e.message)}

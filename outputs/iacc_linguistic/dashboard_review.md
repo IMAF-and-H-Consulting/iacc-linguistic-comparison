@@ -76,6 +76,102 @@ predecessor, and to federal agencies more often than to autism, is a document wh
 changed.
 
 
+## 1b. The reversal control, corrected
+
+**My first control was wrong, and wrong in the direction that understated your finding.** I held each
+document out, refit the trends on the other 44 — *including documents published after it* — and scored
+it against the fixed 2018-onwards average. For a 2011 plan that asks whether 2011 looks like 2018–2023.
+For any term with a time trend the answer is no by construction, so the five annual-update plans
+returned 75–79 of 80 and I reported "hold out any document and it reverses 41–99%" as though the
+draft's 55 were unremarkable. The six documents that scored highest are exactly the six that predate the
+window they were scored against. Your own design did not have this defect: the draft is a 2026 document
+judged against 2018–2023, which is genuinely its own past.
+
+**The time-symmetric control.** Each document is scored by the draft's rule against *its own* past:
+trends refitted on the documents published before it, compared with the mean of its own trailing
+eight-year window. Documents with fewer than 15 prior documents or 3 in the window are skipped, leaving
+29. Percentages are the comparable unit because the trend set grows with the corpus (34 terms for a 2017
+document, 80 for the draft).
+
+| | SP-2013 | SP-2019 | SP-2023 | SP-2017 | **2026 draft** |
+|---|---|---|---|---|---|
+| strong trends reversed | 25.0% | 42.1% | 48.2% | 60.6% | **68.8%** (55 of 80) |
+
+The 28 earlier documents span **25.0–75.9%**, median **48.2%**. So two things are true at once, and the
+package should say both: a reversal share near half is the corpus norm and this measure has no magnitude
+floor — but **the draft ranks 2 of 29 documents and is the highest of every strategic plan in the
+series**, above SP-2017's 60.6%. Only USPSTF-2016 (75.9%) is higher, and that is an external clinical
+review rather than an IACC plan.
+
+**The metric is still too loose to quote on its own.** From the retrospective diagnostic, which remains
+useful as a floor-check: 61 of the 80 terms are "reversed" by 8 or more of the 11 documents tested, the
+minimum for any term is 4, and no term is reversed by the draft alone. Re-scoring the draft against a
+recent-*plans*-only baseline gives 53 rather than 55, so what the measure lacks is a minimum size of
+change, not a cleaner comparison set. That is why the thirteen magnitude-floored reversals — used at
+least 5 per 10k recently and at least halved by the draft, including health, disparities, adulthood,
+racial, suicide, sex and justice — are the ones to put in front of a committee.
+
+**Worked example — "health" (rising, ρ = 0.61).** The draft uses it 47.0 times per 10,000 words against
+a 2018+ mean of 111.1, so the rule fires. SP-2009 through SP-2017 sit at 34–59 per 10k, also below that
+mean: the plans have always used "health" less than the reports-to-Congress and summaries-of-advances
+that make up 13 of the 15 documents in that window. "Justice" behaves the same way — draft 0.0, window
+mean 5.1, earlier plans 0.8–3.8.
+
+**A reproducibility bug surfaced while building this, and is fixed.** The control originally joined
+held-out scores to the canonical term list by *display label*. A label is a stem's most common spelling,
+taken from a map that keeps accumulating on every tokenisation call, so once the section analysis had
+run "caregivers" became "caregiver" and the join silently dropped a row: re-running the control cell
+after the rest of the notebook gave 78/79 where the first pass gave 79/80. The surface-form and
+Title-Case maps are now frozen once the corpus pass finishes, the control joins on stems, and the
+notebook asserts that the per-term detail reconciles with its own totals.
+
+## 1c. Plan against plan, with no window and no baseline choice
+
+Every trend measure so far compares one document against an average of several others, which needs a
+window, a trend fit and a decision about which documents belong in the baseline. The pairwise question
+avoids all three: **how far does each plan move from the plan immediately before it?**
+
+One fixed vocabulary for all eight steps — 386 terms averaging at least 5 uses per 10,000 words across
+the nine plans. Fixing it matters: selecting terms on the *earlier* plan of each pair biases every
+comparison toward decreases, and that is what produced the suspiciously uniform 79–90% decrease shares
+in my first cut. On the fixed set the median term ratio across the seven published-plan steps is 0.99,
+so the measure carries no built-in direction.
+
+| Plan vs its predecessor | years apart | changed ≥2× | at least halved | at least doubled | median ratio | trend terms | reversed |
+|---|---|---|---|---|---|---|---|
+| 2010 vs 2009 | 1 | 15.3% | 2.3% | 13.0% | 0.95 | — | — |
+| 2011 vs 2010 | 1 | 13.0% | 3.9% | 9.1% | 0.88 | — | — |
+| 2012 vs 2011 | 1 | 34.7% | 21.8% | 13.0% | 0.93 | — | — |
+| 2013 vs 2012 | 1 | 32.1% | 11.9% | 20.2% | 1.04 | 213 | 29.1% |
+| 2017 vs 2013 | 4 | 26.2% | 11.1% | 15.0% | 1.10 | 196 | 21.4% |
+| 2019 vs 2017 | 2 | 50.5% | 33.4% | 17.1% | 0.72 | 188 | 20.2% |
+| 2023 vs 2019 | 4 | 49.0% | 16.8% | 32.1% | 1.30 | 187 | **42.8%** |
+| **2026 draft vs 2023** | 3 | **62.2%** | **45.1%** | 17.1% | **0.60** | 173 | 32.4% |
+
+**Two findings, and they point different ways.**
+
+*Divergence.* The draft is the largest plan-to-plan step in the series on every magnitude column: it
+changes 62.2% of the shared vocabulary by a factor of two or more, against 50.5% for the next largest
+step (2019 vs 2017) and 13–35% for the annual-update era. 45.1% of the vocabulary is at least halved,
+where no earlier step exceeds 33.4%. The median term ends at 0.60× its SP-2023 rate. Note the
+escalation: churn has been above 49% for the last three steps, so the draft extends a pattern that began
+with SP-2019 rather than breaking from a stable series.
+
+*Reversal.* On the strict pairwise rule — trend fitted on the plan series only, judged against the
+predecessor's own level, with a 2× magnitude floor so a trivial change cannot register — the draft
+reverses **32.4%** of its trend terms and **SP-2023 reverses 42.8%**. SP-2023 is the bigger reverser,
+and the reason is visible in the direction columns: SP-2023 was an expansionary rewrite (median ratio
+1.30, 32.1% of terms at least doubled), and raising a falling term counts as a reversal. The draft
+mostly pushes already-falling terms further down, which the rule scores as *continuing* the trend.
+
+**So the honest summary of this metric family:** the draft is the most divergent plan-to-plan step in
+the record, and its divergence is near-uniform contraction rather than a change of subject. It is not
+the biggest trend-reverser once a magnitude floor is imposed and the comparison is kept inside the plan
+series. My claim in the previous pass — "the highest share of any strategic plan" — is true only of the
+corpus-wide walk-forward version, which has no magnitude floor and mixes document types; it does not
+survive this stricter test, and the package should not lean on it.
+
+
 ## 2. What was wrong, and what was changed
 
 ### 2.1 The baseline is wrong on the headline tiles (highest priority)
@@ -114,16 +210,16 @@ Then I held out other documents and re-ran the same rule against the same 80 ter
 
 | Held out | SP-2013 | SP-2017 | **2026 draft** | SP-2019 | SP-2023 | SOA-2023 | RTC-2023 |
 |---|---|---|---|---|---|---|---|
-| "trends reversed" of 80 | 79 | 59 | **55** | 50 | 38 | 36 | 33 |
+| "trends reversed" of 80 (retrospective diagnostic) | 79 | 59 | **55** | 50 | 38 | 36 | 33 |
 
-Any document in this corpus "reverses" 41–99% of these trends; **SP-2017 reverses more than the
-draft does, and so does every plan from 2009 to 2013.** The measure is a near-tautology: a trend fitted across 45 documents and then scored
+Scored against its own past instead, each earlier document reverses 25–76% (median 48%) of its own
+trend set, and **the draft's 69% is the highest of any strategic plan** — see §1b. The measure is a near-tautology: a trend fitted across 45 documents and then scored
 against the 2018+ mean with no magnitude threshold will flag almost any single document. Eleven of
 your 55 reversals are terms the draft simply never uses, and 13 have a 2018+ base rate under 2 per
 10,000 words ("spark", "in-person", "receipt", "welfare").
 
-**Fix:** either drop this tile, or replace it with the controlled version — "the draft reverses 55 of
-80, more than any post-2018 document (SP-2023: 38) but fewer than SP-2017's 59" — which is honest and
+**Fix:** either drop this tile, or replace it with the controlled version — "the draft reverses 55 of 80 —
+69% of its trend set, the highest share of any plan, where the corpus median is 48%" — which is honest and
 still informative. Adding a magnitude floor (say, reversals where the 2018+ rate exceeds 5 per 10k
 and the draft moves by ≥2×) would give you a defensible short list instead of a large weak one.
 

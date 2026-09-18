@@ -123,14 +123,24 @@ payload["reference"] = [
 
 payload["trends"] = {"docs": docs, "lexicon": lexicon_series, "style": style_series}
 
-# --- leave-one-out control for the trend-reversal count ---
-ctl = pd.read_csv(OUT / "trend_reversal_control.csv")
+# --- control: every document scored against its own past ---
+# Refitting on the whole corpus and scoring every document against one fixed
+# recent window is not the draft's rule: a document published before that window
+# is on the reversing side of any time trend by construction. The walk-forward
+# control refits on the documents preceding each document and uses its own
+# trailing 8-year window, so the comparison is like-for-like.
+wf = pd.read_csv(OUT / "trend_reversal_walkforward.csv")
+_wf_d = wf.loc[wf.document == "SP-2026-DRAFT", "pct"].iloc[0]
+_wf_other = wf[wf.document != "SP-2026-DRAFT"]
 payload["control"] = [
-    {"id": r.held_out_document.replace("SP-2026-DRAFT", "2026 draft"),
-     "n": int(r.trends_reversed), "tot": int(r.n_trend_terms),
-     "draft": r.held_out_document == "SP-2026-DRAFT"}
-    for r in ctl.sort_values("trends_reversed", ascending=False).itertuples()
+    {"id": r.document.replace("SP-2026-DRAFT", "2026 draft"),
+     "n": int(r.reversed), "tot": int(r.n_strong_terms), "pct": f2(r.pct, 1),
+     "draft": r.document == "SP-2026-DRAFT"}
+    for r in wf.sort_values("pct", ascending=False).itertuples()
 ]
+payload["controlNote"] = {"median": f2(_wf_other["pct"].median(), 1), "lo": f2(_wf_other["pct"].min(), 1),
+                          "hi": f2(_wf_other["pct"].max(), 1), "n": int(len(_wf_other)),
+                          "draftPct": f2(_wf_d, 1), "rank": int((wf["pct"] > _wf_d).sum() + 1)}
 
 # --- keyness (all rows embedded; display is capped/filtered in the page) ---
 def keyness_slice(fname, n_each=None):
