@@ -6,6 +6,18 @@
 
 **How does the July 2026 IACC Strategic Plan working draft differ from everything the Interagency Autism Coordinating Committee published between 2007 and 2023?** This repository contains a single Jupyter notebook that answers that question quantitatively — style, vocabulary, naming conventions, similarity, text reuse, and 17-year trends — plus all of its precomputed results.
 
+## Public comments (backend installation required)
+
+The explorer includes a separate, no-login annotation overlay for page comments,
+selected-text notes and replies. Comments are stored on DreamHost, not in the
+notebook or this repository. The original browser gets a persistent badge so
+identical display names can still be distinguished.
+
+See [PAGE_NOTES.md](PAGE_NOTES.md) for the exact host/origin configuration,
+privacy and moderation behavior, and pre-merge deployment checks. The loader
+belongs in `explorer_template.html` as well as generated `index.html` so a rebuild
+preserves it. Install and verify the backend before enabling this on the live site.
+
 ## Run it — no PDFs needed
 
 **One-click:** the Colab badge above opens the notebook straight from this repo; its first cell auto-fetches the text cache (~18 MB), then *Run all* reproduces every number in a couple of minutes. (If GitHub's own notebook viewer balks at the file size, use [nbviewer](https://nbviewer.org/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb) for reading.)
