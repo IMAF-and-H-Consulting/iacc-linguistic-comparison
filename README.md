@@ -1,8 +1,8 @@
 # IACC Linguistic Comparison
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb)
 
-**Interactive explorer:** [sablister.github.io/iacc-linguistic-comparison](https://sablister.github.io/iacc-linguistic-comparison/) — poke at every result (z-score shifts, distinctive vocabulary, 17-year trends, text reuse, section-by-section match) in a single self-contained page, no install. Rebuilt from the analysis CSVs by `build_explorer.py`.
+**Interactive explorer:** [imaf-and-h-consulting.github.io/iacc-linguistic-comparison](https://imaf-and-h-consulting.github.io/iacc-linguistic-comparison/) — poke at every result (z-score shifts, distinctive vocabulary, 17-year trends, text reuse, section-by-section match) in a single self-contained page, no install. Rebuilt from the analysis CSVs by `build_explorer.py`.
 
 **How does the July 2026 IACC Strategic Plan working draft differ from everything the Interagency Autism Coordinating Committee published between 2007 and 2023?** This repository contains a single Jupyter notebook that answers that question quantitatively — style, vocabulary, naming conventions, similarity, text reuse, and 17-year trends — plus all of its precomputed results.
 
@@ -20,7 +20,7 @@ preserves it. Install and verify the backend before enabling this on the live si
 
 ## Run it — no PDFs needed
 
-**One-click:** the Colab badge above opens the notebook straight from this repo; its first cell auto-fetches the text cache (~18 MB), then *Run all* reproduces every number in a couple of minutes. (If GitHub's own notebook viewer balks at the file size, use [nbviewer](https://nbviewer.org/github/SABLISTER/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb) for reading.)
+**One-click:** the Colab badge above opens the notebook straight from this repo; its first cell auto-fetches the text cache (~18 MB), then *Run all* reproduces every number in a couple of minutes. (If GitHub's own notebook viewer balks at the file size, use [nbviewer](https://nbviewer.org/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb) for reading.)
 
 The extracted, cleaned text of all 61 documents (60 archive publications + the draft) ships in `.pdf_cache/iacc_linguistic/`, keyed by content hash with a `cache_manifest.json`. On a fresh clone the notebook detects the missing PDFs and runs entirely from that cache:
 
