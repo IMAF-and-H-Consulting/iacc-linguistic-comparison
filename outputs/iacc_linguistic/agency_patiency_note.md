@@ -81,19 +81,27 @@ Candidate stems (`nonprofit`, `advocacy`, `community`, `partner`, `family`,
 `caregiver`, `parent`, `stakeholder`, `organization`, `foundation`) were
 concordanced across SP-2009 through the 2026 draft. Entity-referring phrases
 that the plans actually use were kept; federal, commercial, locative, and
-topical uses were dropped. Longest-first, non-overlapping match. Per-term
-counts: `community_partner_terms.csv`.
+topical uses were dropped. Phrases are applied longest-first (sorted by
+length, not list order) with word-boundary matches; spans do not overlap.
+Per-term counts: `community_partner_terms.csv`.
 
-**Included phrases:** advocacy group(s); advocacy organization(s); self-advocate(s)/self-advocacy; autistic advocate(s); autism / ASD / autistic / disability / broader autism community; community member(s); community organization(s); community-based organization(s); community partner(s); family member(s); family caregiver(s); families; caregivers; caregiver (not hyphenated compounds); parents; nonprofit / non-profit / not-for-profit and their 'organization' variants; stakeholder(s); public stakeholder(s); private organization(s); private foundation(s); named nonprofits the plans use (Autism Speaks, Simons Foundation, Autism Science Foundation, Autistic Self Advocacy Network).
+**Included phrases:** advocacy group(s); advocacy organization(s); self-advocate(s)/self-advocacy; autistic advocate(s); autism / ASD / autistic / disability / broader autism community; community member(s); community organization(s); community-based organization(s); community partner(s); family member(s); family caregiver(s); families; caregivers (plural people-noun only); parents; nonprofit / non-profit / not-for-profit *organization(s)* (not the bare adjective); public stakeholder(s) (not bare stakeholder); private organization(s); private foundation(s); named nonprofits the plans use (Autism Speaks, Simons Foundation, Autism Science Foundation, Autistic Self Advocacy Network).
 
-**Excluded after inspecting contexts:** supporting/lead partners, partner agencies, federal/HHS/FDA partners (these name federal agencies in the draft); Administration for Community Living (ACL); community settings / living / participation / integration / impact (place or metric, not an organisation); research/scientific community; family history / studies / burden; parent of origin; parent-mediated; caregiver-reported / caregiver-succession and other hyphenated topic compounds; communication partner (clinical role); public-private partnership (includes industry); World Health Organization; universities; industry / pharmaceutical firms.
+**Excluded after inspecting contexts:** supporting/lead partners, partner agencies, federal/HHS/FDA partners (these name federal agencies in the draft); Administration for Community Living (ACL); community settings / living / participation / integration / impact (place or metric, not an organisation); research/scientific community; family history / studies / burden; parent of origin; parent-mediated; caregiver-reported / caregiver-succession and other hyphenated topic compounds; singular attributive *caregiver* (caregiver burden / supports / training); bare *nonprofit* / *non-profit* / *not-for-profit* and bare *stakeholder(s)* (adjective or undifferentiated role, not an entity); communication partner (clinical role); public-private partnership (includes industry); World Health Organization; universities; industry / pharmaceutical firms.
 
 **Visibility construction.** Community/org mentions are counted on the same
 cleaned prose as `autism_reference_by_plan.csv` (running headers and reference
-lists removed) and divided by that file's official word counts. Phrases already
-inside the person-visibility taxonomy (self-advocate*, autistic community) are
-not added again. Combined visibility = existing `person_p10k` + new community/
-org rate. Existing agency and person visibility figures are unchanged.
+lists removed; whitespace collapsed as in the notebook) and divided by that
+file's official word counts. Overlap with notebook `PERSON_REFERRING`
+(person-first, spectrum, those-with, identity-first, self-advocate /
+autistic community / autistic-led) is a character-span test, not a
+phrase-name denylist. A span is withheld only when it is fully covered
+by a person-referring match (self-advocate*, autistic community). A
+longer organisation name that merely contains one — Autistic Self
+Advocacy Network — still counts, as do phrases such as *autistic
+advocates* that are not in PERSON_REFERRING.
+Combined visibility = existing `person_p10k` + new community/org rate.
+Existing agency and person visibility figures are unchanged.
 
 **Relative agency construction.** Community/org phrases are parsed with the
 same spaCy proto-role proxy. Combined actor-role share uses the existing
@@ -104,18 +112,18 @@ agency and person agent counts plus the new community agent counts. Existing
 
 | Plan | Agency vis /10k | Person+community vis /10k | Community/org vis /10k | Agency share of agents vs combined | Combined share of agents |
 |---|---|---|---|---|---|
-| SP-2009 | 8.6 | 361.7 | 48.0 | 28.0% | 72.0% |
-| SP-2010 | 15.3 | 327.3 | 41.0 | 42.9% | 57.1% |
-| SP-2011 | 32.0 | 306.7 | 45.6 | 46.9% | 53.1% |
-| SP-2012 | 22.3 | 289.4 | 33.1 | 48.3% | 51.7% |
-| SP-2013 | 20.3 | 224.6 | 25.4 | 73.1% | 26.9% |
-| SP-2017 | 8.1 | 306.6 | 43.0 | 34.2% | 65.8% |
-| SP-2019 | 30.3 | 346.9 | 61.7 | 71.6% | 28.4% |
-| SP-2023 | 12.2 | 337.2 | 59.7 | 31.5% | 68.5% |
-| SP-2026-DRAFT | 166.9 | 137.7 | 29.5 | 74.2% | 25.8% |
+| SP-2009 | 8.6 | 359.8 | 46.1 | 28.0% | 72.0% |
+| SP-2010 | 15.3 | 326.1 | 39.8 | 42.9% | 57.1% |
+| SP-2011 | 32.0 | 307.5 | 46.4 | 46.9% | 53.1% |
+| SP-2012 | 22.3 | 292.7 | 36.4 | 48.3% | 51.7% |
+| SP-2013 | 20.3 | 227.0 | 27.8 | 73.1% | 26.9% |
+| SP-2017 | 8.1 | 304.4 | 40.8 | 34.7% | 65.3% |
+| SP-2019 | 30.3 | 344.9 | 59.7 | 73.1% | 26.9% |
+| SP-2023 | 12.2 | 335.4 | 57.9 | 32.2% | 67.8% |
+| SP-2026-DRAFT | 166.9 | 119.6 | 11.4 | 75.1% | 24.9% |
 
 ### Comparison: draft vs SP-2023 vs earlier plans
 
-Combined person+community visibility: earlier-plan mean 309.0/10k (org/family layer 42.5/10k); SP-2023 337.2/10k (org/family 59.7/10k); draft 137.7/10k (org/family 29.5/10k). Agency visibility remains 166.9/10k in the draft vs 12.2 in SP-2023.
+Combined person+community visibility: earlier-plan mean 308.9/10k (org/family layer 42.4/10k); SP-2023 335.4/10k (org/family 57.9/10k); draft 119.6/10k (org/family 11.4/10k). Agency visibility remains 166.9/10k in the draft vs 12.2 in SP-2023.
 
-Of actor-role mentions when the non-agency side includes community/partner/family organisations as well as autistic people: earlier plans give that combined side a mean 50.7% of agent roles; SP-2023 gives 68.5%; the draft gives 25.8% (agencies 74.2%). Widening the non-agency side does not restore the SP-2023 balance. Community agent mentions in the draft: 27; in SP-2023: 46.
+Of actor-role mentions when the non-agency side includes community/partner/family organisations as well as autistic people: earlier plans give that combined side a mean 50.4% of agent roles; SP-2023 gives 67.8%; the draft gives 24.9% (agencies 75.1%). Widening the non-agency side does not restore the SP-2023 balance. Community agent mentions in the draft: 23; in SP-2023: 42.

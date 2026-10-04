@@ -146,35 +146,35 @@ COMMUNITY_PHRASES = [
     "autistic advocates",
     "autistic advocate",
     "autism speaks",
-    "not-for-profit",
-    "stakeholders",
-    "stakeholder",
-    "non-profit",
-    "nonprofit",
 ]
 
-# Whole-word entity tokens applied after the phrases, skipping occupied spans
-# and hyphenated topic compounds (caregiver-reported, caregiver-succession).
-COMMUNITY_WORDS = ["families", "caregivers", "caregiver", "parents"]
+# Bare adjective/role stems (nonprofit, stakeholder) are not entities.
+# Singular attributive "caregiver" (caregiver burden, caregiver supports) is not.
+# Plural people-nouns remain: families, caregivers, parents.
+COMMUNITY_WORDS = ["families", "caregivers", "parents"]
 
-# Already counted in autism_reference_by_plan.csv person_p10k (self_advocate
-# bucket: self-advocate* / autistic community / autistic-led). Excluded from
-# the visibility add-on so combined visibility = person_p10k + new org terms
-# does not double-count.
-PERSON_VISIBILITY_OVERLAP = {
-    "autistic self advocacy network",
-    "autistic self-advocacy network",
-    "autistic communities",
-    "autistic community",
-    "self-advocates",
-    "self-advocate",
-    "self advocates",
-    "self advocate",
-    "self-advocacy",
-    "self advocacy",
-    "autistic advocates",
-    "autistic advocate",
-}
+# Person-referring patterns from the notebook (PERSON_REFERRING only).
+# Visibility add-on excludes any community span that overlaps these matches,
+# instead of a hand list of phrase names (which both over- and under-excluded).
+_PERSON_NOUN = (
+    r"(?:people|persons?|individuals?|adults?|children|child|youths?|adolescents?"
+    r"|teens?|teenagers?|students?|patients?|infants?|toddlers?|men|man|women|"
+    r"woman|boys?|girls?|self-?advocates?)"
+)
+_AUTISM_NOUN = r"(?:autism(?: spectrum disorders?)?|asd|autism spectrum conditions?)"
+_MODIFIERS = r"(?:\w+[- ]){0,2}"
+PERSON_REFERRING_RE = re.compile(
+    "|".join(
+        (
+            rf"\b{_PERSON_NOUN}\s+with\s+{_MODIFIERS}{_AUTISM_NOUN}\b",
+            rf"\b(?:{_PERSON_NOUN}|those)\s+on\s+the\s+(?:autism\s+)?spectrum\b",
+            rf"\bthose\s+with\s+{_MODIFIERS}{_AUTISM_NOUN}\b",
+            rf"\bautistic\s+{_MODIFIERS}{_PERSON_NOUN}\b",
+            r"\bself-?advocat(?:e|es|ing|acy)\b|\bautistic\s+community\b|\bautistic-led\b",
+        )
+    ),
+    re.I,
+)
 
 # Notebook cleaning defaults (iacc_linguistic_comparison.ipynb Config).
 CLEAN_CFG = SimpleNamespace(
@@ -342,14 +342,15 @@ def _apply_ligatures(page):
 
 
 def _phrase_boundary_pattern(phrase):
-    return r"(?<![a-z])" + re.escape(phrase) + r"(?![a-z])"
+    return r"\b" + re.escape(phrase) + r"\b"
 
 
 def find_community_spans(text_lower):
     """Non-overlapping community/partner/family mention spans, longest first."""
     occupied = [False] * (len(text_lower) + 1)
     spans = []
-    for phrase in COMMUNITY_PHRASES:
+    phrases = sorted(COMMUNITY_PHRASES, key=len, reverse=True)
+    for phrase in phrases:
         for m in re.finditer(_phrase_boundary_pattern(phrase), text_lower):
             if any(occupied[m.start() : m.end()]):
                 continue
@@ -358,7 +359,6 @@ def find_community_spans(text_lower):
             spans.append((m.start(), m.end(), phrase))
     for word in COMMUNITY_WORDS:
         for m in re.finditer(r"\b" + re.escape(word) + r"\b", text_lower):
-            # Skip hyphenated topic compounds: caregiver-reported, etc.
             end = m.end()
             if end < len(text_lower) and text_lower[end] == "-":
                 continue
@@ -370,15 +370,32 @@ def find_community_spans(text_lower):
     return spans
 
 
-def count_community_visibility(text_lower):
-    """Org/family mentions not already inside the person-visibility taxonomy."""
+def person_referring_occupied(text_norm):
+    """Character mask of notebook person-referring matches on whitespace-normalised text."""
+    occupied = [False] * (len(text_norm) + 1)
+    for m in PERSON_REFERRING_RE.finditer(text_norm):
+        for i in range(m.start(), m.end()):
+            occupied[i] = True
+    return occupied
+
+
+def count_community_visibility(text):
+    """Org/family mentions whose spans do not overlap a person-referring match."""
+    text_norm = re.sub(r"\s+", " ", text.lower())
+    person_occ = person_referring_occupied(text_norm)
     n = 0
     by_term = Counter()
-    for _a, _b, phrase in find_community_spans(text_lower):
+    excluded = Counter()
+    for start, end, phrase in find_community_spans(text_norm):
         by_term[phrase] += 1
-        if phrase not in PERSON_VISIBILITY_OVERLAP:
+        # Withhold only when the community span *is* a person-referring
+        # mention (fully covered). A longer organisation name that merely
+        # contains one (ASAN ⊃ "self advocacy") still counts.
+        if start < end and all(person_occ[start:end]):
+            excluded[phrase] += 1
+        else:
             n += 1
-    return n, by_term
+    return n, by_term, excluded
 
 
 def find_community_mentions(doc, text_lower):
@@ -586,12 +603,13 @@ def main():
 
     print(f"\nAnalyzing community/partner mentions in {len(records)} plans...")
     term_counts = {}
+    excluded_counts = {}
     new_by_id = {}
     for doc_id in sorted(records.keys()):
         rec = records[doc_id]
         cleaned, info = clean_pages(list(rec["pages"]), rec["toc"], CLEAN_CFG)
         cleaned_text = "\n".join(cleaned)
-        vis_n, by_term = count_community_visibility(cleaned_text.lower())
+        vis_n, by_term, excluded = count_community_visibility(cleaned_text)
         official_n = ref_n_words.get(doc_id)
         print(
             f"  {doc_id}: cleaner words={info['words_clean']} "
@@ -601,6 +619,7 @@ def main():
         print(f"    scoring community actor roles...")
         roles = analyze_community_roles(rec["text"])
         term_counts[doc_id] = by_term
+        excluded_counts[doc_id] = excluded
         new_by_id[doc_id] = {
             "community_visibility_count": vis_n,
             "community_visibility_p10k": _p10k(vis_n, official_n),
@@ -677,16 +696,15 @@ def main():
     with open(term_csv, "w", newline="") as f:
         w = csv.DictWriter(
             f,
-            fieldnames=["term", "in_person_visibility_overlap"]
+            fieldnames=["term", "excluded_as_person_span_overlap"]
             + sorted(term_counts.keys()),
         )
         w.writeheader()
         for term in all_terms:
+            overlap_n = sum(c.get(term, 0) for c in excluded_counts.values())
             rec = {
                 "term": term,
-                "in_person_visibility_overlap": (
-                    "yes" if term in PERSON_VISIBILITY_OVERLAP else "no"
-                ),
+                "excluded_as_person_span_overlap": overlap_n,
             }
             for pid, counts in term_counts.items():
                 rec[pid] = counts.get(term, 0)
@@ -771,33 +789,44 @@ def write_method_note(path, rows):
         f.write("`caregiver`, `parent`, `stakeholder`, `organization`, `foundation`) were\n")
         f.write("concordanced across SP-2009 through the 2026 draft. Entity-referring phrases\n")
         f.write("that the plans actually use were kept; federal, commercial, locative, and\n")
-        f.write("topical uses were dropped. Longest-first, non-overlapping match. Per-term\n")
-        f.write("counts: `community_partner_terms.csv`.\n\n")
+        f.write("topical uses were dropped. Phrases are applied longest-first (sorted by\n")
+        f.write("length, not list order) with word-boundary matches; spans do not overlap.\n")
+        f.write("Per-term counts: `community_partner_terms.csv`.\n\n")
         f.write("**Included phrases:** advocacy group(s); advocacy organization(s); ")
         f.write("self-advocate(s)/self-advocacy; autistic advocate(s); autism / ASD / ")
         f.write("autistic / disability / broader autism community; community member(s); ")
         f.write("community organization(s); community-based organization(s); community ")
-        f.write("partner(s); family member(s); family caregiver(s); families; caregivers; ")
-        f.write("caregiver (not hyphenated compounds); parents; nonprofit / non-profit / ")
-        f.write("not-for-profit and their 'organization' variants; stakeholder(s); public ")
-        f.write("stakeholder(s); private organization(s); private foundation(s); named ")
-        f.write("nonprofits the plans use (Autism Speaks, Simons Foundation, Autism Science ")
-        f.write("Foundation, Autistic Self Advocacy Network).\n\n")
+        f.write("partner(s); family member(s); family caregiver(s); families; caregivers ")
+        f.write("(plural people-noun only); parents; nonprofit / non-profit / ")
+        f.write("not-for-profit *organization(s)* (not the bare adjective); public ")
+        f.write("stakeholder(s) (not bare stakeholder); private organization(s); private ")
+        f.write("foundation(s); named nonprofits the plans use (Autism Speaks, Simons ")
+        f.write("Foundation, Autism Science Foundation, Autistic Self Advocacy Network).\n\n")
         f.write("**Excluded after inspecting contexts:** supporting/lead partners, partner ")
         f.write("agencies, federal/HHS/FDA partners (these name federal agencies in the draft); ")
         f.write("Administration for Community Living (ACL); community settings / living / ")
         f.write("participation / integration / impact (place or metric, not an organisation); ")
         f.write("research/scientific community; family history / studies / burden; parent of ")
         f.write("origin; parent-mediated; caregiver-reported / caregiver-succession and other ")
-        f.write("hyphenated topic compounds; communication partner (clinical role); ")
+        f.write("hyphenated topic compounds; singular attributive *caregiver* (caregiver ")
+        f.write("burden / supports / training); bare *nonprofit* / *non-profit* / ")
+        f.write("*not-for-profit* and bare *stakeholder(s)* (adjective or undifferentiated ")
+        f.write("role, not an entity); communication partner (clinical role); ")
         f.write("public-private partnership (includes industry); World Health Organization; ")
         f.write("universities; industry / pharmaceutical firms.\n\n")
         f.write("**Visibility construction.** Community/org mentions are counted on the same\n")
         f.write("cleaned prose as `autism_reference_by_plan.csv` (running headers and reference\n")
-        f.write("lists removed) and divided by that file's official word counts. Phrases already\n")
-        f.write("inside the person-visibility taxonomy (self-advocate*, autistic community) are\n")
-        f.write("not added again. Combined visibility = existing `person_p10k` + new community/\n")
-        f.write("org rate. Existing agency and person visibility figures are unchanged.\n\n")
+        f.write("lists removed; whitespace collapsed as in the notebook) and divided by that\n")
+        f.write("file's official word counts. Overlap with notebook `PERSON_REFERRING`\n")
+        f.write("(person-first, spectrum, those-with, identity-first, self-advocate /\n")
+        f.write("autistic community / autistic-led) is a character-span test, not a\n")
+        f.write("phrase-name denylist. A span is withheld only when it is fully covered\n")
+        f.write("by a person-referring match (self-advocate*, autistic community). A\n")
+        f.write("longer organisation name that merely contains one — Autistic Self\n")
+        f.write("Advocacy Network — still counts, as do phrases such as *autistic\n")
+        f.write("advocates* that are not in PERSON_REFERRING.\n")
+        f.write("Combined visibility = existing `person_p10k` + new community/org rate.\n")
+        f.write("Existing agency and person visibility figures are unchanged.\n\n")
         f.write("**Relative agency construction.** Community/org phrases are parsed with the\n")
         f.write("same spaCy proto-role proxy. Combined actor-role share uses the existing\n")
         f.write("agency and person agent counts plus the new community agent counts. Existing\n")
