@@ -237,13 +237,13 @@ footer .links{margin-top:10px}
       <text x="0" y="120" font-family="var(--mono)" font-size="9.5" fill="var(--faint)">Method: dependency-parse proxy for Hoefer &amp; Martin (SCiL 2026) semantic proto-role properties. Full data in agency_patiency.csv.</text>
     </svg>
   </div>
-  <p class="lede"><b>Widening the non-agency side does not restore the balance.</b> The same visibility and actor-role measures, with autistic people joined to the less-profit-motivated organisations the plans themselves name: nonprofits, advocacy groups, community partners and members, families, caregivers, parents, and public stakeholders. The term list was harvested from the plan texts (full inventory in <code>community_partner_terms.csv</code>); federal “supporting partners,” community-as-setting, and industry partnerships are excluded. Combined visibility sat at a <b>309 per 10k</b> mean across the 2009–2019 plans and <b>337</b> in SP-2023. The draft is at <b>138</b> — below agency visibility (167), the only plan in which agencies out-name that entire coalition. Of actor-role mentions, the combined side held <b>68.5%</b> in SP-2023 and a 50.7% earlier-plan mean; the draft gives it <b>25.8%</b> and agencies <b>74.2%</b>. Existing agency-versus-person figures (166.9 vs 108.2; 80.2% vs 19.8%) are unchanged.</p>
+  <p class="lede"><b>Widening the non-agency side does not restore the balance.</b> The seventh pair is not agencies versus nonprofits alone. It is federal agencies versus one combined non-agency side: autistic people <i>and</i> the less-profit-motivated organisations the plans themselves name — nonprofits, advocacy groups, community partners and members, families, caregivers, parents, and public stakeholders. Same visibility and actor-role measures as the agency-versus-person pair above. The term list was harvested from the plan texts (full inventory in <code>community_partner_terms.csv</code>); federal “supporting partners,” community-as-setting, and industry partnerships are excluded. Combined visibility sat at a <b>309 per 10k</b> mean across the 2009–2019 plans and <b>337</b> in SP-2023. The draft is at <b>138</b> — below agency visibility (167), the only plan in which agencies out-name that entire coalition. Of actor-role mentions, the combined side held <b>68.5%</b> in SP-2023 and a 50.7% earlier-plan mean; the draft gives it <b>25.8%</b> and agencies <b>74.2%</b>. Existing agency-versus-person figures (166.9 vs 108.2; 80.2% vs 19.8%) are unchanged.</p>
   <div class="chartbox" style="padding:18px 14px 10px;margin:10px 0 20px;max-width:900px">
-    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px">Who acts when families, partners, and nonprofits are counted with autistic people</div>
-    <svg viewBox="0 0 780 110" width="100%" role="img" aria-label="Stacked bar chart comparing share of agent-role mentions between agencies and the combined people-plus-community side in SP-2023 versus the 2026 draft">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px">Who acts: federal agencies vs autistic people + nonprofits, partners, families</div>
+    <svg viewBox="0 0 780 110" width="100%" role="img" aria-label="Stacked bar chart comparing share of agent-role mentions between federal agencies and the combined non-agency side (autistic people plus nonprofits, partners, families, advocacy groups) in SP-2023 versus the 2026 draft">
       <text x="0" y="14" font-family="var(--mono)" font-size="10" fill="var(--muted)">SP-2023</text>
       <rect x="70" y="2" width="343" height="22" fill="var(--blue)" opacity="0.75" rx="1"/>
-      <text x="78" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">people + community 68.5%</text>
+      <text x="78" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">people + orgs 68.5%</text>
       <rect x="413" y="2" width="157" height="22" fill="var(--orange)" opacity="0.75" rx="1"/>
       <text x="421" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">31.5%</text>
       <text x="0" y="50" font-family="var(--mono)" font-size="10" fill="var(--muted)">Draft</text>
@@ -478,7 +478,7 @@ abstract_p10k:'Autism or ASD named as a topic, without reference to a person. Al
 agency_p10k:'Federal agency acronyms (HHS, NIH, CDC, FDA, CMS, HRSA…) per 10,000 words — how much of the text is about the machinery rather than the subject.',
 agency_autism_ratio:'Agency names per autism reference. Every plan from 2009 to 2023 sat between 0.03 and 0.12 — naming autism 8 to 36 times more often than any agency. The draft is at 1.54.',
 community_p10k:'Less-profit-motivated organisations and the people around autistic individuals — nonprofits, advocacy groups, community partners and members, families, caregivers, parents, stakeholders — per 10,000 words. Term list harvested from the plans; full inventory in community_partner_terms.csv.',
-community_combined_p10k:'Autistic-person references plus the community/partner/family/nonprofit layer, per 10,000 words. In SP-2023 this combined side is at 337; the draft is at 138, below agency visibility (167).',
+community_combined_p10k:'The combined non-agency side: autistic-person references plus nonprofits, partners, community members, families, and advocacy groups, per 10,000 words. In SP-2023 this combined side is at 337; the draft is at 138, below agency visibility (167).',
 agency_share_vs_community:'Of all actor-role mentions (agencies + autistic people + community/partner/family orgs), the share assigned to federal agencies. SP-2023: 31.5%. Draft: 74.2%.',
 community_share_of_agents:'Of all actor-role mentions, the share assigned to autistic people and the community/partner/family/nonprofit layer together. SP-2023: 68.5%. Draft: 25.8%.'};
 let zmode='sp23';
@@ -730,11 +730,11 @@ const GROUPS=[
      {idx:allSeries.findIndex(x=>x.feature==='agency_p10k'), color:'var(--orange)', label:'agency visibility /10k'},
      {idx:allSeries.findIndex(x=>x.feature==='person_p10k'), color:'var(--blue)', label:'person visibility /10k'}
    ]},
-  {title:"Agencies still out-name and out-act people, families, and nonprofits together",
-   note:"Folding nonprofits, community partners, families, caregivers, and advocacy groups onto the non-agency side does not restore the SP-2023 balance. Combined visibility falls from 337/10k (SP-2023) and a 309/10k earlier-plan mean to 138 in the draft — below agency visibility (167). Combined actor-role share falls from 68.5% to 25.8%; agencies hold 74.2%. Term list in community_partner_terms.csv.",
+  {title:"Agencies versus autistic people and less-profit-motivated organisations together",
+   note:"One combined non-agency side: autistic people plus nonprofits, partners, community members, families, and advocacy groups. Combined visibility falls from 337/10k (SP-2023) and a 309/10k earlier-plan mean to 138 in the draft — below agency visibility (167). Combined actor-role share falls from 68.5% to 25.8%; agencies hold 74.2%. Term list in community_partner_terms.csv.",
    series:[
-     {idx:allSeries.findIndex(x=>x.feature==='agency_p10k'), color:'var(--orange)', label:'agency visibility /10k'},
-     {idx:allSeries.findIndex(x=>x.feature==='community_combined_p10k'), color:'var(--blue)', label:'people + community/partners /10k'}
+     {idx:allSeries.findIndex(x=>x.feature==='agency_p10k'), color:'var(--orange)', label:'federal agencies /10k'},
+     {idx:allSeries.findIndex(x=>x.feature==='community_combined_p10k'), color:'var(--blue)', label:'autistic people + orgs /10k'}
    ]}];
 let gSlide=0;
 function drawGrouped(){

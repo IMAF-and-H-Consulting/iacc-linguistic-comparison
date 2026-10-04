@@ -120,7 +120,7 @@ style_series += [
 ap = pd.read_csv(OUT / "agency_patiency.csv").set_index("doc_id")
 COMMUNITY_PICK = {
     "community_p10k": "community/partner/family org references, per 10k words",
-    "community_combined_p10k": "autistic people + community/partner/family orgs, per 10k",
+    "community_combined_p10k": "autistic people + nonprofits/partners/families, per 10k",
     "agency_share_vs_community": "agency share of actor roles vs people+community",
     "community_share_of_agents": "people+community share of actor roles",
 }
