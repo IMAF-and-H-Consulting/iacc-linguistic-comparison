@@ -114,6 +114,27 @@ style_series += [
      "vals": [f2(ref.loc[d, col], 3) if d in ref.index else None for d in doc_ids]}
     for col, label in REF_PICK.items()
 ]
+# Seventh comparison: federal agencies vs autistic people + less-profit-motivated
+# organisations (nonprofits, partners, community, families, advocacy groups).
+# Existing agency/person visibility and 80.2/19.8 actor-role shares are unchanged.
+ap = pd.read_csv(OUT / "agency_patiency.csv").set_index("doc_id")
+COMMUNITY_PICK = {
+    "community_p10k": "community/partner/family org references, per 10k words",
+    "community_combined_p10k": "autistic people + nonprofits/partners/families, per 10k",
+    "agency_share_vs_community": "agency share of actor roles vs people+community",
+    "community_share_of_agents": "people+community share of actor roles",
+}
+COMMUNITY_COL = {
+    "community_p10k": "community_visibility_p10k",
+    "community_combined_p10k": "community_combined_visibility_p10k",
+    "agency_share_vs_community": "agency_share_vs_community",
+    "community_share_of_agents": "community_combined_share_of_agent_roles",
+}
+style_series += [
+    {"feature": feat, "label": label, "kind": "ref",
+     "vals": [f2(ap.loc[d, COMMUNITY_COL[feat]], 3) if d in ap.index else None for d in doc_ids]}
+    for feat, label in COMMUNITY_PICK.items()
+]
 payload["reference"] = [
     {"id": d, "year": int(ref.loc[d, "year"]), "total": f2(ref.loc[d, "total_p10k"], 1),
      "person": f2(ref.loc[d, "person_p10k"], 1), "agency": f2(ref.loc[d, "agency_p10k"], 1),
