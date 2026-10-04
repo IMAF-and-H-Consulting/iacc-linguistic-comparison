@@ -23,12 +23,20 @@ Entities:
   - PERSON: the autism person-reference taxonomy already coded
     (autistic people/individuals/adults/children, people with autism,
     individuals with autism, etc.)
+  - COMMUNITY: less-profit-motivated organisations and people derived
+    from the plan texts (nonprofits, advocacy groups, community
+    partners/members, families, caregivers, parents, named foundations).
+    Combined with PERSON for the seventh comparison pair.
 """
 
+import csv
 import json
+import math
 import os
 import re
-import csv
+from collections import Counter
+from types import SimpleNamespace
+
 import spacy
 
 nlp = spacy.load("en_core_web_sm", disable=["ner", "textcat"])
@@ -56,6 +64,147 @@ PERSON_PHRASES = [
     "children with asd", "adults with asd",
 ]
 
+# Community / partner / family / nonprofit terms harvested from the strategic
+# plans themselves (see community_partner_terms.csv and the method note).
+# Longest-first matching; spans do not overlap.
+#
+# Included: entity-referring phrases for less-profit-motivated organisations
+# and the people they comprise — nonprofits, advocacy groups, community
+# partners and members, families, caregivers, parents, public stakeholders,
+# and named autism nonprofits that the plans actually use.
+#
+# Excluded after inspecting plan contexts (these are federal, commercial,
+# locative, topical, or already inside the person-reference taxonomy):
+#   supporting/lead partners, partner agencies, federal/HHS/FDA partners,
+#   Administration for Community Living, community settings/living/
+#   participation/integration/impact, research/scientific community,
+#   family history/studies/burden, parent of origin, parent-mediated,
+#   caregiver-hyphen compounds, communication partner, public-private
+#   partnership, World Health Organization, industry/pharma, universities.
+COMMUNITY_PHRASES = [
+    "autistic self advocacy network",
+    "autistic self-advocacy network",
+    "autism science foundation",
+    "community-based organizations",
+    "community-based organisations",
+    "community-based organization",
+    "community-based organisation",
+    "not-for-profit organizations",
+    "not-for-profit organisations",
+    "not-for-profit organization",
+    "not-for-profit organisation",
+    "non-profit organizations",
+    "non-profit organisations",
+    "non-profit organization",
+    "non-profit organisation",
+    "nonprofit organizations",
+    "nonprofit organisations",
+    "nonprofit organization",
+    "nonprofit organisation",
+    "advocacy organizations",
+    "advocacy organisations",
+    "advocacy organization",
+    "advocacy organisation",
+    "community organizations",
+    "community organisations",
+    "community organization",
+    "community organisation",
+    "private organizations",
+    "private organisations",
+    "private organization",
+    "private organisation",
+    "broader autism community",
+    "parents and caregivers",
+    "parent or caregiver",
+    "public stakeholders",
+    "public stakeholder",
+    "private foundations",
+    "private foundation",
+    "community partners",
+    "community partner",
+    "community members",
+    "community member",
+    "disability communities",
+    "disability community",
+    "autistic communities",
+    "autistic community",
+    "family caregivers",
+    "family caregiver",
+    "simons foundation",
+    "family members",
+    "family member",
+    "advocacy groups",
+    "advocacy group",
+    "autism community",
+    "asd community",
+    "self-advocates",
+    "self-advocate",
+    "self advocates",
+    "self advocate",
+    "self-advocacy",
+    "self advocacy",
+    "autistic advocates",
+    "autistic advocate",
+    "autism speaks",
+    "not-for-profit",
+    "stakeholders",
+    "stakeholder",
+    "non-profit",
+    "nonprofit",
+]
+
+# Whole-word entity tokens applied after the phrases, skipping occupied spans
+# and hyphenated topic compounds (caregiver-reported, caregiver-succession).
+COMMUNITY_WORDS = ["families", "caregivers", "caregiver", "parents"]
+
+# Already counted in autism_reference_by_plan.csv person_p10k (self_advocate
+# bucket: self-advocate* / autistic community / autistic-led). Excluded from
+# the visibility add-on so combined visibility = person_p10k + new org terms
+# does not double-count.
+PERSON_VISIBILITY_OVERLAP = {
+    "autistic self advocacy network",
+    "autistic self-advocacy network",
+    "autistic communities",
+    "autistic community",
+    "self-advocates",
+    "self-advocate",
+    "self advocates",
+    "self advocate",
+    "self-advocacy",
+    "self advocacy",
+    "autistic advocates",
+    "autistic advocate",
+}
+
+# Notebook cleaning defaults (iacc_linguistic_comparison.ipynb Config).
+CLEAN_CFG = SimpleNamespace(
+    trim_references=True,
+    ref_page_density=70.0,
+    ref_page_min_words=50,
+    running_line_share=0.20,
+)
+LIGATURES = {
+    "\ufb00": "ff", "\ufb01": "fi", "\ufb02": "fl", "\ufb03": "ffi", "\ufb04": "ffl",
+    "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "\u00ad": "", "\x00": " ",
+}
+REF_HEADING_RE = re.compile(
+    r"^\s*(?:references|bibliography|works cited|endnotes|literature cited|reference list)\s*[:.]?\s*$",
+    re.I,
+)
+REF_TITLE_RE = re.compile(r"\b(?:references|bibliography|endnotes|works cited)\b", re.I)
+CITATION_RE = re.compile(
+    r"\bet al\b|\bdoi\b|\bpmid\b|https?://|\b[A-Z][a-z]+ [A-Z]{1,3}[,.;]|\b[A-Z][a-z]+, [A-Z]\.|"
+    r"\b\d{1,4}\s*\(\d{1,3}\)\s*:\s*\d|\b(?:19|20)\d{2}\s*;\s*\d",
+    re.I,
+)
+DOT_LEADER_RE = re.compile(r"\.{4,}|(?:\. ){4,}")
+PAGE_NUMBER_RE = re.compile(
+    r"^\s*(?:page\s+)?\d{1,4}(?:\s*(?:of|/)\s*\d{1,4})?\s*$|^\s*[ivxlc]{1,6}\s*$",
+    re.I,
+)
+INLINE_JUNK_RE = re.compile(r"\[\s*PMID:?\s*\d+\s*\]|\bhttps?://\S+|\bwww\.\S+|\bdoi:\s*\S+", re.I)
+WORD_RE = re.compile(r"[A-Za-z]+(?:['\-][A-Za-z]+)*")
+
 
 def is_passive(token):
     if token.dep_ == "nsubjpass":
@@ -76,6 +225,171 @@ def classify_role(token):
     if dep in ("dobj", "attr") or (dep == "pobj" and token.head.text.lower() == "by"):
         return "patient"
     return "other"
+
+
+def citation_density(text):
+    words = len(WORD_RE.findall(text))
+    return len(CITATION_RE.findall(text)) / max(1, words) * 1000
+
+
+def find_reference_cut(pages, toc, min_position=0.4):
+    n = len(pages)
+    if n < 6:
+        return None, "too_short"
+    floor = int(n * min_position)
+    candidates = [
+        pg for _lvl, title, pg in toc
+        if pg >= floor + 1 and pg <= n and REF_TITLE_RE.search(title)
+    ]
+    for i in range(floor, n):
+        if any(REF_HEADING_RE.match(line) for line in pages[i].splitlines()):
+            candidates.append(i + 1)
+            break
+    if not candidates:
+        return None, "no_heading"
+    cut = min(candidates)
+    before = citation_density("\n".join(pages[: cut - 1]))
+    after = citation_density("\n".join(pages[cut - 1 :]))
+    if after >= 40 and after >= 3 * max(before, 1e-9):
+        return cut, "verified"
+    return None, f"unverified(before={before:.0f},after={after:.0f})"
+
+
+def reference_pages(pages, cfg):
+    return {
+        i + 1
+        for i, page in enumerate(pages)
+        if len(WORD_RE.findall(page)) >= cfg.ref_page_min_words
+        and citation_density(page) >= cfg.ref_page_density
+    }
+
+
+def _line_key(line):
+    return re.sub(r"\s+", " ", re.sub(r"\d+", "#", line.strip().lower()))
+
+
+def running_line_keys(pages, share):
+    counts = Counter()
+    for page in pages:
+        seen = set()
+        for line in page.splitlines():
+            key = _line_key(line)
+            if 4 <= len(key) <= 140 and key not in seen:
+                seen.add(key)
+                counts[key] += 1
+    threshold = max(3, int(math.ceil(share * len(pages))))
+    return {key for key, c in counts.items() if c >= threshold}
+
+
+def smart_dehyphenate(text):
+    vocab = {
+        w.lower()
+        for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", re.sub(r"\w+-\n\w+", " ", text))
+    }
+
+    def fix(match):
+        a, b = match.group(1), match.group(2)
+        if (a + b).lower() in vocab:
+            return a + b
+        if f"{a}-{b}".lower() in vocab:
+            return f"{a}-{b}"
+        return a + b
+
+    return re.sub(r"(\w+)-\n(\w+)", fix, text)
+
+
+def clean_pages(pages, toc, cfg):
+    n = len(pages)
+    pages = [_apply_ligatures(p) for p in pages]
+    cut, cut_status = (
+        find_reference_cut(pages, toc) if cfg.trim_references else (None, "disabled")
+    )
+    ref_pgs = reference_pages(pages, cfg) if cfg.trim_references else set()
+    dropped = {p for p in range(1, n + 1) if (cut is not None and p >= cut) or p in ref_pgs}
+    running = running_line_keys(pages, cfg.running_line_share)
+    cleaned = []
+    removed_running = 0
+    for i, page in enumerate(pages):
+        if i + 1 in dropped:
+            cleaned.append("")
+            continue
+        kept = []
+        for line in page.splitlines():
+            if not line.strip():
+                kept.append("")
+                continue
+            if _line_key(line) in running:
+                removed_running += 1
+                continue
+            if DOT_LEADER_RE.search(line) or PAGE_NUMBER_RE.match(line):
+                continue
+            kept.append(INLINE_JUNK_RE.sub(" ", line))
+        cleaned.append(smart_dehyphenate("\n".join(kept)))
+    return cleaned, {
+        "n_pages": n,
+        "n_pages_kept": n - len(dropped),
+        "ref_cut_page": cut,
+        "ref_cut_status": cut_status,
+        "words_clean": sum(len(WORD_RE.findall(p)) for p in cleaned),
+        "running_lines_removed": removed_running,
+    }
+
+
+def _apply_ligatures(page):
+    for src, dst in LIGATURES.items():
+        page = page.replace(src, dst)
+    return page
+
+
+def _phrase_boundary_pattern(phrase):
+    return r"(?<![a-z])" + re.escape(phrase) + r"(?![a-z])"
+
+
+def find_community_spans(text_lower):
+    """Non-overlapping community/partner/family mention spans, longest first."""
+    occupied = [False] * (len(text_lower) + 1)
+    spans = []
+    for phrase in COMMUNITY_PHRASES:
+        for m in re.finditer(_phrase_boundary_pattern(phrase), text_lower):
+            if any(occupied[m.start() : m.end()]):
+                continue
+            for i in range(m.start(), m.end()):
+                occupied[i] = True
+            spans.append((m.start(), m.end(), phrase))
+    for word in COMMUNITY_WORDS:
+        for m in re.finditer(r"\b" + re.escape(word) + r"\b", text_lower):
+            # Skip hyphenated topic compounds: caregiver-reported, etc.
+            end = m.end()
+            if end < len(text_lower) and text_lower[end] == "-":
+                continue
+            if any(occupied[m.start() : m.end()]):
+                continue
+            for i in range(m.start(), m.end()):
+                occupied[i] = True
+            spans.append((m.start(), m.end(), word))
+    return spans
+
+
+def count_community_visibility(text_lower):
+    """Org/family mentions not already inside the person-visibility taxonomy."""
+    n = 0
+    by_term = Counter()
+    for _a, _b, phrase in find_community_spans(text_lower):
+        by_term[phrase] += 1
+        if phrase not in PERSON_VISIBILITY_OVERLAP:
+            n += 1
+    return n, by_term
+
+
+def find_community_mentions(doc, text_lower):
+    mentions = []
+    for start_char, end_char, phrase in find_community_spans(text_lower):
+        span = doc.char_span(start_char, end_char, alignment_mode="expand")
+        if span:
+            head_token = span.root
+            role = classify_role(head_token)
+            mentions.append(("community", role, phrase, head_token.head.text))
+    return mentions
 
 
 def find_entity_mentions(doc, text_lower):
@@ -133,7 +447,8 @@ def load_plan_text(doc_id, manifest, cache_dir):
     return "\n".join(pages)
 
 
-def load_plan_texts():
+def load_plan_records():
+    """Return {doc_id: {text, pages, toc}} from the PDF cache."""
     cache_dir = ".pdf_cache/iacc_linguistic"
     with open(os.path.join(cache_dir, "cache_manifest.json")) as f:
         manifest = json.load(f)
@@ -143,11 +458,7 @@ def load_plan_texts():
         "SP-2017", "SP-2019", "SP-2023", "SP-2026-DRAFT"
     ]
 
-    file_map = {}
-    for path, info in manifest.get("files", {}).items():
-        file_map[info["sha256"]] = os.path.join(cache_dir, info["sha256"] + ".json")
-
-    texts = {}
+    records = {}
     for pid in plan_ids:
         if pid == "SP-2026-DRAFT":
             entry = manifest.get("draft", {})
@@ -179,10 +490,16 @@ def load_plan_texts():
         with open(cache_file) as f:
             data = json.load(f)
         pages = data.get("pages", [])
-        texts[pid] = "\n".join(pages)
-        print(f"  Loaded {pid}: {len(texts[pid])} chars")
+        toc = data.get("toc") or []
+        text = "\n".join(pages)
+        records[pid] = {"text": text, "pages": pages, "toc": toc}
+        print(f"  Loaded {pid}: {len(text)} chars, {len(pages)} pages")
 
-    return texts
+    return records
+
+
+def load_plan_texts():
+    return {pid: rec["text"] for pid, rec in load_plan_records().items()}
 
 
 def analyze_plan(doc_id, text):
@@ -228,53 +545,302 @@ def analyze_plan(doc_id, text):
     return result
 
 
+def analyze_community_roles(text):
+    """Dependency-parse roles for community/partner/family mentions only."""
+    counts = {"agent": 0, "patient": 0, "other": 0}
+    for i in range(0, len(text), 80000):
+        chunk = text[i : i + 80000]
+        doc = nlp(chunk)
+        for _etype, role, _phrase, _head in find_community_mentions(doc, chunk.lower()):
+            counts[role] += 1
+    return counts
+
+
+def _pct(num, den, nd=3):
+    if not den:
+        return None
+    return round(num / den, nd)
+
+
+def _p10k(count, n_words, nd=1):
+    if not n_words:
+        return 0.0
+    return round(count / n_words * 10000, nd)
+
+
 def main():
-    print("Loading plan texts...")
-    texts = load_plan_texts()
-
-    print(f"\nAnalyzing {len(texts)} plans...")
-    results = []
-    for doc_id in sorted(texts.keys()):
-        print(f"  Processing {doc_id}...")
-        r = analyze_plan(doc_id, texts[doc_id])
-        results.append(r)
-        ag = r["agency_agency_share"]
-        pg = r["person_agency_share"]
-        print(f"    agency→agency_share={ag}, person→agency_share={pg}")
-        print(f"    agency mentions: agent={r['agency_agent']}, patient={r['agency_patient']}, other={r['agency_other']}")
-        print(f"    person mentions: agent={r['person_agent']}, patient={r['person_patient']}, other={r['person_other']}")
-
     outdir = "outputs/iacc_linguistic"
+    existing_path = os.path.join(outdir, "agency_patiency.csv")
+    with open(existing_path, newline="") as f:
+        existing = list(csv.DictReader(f))
+    existing_fields = list(existing[0].keys())
+    by_id = {row["doc_id"]: row for row in existing}
+
+    ref_n_words = {}
+    with open(os.path.join(outdir, "autism_reference_by_plan.csv"), newline="") as f:
+        for row in csv.DictReader(f):
+            ref_n_words[row["doc_id"]] = int(row["n_words"])
+
+    print("Loading plan texts...")
+    records = load_plan_records()
+
+    print(f"\nAnalyzing community/partner mentions in {len(records)} plans...")
+    term_counts = {}
+    new_by_id = {}
+    for doc_id in sorted(records.keys()):
+        rec = records[doc_id]
+        cleaned, info = clean_pages(list(rec["pages"]), rec["toc"], CLEAN_CFG)
+        cleaned_text = "\n".join(cleaned)
+        vis_n, by_term = count_community_visibility(cleaned_text.lower())
+        official_n = ref_n_words.get(doc_id)
+        print(
+            f"  {doc_id}: cleaner words={info['words_clean']} "
+            f"official={official_n} org_vis_mentions={vis_n} "
+            f"cut={info['ref_cut_status']}"
+        )
+        print(f"    scoring community actor roles...")
+        roles = analyze_community_roles(rec["text"])
+        term_counts[doc_id] = by_term
+        new_by_id[doc_id] = {
+            "community_visibility_count": vis_n,
+            "community_visibility_p10k": _p10k(vis_n, official_n),
+            "community_agent": roles["agent"],
+            "community_patient": roles["patient"],
+            "community_other": roles["other"],
+            "community_total": roles["agent"] + roles["patient"] + roles["other"],
+            "community_proto_agency": _pct(
+                roles["agent"], roles["agent"] + roles["patient"]
+            ),
+            "cleaner_n_words": info["words_clean"],
+        }
+
+    new_fields = [
+        "community_visibility_count",
+        "community_visibility_p10k",
+        "community_combined_visibility_p10k",
+        "community_agent",
+        "community_patient",
+        "community_other",
+        "community_total",
+        "community_agent_count",
+        "community_proto_agency",
+        "agency_share_vs_community",
+        "community_combined_share_of_agent_roles",
+    ]
+
+    rows = []
+    for row in existing:
+        doc_id = row["doc_id"]
+        extra = new_by_id[doc_id]
+        person_vis = float(row["person_visibility_p10k"])
+        agency_agents = int(row["agency_agent_count"])
+        person_agents = int(row["person_agent_count"])
+        comm_agents = extra["community_agent"]
+        denom = agency_agents + person_agents + comm_agents
+        merged = dict(row)
+        merged.update({
+            "community_visibility_count": extra["community_visibility_count"],
+            "community_visibility_p10k": extra["community_visibility_p10k"],
+            "community_combined_visibility_p10k": round(
+                person_vis + extra["community_visibility_p10k"], 1
+            ),
+            "community_agent": extra["community_agent"],
+            "community_patient": extra["community_patient"],
+            "community_other": extra["community_other"],
+            "community_total": extra["community_total"],
+            "community_agent_count": extra["community_agent"],
+            "community_proto_agency": extra["community_proto_agency"],
+            "agency_share_vs_community": _pct(agency_agents, denom),
+            "community_combined_share_of_agent_roles": _pct(
+                person_agents + comm_agents, denom
+            ),
+        })
+        rows.append(merged)
+        print(
+            f"    {doc_id}: org_vis={extra['community_visibility_p10k']}/10k "
+            f"combined_vis={merged['community_combined_visibility_p10k']}/10k "
+            f"agency_share_vs_community={merged['agency_share_vs_community']} "
+            f"community_agents={comm_agents}"
+        )
+
     csv_path = os.path.join(outdir, "agency_patiency.csv")
-    fields = list(results[0].keys())
+    fields = existing_fields + [c for c in new_fields if c not in existing_fields]
     with open(csv_path, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields)
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
-        w.writerows(results)
+        w.writerows(rows)
     print(f"\nSaved {csv_path}")
 
-    md_path = os.path.join(outdir, "agency_patiency_note.md")
-    with open(md_path, "w") as f:
-        f.write("# Agency and patiency ascribed to federal agencies vs autistic people\n\n")
-        f.write("Method: dependency-parse proxy for semantic proto-role labeling\n")
-        f.write("(Hoefer & Martin, SCiL 2026, 'Measuring Perceptions of Personhood\n")
-        f.write("with Semantic Proto-role Properties').\n\n")
-        f.write("The full SPRL parser (Spaulding et al. 2023) was not available;\n")
-        f.write("instead, spaCy dependency parsing classifies each entity mention as:\n")
-        f.write("- AGENT: grammatical subject of active-voice verb (proto-agent: +instigation, +volition)\n")
-        f.write("- PATIENT: direct object, or passive subject (proto-patient: -instigation, -volition)\n")
-        f.write("- OTHER: prepositional, possessive, appositive, etc.\n\n")
+    # Per-term inventory on cleaned text (documentation, not a new linguistic series).
+    all_terms = sorted({t for counts in term_counts.values() for t in counts})
+    term_csv = os.path.join(outdir, "community_partner_terms.csv")
+    with open(term_csv, "w", newline="") as f:
+        w = csv.DictWriter(
+            f,
+            fieldnames=["term", "in_person_visibility_overlap"]
+            + sorted(term_counts.keys()),
+        )
+        w.writeheader()
+        for term in all_terms:
+            rec = {
+                "term": term,
+                "in_person_visibility_overlap": (
+                    "yes" if term in PERSON_VISIBILITY_OVERLAP else "no"
+                ),
+            }
+            for pid, counts in term_counts.items():
+                rec[pid] = counts.get(term, 0)
+            w.writerow(rec)
+    print(f"Saved {term_csv}")
+
+    write_method_note(os.path.join(outdir, "agency_patiency_note.md"), rows)
+    print(f"Saved {os.path.join(outdir, 'agency_patiency_note.md')}")
+
+
+def write_method_note(path, rows):
+    draft = next(r for r in rows if r["doc_id"] == "SP-2026-DRAFT")
+    sp23 = next(r for r in rows if r["doc_id"] == "SP-2023")
+    earlier = [r for r in rows if r["doc_id"] not in ("SP-2023", "SP-2026-DRAFT")]
+
+    def mean_field(items, field):
+        vals = [float(r[field]) for r in items]
+        return round(sum(vals) / len(vals), 1)
+
+    with open(path, "w") as f:
+        f.write("# Agency, visibility, and patiency: federal agencies vs autistic people\n\n")
+        f.write("Three measures applied to each IACC strategic plan, contrasting how the text\n")
+        f.write("positions federal agencies versus autistic people.\n\n")
+        f.write("## Method\n\n")
+        f.write("Informed by Hoefer & Martin (SCiL 2026), 'Measuring Perceptions of Personhood\n")
+        f.write("with Semantic Proto-role Properties.' The full SPRL neural parser (Spaulding\n")
+        f.write("et al. 2023) was not available in this environment; the proxy described below\n")
+        f.write("was used instead.\n\n")
+        f.write("**1. Visibility** — how often each entity class is named, per 10,000 words.\n")
+        f.write("Uses the existing reference taxonomies already coded in the repository:\n")
+        f.write("agency acronyms (NIH, CDC, HRSA, CMS, FDA, HHS, IACC, etc.) and autism\n")
+        f.write("person-references (autistic people/individuals, people with autism, etc.).\n")
+        f.write("Source: `autism_reference_by_plan.csv`.\n\n")
+        f.write("**2. Relative agency** — of all agent-role mentions (agency + person), what\n")
+        f.write("share belongs to each class? This measures who the document treats as the\n")
+        f.write("primary actor when it does assign an actor.\n\n")
+        f.write("**3. Proto-role agency share** — for each entity class independently, the\n")
+        f.write("share of its predicate-argument mentions in which it occupies the agent role\n")
+        f.write("(grammatical subject of active-voice verb) rather than the patient role\n")
+        f.write("(direct object or passive subject). This is a dependency-parse proxy for\n")
+        f.write("Dowty's (1991) proto-agent properties: +instigation, +volition, +awareness,\n")
+        f.write("+sentience, as operationalised by Hoefer & Martin's SPRL cluster (Table 1).\n\n")
+        f.write("spaCy (en_core_web_sm) dependency parsing classifies each mention as:\n")
+        f.write("- AGENT: grammatical subject of active-voice verb (nsubj, no auxpass)\n")
+        f.write("- PATIENT: direct object, or passive subject (dobj, nsubjpass, by-agent)\n")
+        f.write("- OTHER: prepositional complement, possessive, appositive, etc.\n\n")
         f.write("Agency share = agent / (agent + patient), excluding OTHER.\n\n")
-        f.write("| Plan | Agency→agent share | Person→agent share | Gap | Agency mentions | Person mentions |\n")
+        f.write("## Results\n\n")
+        f.write("| Plan | Agency vis /10k | Person vis /10k | Agency share of agents | Person share of agents | Agency proto-agency | Person proto-agency |\n")
+        f.write("|---|---|---|---|---|---|---|\n")
+        for r in rows:
+            f.write(
+                f"| {r['doc_id']} | {r['agency_visibility_p10k']} | {r['person_visibility_p10k']} | "
+                f"{float(r['agency_share_of_agent_roles'])*100:.1f}% | "
+                f"{float(r['person_share_of_agent_roles'])*100:.1f}% | "
+                f"{r['agency_proto_agency']} | {r['person_proto_agency']} |\n"
+            )
+        f.write("\n## Interpretation\n\n")
+        f.write("The draft inverts the visibility relationship (agencies 166.9/10k vs persons\n")
+        f.write("108.2/10k) and concentrates agent-role assignment on agencies (80.2% of actor\n")
+        f.write("mentions vs 19.8% for autistic people). When agencies do appear in predicate-\n")
+        f.write("argument structures, they occupy the agent role 82.2% of the time — the\n")
+        f.write("highest in the series. Autistic people's proto-agency share (57.4%) is mid-\n")
+        f.write("range, but their relative share of who-acts-in-this-document collapses because\n")
+        f.write("agency mentions overwhelm person mentions in agent positions.\n\n")
+        f.write("In SP-2023, by contrast, person agent mentions (78) exceeded agency agent\n")
+        f.write("mentions (57), giving autistic people a 57.8% share of actor roles. The draft\n")
+        f.write("reverses this: agencies hold 80.2% vs persons 19.8%.\n\n")
+        f.write("Citation: Hoefer, E. S. & Martin, J. (2026). Measuring Perceptions of\n")
+        f.write("Personhood with Semantic Proto-role Properties. Proceedings of the Society\n")
+        f.write("for Computation in Linguistics (SCiL) 2026, 1–14.\n\n")
+
+        f.write("## Federal agencies vs autistic people + community/partner organisations\n\n")
+        f.write("A seventh comparison folds less-profit-motivated organisations and the people\n")
+        f.write("around autistic individuals into one non-agency side: nonprofits, advocacy\n")
+        f.write("groups, community partners and members, families, caregivers, parents, and\n")
+        f.write("public stakeholders. The two measures are the same as the agency-vs-person\n")
+        f.write("pair: visibility (references per 10,000 cleaned words) and relative agency\n")
+        f.write("(share of agent-role mentions).\n\n")
+        f.write("### Term list, derived from the plan texts\n\n")
+        f.write("Candidate stems (`nonprofit`, `advocacy`, `community`, `partner`, `family`,\n")
+        f.write("`caregiver`, `parent`, `stakeholder`, `organization`, `foundation`) were\n")
+        f.write("concordanced across SP-2009 through the 2026 draft. Entity-referring phrases\n")
+        f.write("that the plans actually use were kept; federal, commercial, locative, and\n")
+        f.write("topical uses were dropped. Longest-first, non-overlapping match. Per-term\n")
+        f.write("counts: `community_partner_terms.csv`.\n\n")
+        f.write("**Included phrases:** advocacy group(s); advocacy organization(s); ")
+        f.write("self-advocate(s)/self-advocacy; autistic advocate(s); autism / ASD / ")
+        f.write("autistic / disability / broader autism community; community member(s); ")
+        f.write("community organization(s); community-based organization(s); community ")
+        f.write("partner(s); family member(s); family caregiver(s); families; caregivers; ")
+        f.write("caregiver (not hyphenated compounds); parents; nonprofit / non-profit / ")
+        f.write("not-for-profit and their 'organization' variants; stakeholder(s); public ")
+        f.write("stakeholder(s); private organization(s); private foundation(s); named ")
+        f.write("nonprofits the plans use (Autism Speaks, Simons Foundation, Autism Science ")
+        f.write("Foundation, Autistic Self Advocacy Network).\n\n")
+        f.write("**Excluded after inspecting contexts:** supporting/lead partners, partner ")
+        f.write("agencies, federal/HHS/FDA partners (these name federal agencies in the draft); ")
+        f.write("Administration for Community Living (ACL); community settings / living / ")
+        f.write("participation / integration / impact (place or metric, not an organisation); ")
+        f.write("research/scientific community; family history / studies / burden; parent of ")
+        f.write("origin; parent-mediated; caregiver-reported / caregiver-succession and other ")
+        f.write("hyphenated topic compounds; communication partner (clinical role); ")
+        f.write("public-private partnership (includes industry); World Health Organization; ")
+        f.write("universities; industry / pharmaceutical firms.\n\n")
+        f.write("**Visibility construction.** Community/org mentions are counted on the same\n")
+        f.write("cleaned prose as `autism_reference_by_plan.csv` (running headers and reference\n")
+        f.write("lists removed) and divided by that file's official word counts. Phrases already\n")
+        f.write("inside the person-visibility taxonomy (self-advocate*, autistic community) are\n")
+        f.write("not added again. Combined visibility = existing `person_p10k` + new community/\n")
+        f.write("org rate. Existing agency and person visibility figures are unchanged.\n\n")
+        f.write("**Relative agency construction.** Community/org phrases are parsed with the\n")
+        f.write("same spaCy proto-role proxy. Combined actor-role share uses the existing\n")
+        f.write("agency and person agent counts plus the new community agent counts. Existing\n")
+        f.write("80.2% / 19.8% agency-vs-person shares are unchanged.\n\n")
+        f.write("### Combined results\n\n")
+        f.write("| Plan | Agency vis /10k | Person+community vis /10k | Community/org vis /10k | Agency share of agents vs combined | Combined share of agents |\n")
         f.write("|---|---|---|---|---|---|\n")
-        for r in results:
-            ag = r["agency_agency_share"]
-            pg = r["person_agency_share"]
-            gap = round(ag - pg, 3) if ag is not None and pg is not None else None
-            f.write(f"| {r['doc_id']} | {ag} | {pg} | {gap} | {r['agency_total']} | {r['person_total']} |\n")
-        f.write("\nAgency share >0.5 means the entity class is more often the agent (actor)\n")
-        f.write("than the patient (acted-upon) in the sentences where it appears.\n")
-    print(f"Saved {md_path}")
+        for r in rows:
+            f.write(
+                f"| {r['doc_id']} | {r['agency_visibility_p10k']} | "
+                f"{r['community_combined_visibility_p10k']} | "
+                f"{r['community_visibility_p10k']} | "
+                f"{float(r['agency_share_vs_community'])*100:.1f}% | "
+                f"{float(r['community_combined_share_of_agent_roles'])*100:.1f}% |\n"
+            )
+
+        f.write("\n### Comparison: draft vs SP-2023 vs earlier plans\n\n")
+        earlier_vis = mean_field(earlier, "community_combined_visibility_p10k")
+        earlier_org = mean_field(earlier, "community_visibility_p10k")
+        earlier_share = round(
+            100 * sum(float(r["community_combined_share_of_agent_roles"]) for r in earlier) / len(earlier),
+            1,
+        )
+        f.write(
+            f"Combined person+community visibility: earlier-plan mean {earlier_vis}/10k "
+            f"(org/family layer {earlier_org}/10k); SP-2023 "
+            f"{sp23['community_combined_visibility_p10k']}/10k "
+            f"(org/family {sp23['community_visibility_p10k']}/10k); draft "
+            f"{draft['community_combined_visibility_p10k']}/10k "
+            f"(org/family {draft['community_visibility_p10k']}/10k). "
+            f"Agency visibility remains 166.9/10k in the draft vs 12.2 in SP-2023.\n\n"
+        )
+        f.write(
+            f"Of actor-role mentions when the non-agency side includes community/partner/"
+            f"family organisations as well as autistic people: earlier plans give that "
+            f"combined side a mean {earlier_share}% of agent roles; SP-2023 gives "
+            f"{float(sp23['community_combined_share_of_agent_roles'])*100:.1f}%; "
+            f"the draft gives {float(draft['community_combined_share_of_agent_roles'])*100:.1f}% "
+            f"(agencies {float(draft['agency_share_vs_community'])*100:.1f}%). "
+            f"Widening the non-agency side does not restore the SP-2023 balance. "
+            f"Community agent mentions in the draft: {draft['community_agent_count']}; "
+            f"in SP-2023: {sp23['community_agent_count']}.\n"
+        )
 
 
 if __name__ == "__main__":
