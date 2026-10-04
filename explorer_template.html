@@ -108,6 +108,23 @@ footer .links{margin-top:10px}
 .ctx b{color:var(--ink);font-weight:600}
 .ctx .src{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:4px}
 .ctx .src a{font-size:11px}
+/* grouped trend carousel */
+.carousel{position:relative;margin:0 0 18px}
+.carousel-nav{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.carousel-nav button{background:none;border:1px solid var(--line);color:var(--muted);padding:4px 12px;cursor:pointer;font:inherit;font-family:var(--mono);font-size:12px}
+.carousel-nav button:hover{border-color:var(--red);color:var(--red)}
+.carousel-title{font-family:var(--mono);font-size:12px;color:var(--ink);flex:1;text-align:center}
+.carousel-dots{display:flex;gap:6px;justify-content:center;margin:10px 0 0}
+.carousel-dots span{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;display:inline-block}
+.carousel-dots span.on{background:var(--red)}
+.grp-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grp-charts{grid-template-columns:1fr}}
+.grp-chart{border:1px solid var(--hair);background:#fbfaf6;padding:10px 8px 4px}
+.grp-label{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin:0 0 4px;text-align:center}
+.view-toggle{font-family:var(--mono);font-size:11.5px;margin:0 0 10px}
+.view-toggle button{background:none;border:1px solid var(--line);color:var(--muted);padding:4px 12px;cursor:pointer;font:inherit}
+.view-toggle button.on{border-color:var(--red);color:var(--red)}
+
 </style>
 </head>
 <body>
@@ -161,11 +178,31 @@ footer .links{margin-top:10px}
 <section id="trends">
   <div class="kicker">02 · the record over time</div>
   <h2>Seventeen years of language, one discontinuity</h2>
-  <p class="lede">The style fingerprint above provides a static comparison; this chart renders the same measures as a time series across all eight earlier strategic plans (2009–2023). The <b>gold star</b> marks the 2026 draft, and the dashed segment indicates the magnitude of the jump from SP-2023. The selector is grouped by analytical category: <b>how the prose is written</b>, then <b>how often the document names its own subject</b>, then the domain lexicon. It opens on "should" — the study's most extreme and most baseline-robust measurement. The annotation below the selector provides a plain-English gloss of each measure.</p>
-  <select id="termsel"></select>
-  <div class="termnote" id="termnote"></div>
-  <div class="chartbox"><svg id="trendsvg" viewBox="0 0 780 380" width="100%" role="img"></svg>
-  <div class="chartnote" id="trendnote"></div></div>
+  <p class="lede">The style fingerprint above provides a static comparison; these charts render the same measures as time series across all eight earlier strategic plans (2009–2023). The <b>gold star</b> marks the 2026 draft, and the dashed segment indicates the magnitude of the jump from SP-2023. The default view groups complementary or contrasting measures side by side; the dropdown selects any individual series.</p>
+  <div class="view-toggle" id="tviewtoggle">
+    <button data-v="grouped" class="on">grouped</button><button data-v="single">single series</button>
+  </div>
+  <div id="tgrouped">
+    <div class="carousel" id="tcarousel">
+      <div class="carousel-nav">
+        <button id="tprev">← prev</button>
+        <div class="carousel-title" id="tgtitle"></div>
+        <button id="tnext">next →</button>
+      </div>
+      <div class="grp-charts" id="tgrpcharts">
+        <div class="grp-chart"><div class="grp-label" id="tgl0"></div><svg id="tgsvg0" viewBox="0 0 380 320" width="100%" role="img"></svg></div>
+        <div class="grp-chart"><div class="grp-label" id="tgl1"></div><svg id="tgsvg1" viewBox="0 0 380 320" width="100%" role="img"></svg></div>
+      </div>
+      <div class="carousel-dots" id="tdots"></div>
+      <div class="chartnote" id="tgrpnote" style="margin-top:8px"></div>
+    </div>
+  </div>
+  <div id="tsingle" style="display:none">
+    <select id="termsel"></select>
+    <div class="termnote" id="termnote"></div>
+    <div class="chartbox"><svg id="trendsvg" viewBox="0 0 780 380" width="100%" role="img"></svg>
+    <div class="chartnote" id="trendnote"></div></div>
+  </div>
 </section>
 
 <section id="subject">
@@ -612,6 +649,98 @@ function drawTrend(){
     else tn.style.display='none';
   }catch(e){err('trend: '+e.message)}
 }
+/* ---------- grouped trend carousel ---------- */
+const GROUPS=[
+  {title:"Autism references collapse as agency references surge",
+   note:"The page’s signature finding: the draft names autism less than half as often as any prior plan, while federal agency acronyms fill the space.",
+   series:[
+     {idx:allSeries.findIndex(x=>x.feature==='total_p10k'), color:'var(--blue)', label:'autism references /10k'},
+     {idx:allSeries.findIndex(x=>x.feature==='agency_p10k'), color:'var(--orange)', label:'agency acronyms /10k'}
+   ]},
+  {title:"“Should” surges as “will” disappears",
+   note:"The grammatical genre shift: earlier plans predict and describe (“will”); the draft commands (“should”).",
+   series:[
+     {idx:allSeries.findIndex(x=>x.feature==='should_per_1k'), color:'var(--red)', label:'“should” /1k'},
+     {idx:allSeries.findIndex(x=>x.feature==='will_per_1k'), color:'var(--blue)', label:'“will” /1k'}
+   ]},
+  {title:"Treatments rise as interventions and services fall",
+   note:"The clinical vocabulary swap: the unit of analysis shifts from persons receiving services to subtypes receiving compounds.",
+   series:[
+     {idx:allSeries.findIndex(x=>x.kind==='lex'&&x.term==='treatment(s)'), color:'var(--red)', label:'treatment(s) /10k'},
+     {idx:allSeries.findIndex(x=>x.kind==='lex'&&x.term==='intervention(s)'), color:'var(--blue)', label:'intervention(s) /10k'}
+   ]},
+  {title:"Immune vocabulary surges as vaccine vocabulary is erased",
+   note:"The causal-framing shift: immune and metabolic language rises tenfold; “vaccine,” previously used to address and refute causation claims, drops to zero.",
+   series:[
+     {idx:allSeries.findIndex(x=>x.kind==='lex'&&x.term==='immun*'), color:'var(--red)', label:'immun* /10k'},
+     {idx:allSeries.findIndex(x=>x.kind==='lex'&&x.term==='vaccin*'), color:'var(--blue)', label:'vaccin* /10k'}
+   ]},
+  {title:"Person references thin as word length climbs",
+   note:"The draft uses the longest words in the record while referring to autistic people less than half as often as any earlier plan.",
+   series:[
+     {idx:allSeries.findIndex(x=>x.feature==='person_p10k'), color:'var(--blue)', label:'person refs /10k'},
+     {idx:allSeries.findIndex(x=>x.feature==='long_words_pct'), color:'var(--red)', label:'long words (7+ letters) %'}
+   ]}
+];
+let gSlide=0;
+function drawGrouped(){
+  const g=GROUPS[gSlide];
+  $('#tgtitle').textContent=(gSlide+1)+' / '+GROUPS.length+' \u2014 '+g.title;
+  const dotsEl=$('#tdots');
+  dotsEl.innerHTML='';
+  GROUPS.forEach((_,i)=>{const d=el('span','');if(i===gSlide)d.className='on';d.onclick=()=>{gSlide=i;drawGrouped();};dotsEl.appendChild(d);});
+  g.series.forEach((sr,si)=>{
+    const s=allSeries[sr.idx];
+    if(!s)return;
+    const svg=$('#tgsvg'+si);
+    const lbl=$('#tgl'+si);
+    lbl.textContent=sr.label;
+    const W=380,H=320,pl=52,pr=12,pt=14,pb=36;
+    const vals=s.vals.map(v=>v===null?null:+v);
+    const ymax=Math.max(...vals.filter(v=>v!==null),0.01)*1.12;
+    const xmin=2008.4,xmax=2026.6;
+    const X=y=>pl+(y-xmin)/(xmax-xmin)*(W-pl-pr);
+    const Y=v=>pt+(1-v/ymax)*(H-pt-pb);
+    let h='<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fbfaf6"/>';
+    for(let gg=0;gg<=4;gg++){
+      const v=ymax*gg/4,y=Y(v);
+      h+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="#e7e2d6"/>';
+      h+='<text x="'+(pl-6)+'" y="'+(y+3)+'" text-anchor="end" font-size="9" font-family="ui-monospace,monospace" fill="#8f897c">'+fmt(v,v<10?1:0)+'</text>';
+    }
+    docs.forEach(d=>{
+      h+='<text x="'+X(d.year)+'" y="'+(H-pb+16)+'" text-anchor="middle" font-size="9" font-family="ui-monospace,monospace" fill="'+(d.draft?'#a42a28':'#8f897c')+'"'+(d.draft?' font-weight="bold"':'')+'>'+(d.year%2===1||d.draft?d.year:'')+'</text>';
+    });
+    h+='<line x1="'+pl+'" y1="'+(H-pb)+'" x2="'+(W-pr)+'" y2="'+(H-pb)+'" stroke="#d9d3c5"/>';
+    const prior=docs.map((d,i)=>({d,v:vals[i],i})).filter(p=>!p.d.draft&&p.v!==null);
+    h+='<polyline fill="none" stroke="'+sr.color+'" stroke-width="2" points="'+prior.map(p=>X(p.d.year).toFixed(1)+','+Y(p.v).toFixed(1)).join(' ')+'"/>';
+    prior.forEach(p=>{h+='<circle cx="'+X(p.d.year)+'" cy="'+Y(p.v)+'" r="3.5" fill="'+sr.color+'"><title>'+p.d.id+': '+fmt(p.v,2)+'</title></circle>';});
+    const di=docs.findIndex(d=>d.draft);
+    if(di>=0&&vals[di]!==null){
+      const last=prior[prior.length-1];
+      if(last)h+='<line x1="'+X(last.d.year)+'" y1="'+Y(last.v)+'" x2="'+X(docs[di].year)+'" y2="'+Y(vals[di])+'" stroke="#a42a28" stroke-width="1.4" stroke-dasharray="4,3"/>';
+      h+=star(X(docs[di].year),Y(vals[di]),8,'#c8931a');
+      h+='<text x="'+(X(docs[di].year))+'" y="'+(Y(vals[di])-11)+'" text-anchor="middle" font-size="10" font-family="ui-monospace,monospace" fill="#a42a28" font-weight="bold">'+fmt(vals[di],vals[di]<10?1:0)+'</text>';
+    }
+    svg.innerHTML=h;
+  });
+  $('#tgrpnote').textContent=g.note;
+}
+$('#tprev').onclick=()=>{gSlide=(gSlide-1+GROUPS.length)%GROUPS.length;drawGrouped();};
+$('#tnext').onclick=()=>{gSlide=(gSlide+1)%GROUPS.length;drawGrouped();};
+drawGrouped();
+
+/* ---------- view toggle (grouped / single) ---------- */
+$('#tviewtoggle').querySelectorAll('button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    $('#tviewtoggle').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const v=b.dataset.v;
+    $('#tgrouped').style.display=v==='grouped'?'':'none';
+    $('#tsingle').style.display=v==='single'?'':'none';
+    if(v==='single')drawTrend();
+  });
+});
+
 drawTrend();
 sel.addEventListener('change',drawTrend);
 
