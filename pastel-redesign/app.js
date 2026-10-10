@@ -386,7 +386,7 @@ function ktable(){
       h+='<tr><td class="t">'+r[0]+'</td><td class="num">'+fmt(r[3],1)+'</td><td class="num">'+r[5]+'</td><td class="num"><b>'+fmt(r[2],1)+'</b></td><td class="num">'+r[4]+'</td><td class="num" style="color:'+(r[1]>0?'var(--red)':'var(--blue)')+'">'+fmt(r[1],1)+'</td></tr>';
     });
     host.innerHTML=h+'</tbody></table>';
-    host.querySelectorAll('th[data-c]').forEach(th=>th.onclick=()=>{const c=th.dataset.c;if(ksort===c)kdir*=-1;else{ksort=c==='term'?'term':+c;kdir=c==='term'?1:-1;}ktable();});
+    host.querySelectorAll('th[data-c]').forEach(th=>th.onclick=()=>{const c=th.dataset.c==='term'?'term':+th.dataset.c;if(ksort===c)kdir*=-1;else{ksort=c;kdir=c==='term'?1:-1;}ktable();});
     const x=host.querySelector('#kexpand');
     if(x)x.onclick=(ev)=>{ev.preventDefault();kexp=!kexp;ktable();};
   }catch(e){err('keyness: '+e.message)}
