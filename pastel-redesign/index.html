@@ -7,6 +7,7 @@
   <meta name="description" content="An interactive, reproducible linguistic comparison of the 2026 IACC draft against the committee's earlier record.">
   <title>The 2026 draft, measured — IACC Pastel Archive</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="report.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -14,23 +15,12 @@
     <a class="wordmark" href="#top" aria-label="IACC 2026, back to top">IACC <span>×</span> 2026</a>
     <nav class="topnav" aria-label="Main navigation">
       <a href="#tldr">TL;DR</a><a href="#background">Background</a><a href="#style">Style</a><a href="#subject">Subject</a>
-      <a href="#trends">Trends</a><a href="#vocabulary">Vocabulary</a><a href="#methods">Methods</a>
+      <a href="#trends">Trends</a><a href="#vocab">Vocabulary</a><a href="#funding">Funding</a><a href="#methods">Sources</a>
     </nav>
     <span class="topnote">A linguistic comparison explorer</span>
   </header>
 
-  <aside class="chapter-rail" aria-label="Page chapters">
-    <span class="rail-mark" aria-hidden="true">●</span>
-    <a class="active" href="#top"><b>00</b><span>Overview</span></a>
-    <a href="#tldr"><b>01</b><span>TL;DR</span></a>
-    <a href="#background"><b>02</b><span>The IACC</span></a>
-    <a href="#style"><b>03</b><span>Style</span></a>
-    <a href="#subject"><b>04</b><span>Who is named</span></a>
-    <a href="#trends"><b>05</b><span>Trends</span></a>
-    <a href="#vocabulary"><b>06</b><span>Key terms</span></a>
-    <a href="#memory"><b>07</b><span>Institutional memory</span></a>
-    <a href="#methods"><b>08</b><span>Methods</span></a>
-  </aside>
+  <aside class="chapter-rail" aria-label="Page chapters"><span class="rail-mark" aria-hidden="true">●</span><a href="#tldr"><b>00</b><span>TL;DR</span></a><a href="#top"><b>01</b><span>Overview</span></a><a href="#background"><b>02</b><span>The IACC</span></a><a href="#style"><b>03</b><span>Style</span></a><a href="#trends"><b>04</b><span>Over time</span></a><a href="#subject"><b>05</b><span>Who is named</span></a><a href="#reversals"><b>06</b><span>Reversals</span></a><a href="#keyness"><b>07</b><span>Keyness</span></a><a href="#vocab"><b>08</b><span>Vocabulary</span></a><a href="#memory"><b>09</b><span>Text reuse</span></a><a href="#sections"><b>10</b><span>Inside the draft</span></a><a href="#funding"><b>11</b><span>Funding</span></a><a href="#methods"><b>12</b><span>Sources</span></a></aside>
 
   <main id="main">
     <section class="tldr-section" id="tldr" aria-labelledby="tldr-title">
@@ -67,100 +57,271 @@
     </section>
 
     <section class="corpus-shelf" aria-label="Source corpus">
-      <div class="shelf-copy"><p class="eyebrow">The source corpus</p><h2>46 strategic plans,<br>one continuity record.</h2><p>The draft is compared with 46 IACC documents from 2009–2023, including eight strategic plans. Results default to SP-2023, with historical baselines available throughout.</p></div>
-      <div class="archive-strip"><img src="assets/archive-books.webp" alt="Seven softly colored report covers representing earlier IACC plans and the 2026 working draft"><div class="archive-years"><span>2009</span><span>2011</span><span>2013</span><span>2016</span><span>2018</span><span>2021–23</span><span>2026</span></div></div>
+      <div class="shelf-copy"><p class="eyebrow">The source corpus</p><h2>46 documents,<br>one continuity record.</h2><p>The draft is compared with 46 IACC documents from 2009–2023, including eight strategic plans. SP-2023 is the 2021–2023 strategic plan. Comparisons read from earlier plans to the 2026 draft throughout.</p></div>
+      <div class="archive-strip"><img src="assets/archive-books.webp" alt="Seven softly colored report covers representing earlier IACC plans and the 2026 working draft"><div class="archive-years"><span>2009</span><span>2011</span><span>2013</span><span>2017</span><span>2019</span><span>2021–23</span><span>2026</span></div></div>
     </section>
 
-    <section class="content-section background" id="background">
-      <div class="section-index"><span>01</span><i></i><small>Context</small></div>
-      <div class="section-body">
-        <p class="eyebrow">The committee and its plans</p>
-        <h2>Language leaves a record.</h2>
-        <div class="prose-columns"><p>The IACC is a federal advisory committee within the U.S. Department of Health and Human Services. Its statutory mandate is to coordinate federal autism activities, monitor research and services, make recommendations, and develop an autism strategic plan.</p><p>Across eight strategic plans, the committee produced a seventeen-year record of how federal autism policy is framed, whom it names, and what it promises. The 2026 working draft is measured against that record, with comparisons available to SP-2023 and the earlier-plan baseline.</p></div>
-        <p class="source-line">Sources: <a href="https://iacc.hhs.gov/about-iacc/" target="_blank" rel="noreferrer">IACC overview</a> · <a href="https://iacc.hhs.gov/publications/" target="_blank" rel="noreferrer">Strategic plans</a> · <a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison" target="_blank" rel="noreferrer">Project repository</a></p>
-      </div>
-    </section>
-
-    <section class="content-section" id="style">
-      <div class="section-index"><span>02</span><i></i><small>Style</small></div>
-      <div class="section-body">
-        <p class="eyebrow">Style fingerprint</p>
-        <h2>More obligation.<br>Less plain language.</h2>
-        <p class="section-lede">Compared with SP-2023, the draft uses more “should” language and longer, more polysyllabic vocabulary.</p>
-        <div class="signal-table" role="table" aria-label="Selected style comparisons">
-          <div class="signal-head" role="row"><span role="columnheader">Measure</span><span role="columnheader">2026 draft</span><span role="columnheader">SP-2023</span><span role="columnheader">Difference</span></div>
-          <div role="row"><span role="cell">“Should” per 1,000 words</span><strong role="cell">10.5</strong><span role="cell">1.4</span><em role="cell">7.8× higher</em></div>
-          <div role="row"><span role="cell">Words per sentence</span><strong role="cell">19.2</strong><span role="cell">28.4</span><em role="cell">1.5× shorter</em></div>
-          <div role="row"><span role="cell">Polysyllabic words</span><strong role="cell">35.4%</strong><span role="cell">26.4%</span><em role="cell">1.3× higher</em></div>
-          <div role="row"><span role="cell">Flesch Reading Ease</span><strong role="cell">0.6</strong><span role="cell">13.3</span><em role="cell">12.7 points lower</em></div>
+<div class="report">
+<section class="content-section" id="background"><div class="section-index"><span>01</span><i></i><small>The IACC</small></div><div class="section-body">
+  
+  <h2>What the IACC is and why its language matters</h2>
+  <p class="lede">The <b>Interagency Autism Coordinating Committee</b> is a federal advisory committee within the U.S. Department of Health and Human Services, established by the <a href="https://www.congress.gov/106/plaws/publ310/PLAW-106publ310.pdf">Children's Health Act of 2000</a> and reconstituted under the <a href="https://www.congress.gov/109/plaws/publ416/PLAW-109publ416.htm">Combating Autism Act of 2006</a> (P.L. 109-416). Its statutory mandate, codified at <a href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title42-section280i-2&num=0&edition=prelim">42 U.S.C. § 280i-2</a>, is to coordinate federal autism activities, monitor research and services, make recommendations to the HHS Secretary, and <b>develop and update a strategic plan</b> for autism research, services, and policy. The committee has been <a href="https://iacc.hhs.gov/about-iacc/legislation/">reauthorized five times</a>, most recently by the <a href="https://www.congress.gov/bill/118th-congress/house-bill/7213">Autism CARES Act of 2024</a> (P.L. 118-180), which extends its authority through September 30, 2029, and broadens its scope toward services, supports, and policy alongside research.</p>
+  <p class="lede">The IACC operates under the <a href="https://www.gsa.gov/policy-regulations/policy/federal-advisory-committee-management/legislation-and-regulations/the-federal-advisory-committee-act">Federal Advisory Committee Act</a> (FACA), which requires balanced membership, public meetings, and publicly available records. Its membership by statute includes federal officials — the directors of NIH, NIMH, CDC, and other HHS agencies — alongside <b>public members</b> appointed by the HHS Secretary: researchers, clinicians, self-advocates, and family members. The designated federal official is <a href="https://iacc.hhs.gov/about-iacc/members/bios/">Susan A. Daniels, Ph.D.</a>, Director of the Office of National Autism Coordination at NIMH.</p>
+  <p class="lede"><b>How earlier plans were produced.</b> Between 2009 and 2023 the committee produced strategic plans through a multi-stage process: a public Request for Information, analysis of the response, scientific workshops or working-group meetings, publication of draft sections for review, full-committee deliberation with public comment, a committee vote, and NIH publication. The <a href="https://iacc.hhs.gov/publications/strategic-plan/2023/">2021–2023 plan</a>, for example, drew on <a href="https://iacc.hhs.gov/meetings/public-comments/requests-for-information/2021/strategic-plan.shtml">537 public comments</a>, a working-group meeting in July 2022, draft review across three full-committee meetings, and a final vote before publication in September 2023. Each plan built incrementally on its predecessors, reusing established research questions, retaining community-negotiated vocabulary, and adding new priorities without discarding the existing framework.</p>
+  <p class="lede"><b>January 2026: a complete reconstitution.</b> On January 28, 2026, HHS Secretary Robert F. Kennedy Jr. <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">appointed 21 new public members</a> to the IACC, replacing every outgoing public member at once rather than staggering replacements as in prior cycles. Dr. <b>Sylvia Fogel</b> was named chair. The <a href="https://iacc.hhs.gov/about-iacc/members/roster/">current public roster</a> includes clinicians, parent advocates, nonprofit executives, a nonspeaking college student, and a high-school student — but no research university faculty in autism neuroscience, no representatives of large autism service organisations, and no members of the Autistic Self Advocacy Network or similar self-advocate organisations that sat on prior committees.</p>
+  <div class="ctx">
+    <b>Overlapping organisational ties.</b> A single organisation links several members of the reconstituted committee. The <a href="https://www.medmaps.org/about-us/">Medical Academy of Pediatric Special Needs (MAPS)</a> — a nonprofit whose fellowship programme trains clinicians in integrative, systems-biology approaches to autism — employs <b>Honey Rinicella</b> as Executive Director and <b>Katie Sweeney</b> as Executive Support Manager. Its <a href="https://www.medmaps.org/about-us/">medical board</a> includes IACC members <b>Dr. Daniel Rossignol</b> and <b>Dr. Elizabeth Mumper</b>, and the committee's incoming chair (September 2026) <b>Dr. John Gaitanis</b>. The draft's nine "Priority Therapeutic Domains" — neurotransmission, immune/autoimmune, folate metabolism, GI/microbiome, neurodevelopmental regression, mitochondrial/redox, autonomic dysfunction, sleep/circadian, and epilepsy — correspond closely to the clinical curriculum MAPS describes on its website.
+    <div class="src">Sources: <a href="https://www.medmaps.org/about-us/">MAPS website, About Us</a>; <a href="https://iacc.hhs.gov/about-iacc/members/bios/">IACC member bios</a>; <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">HHS press release, 28 Jan 2026</a></div>
+  </div>
+  <p class="lede">The resulting <a href="https://iacc.hhs.gov/meetings/iacc-meetings/2026/full-committee-meeting/august/">working draft</a>, released for public comment on July 31, 2026, was assembled without the multi-stage RFI-and-workshop cycle that produced every earlier plan. Its own preface states: <i>"Our drafting process did not have the benefit of a complete institutional record or formal handoff from the prior planning cycle."</i> The linguistic analysis that follows measures what changed when the committee, the process, and the plan were all replaced at once.</p>
+</div></section>
+<section class="content-section" id="style"><div class="section-index"><span>02</span><i></i><small>Style</small></div><div class="section-body">
+  
+  <h2>Where the draft's style sits versus every earlier plan</h2>
+  <p class="lede">The draft uses “should” at <b>7.8× the SP-2023 rate</b> and the longest, most polysyllabic vocabulary in the committee’s record. Compare all style measurements below: SP-2023 is the 2021–2023 plan, and the other views use the eight earlier plans or all 45 earlier documents. Paired values always show <b>earlier baseline → 2026 draft</b>.</p><div class="signal-table" role="table" aria-label="Selected style comparisons">
+          <div class="signal-head" role="row"><span role="columnheader">Measure</span><span role="columnheader">SP-2023 · 2021–2023</span><span role="columnheader">2026 draft</span><span role="columnheader">Difference</span></div>
+          <div role="row"><span role="cell">“Should” per 1,000 words</span><span role="cell">1.4</span><strong role="cell">10.5</strong><em role="cell">7.8× higher</em></div>
+          <div role="row"><span role="cell">Words per sentence</span><span role="cell">28.4</span><strong role="cell">19.2</strong><em role="cell">1.5× shorter</em></div>
+          <div role="row"><span role="cell">Polysyllabic words</span><span role="cell">26.4%</span><strong role="cell">35.4%</strong><em role="cell">1.3× higher</em></div>
+          <div role="row"><span role="cell">Flesch Reading Ease</span><span role="cell">13.3</span><strong role="cell">0.6</strong><em role="cell">12.7 points lower</em></div>
         </div>
         <p class="footnote">Flesch Reading Ease is usually read on a 0–100 scale, with higher scores indicating easier reading. The draft falls from 13.3 to 0.6, close to zero. For scale, this 12.7-point drop equals the formula’s penalty for adding about 12.5 words to every sentence while holding syllables per word constant. <a href="https://support.microsoft.com/en-us/word/get-your-document-s-readability-and-level-statistics-in-microsoft-word" target="_blank" rel="noreferrer">Scale and formula ↗</a></p>
+  <div class="toggle" id="ztoggle">
+    <button data-m="sp23" class="on">vs SP-2023 (the plan it replaces)</button><button data-m="sp">z vs 8 earlier plans</button><button data-m="all">z vs all 45 earlier documents</button>
+  </div>
+  <div id="zbars"></div>
+  <p class="lede" style="font-size:14px"><b>The readability finding rests on the main prose.</b> Removing every list-typeset-as-prose block in the draft changes its overall Flesch–Kincaid grade by 0.1. The obvious objection — that Appendix C reaches FK <b>30.6</b> because a clinical-protocol list was set as continuous prose (373 words, 5 sentences, 58 semicolon-delimited items, longest sentence 121 words) — was checked: 26 such blocks appear in the draft (1,790 words, 2.1% of the text) against 3 in SP-2023, and their removal does not materially alter the result.</p>
+  <p class="zlegend"><span class="sw" style="background:var(--red)"></span>large (|z|&nbsp;&gt;&nbsp;2, or ≥2× vs SP-2023)<span class="sw" style="background:var(--orange)"></span>notable (|z|&nbsp;&gt;&nbsp;1, or ≥1.4×)<span class="sw" style="background:#9a958a"></span>within range · bars show log₂ ratios or z-scores, clipped at ±6 · <b>hover a row for a plain-English explanation</b></p>
+</div></section>
+<section class="content-section" id="trends"><div class="section-index"><span>03</span><i></i><small>Over time</small></div><div class="section-body">
+  
+  <h2>Seventeen years of language, one discontinuity</h2>
+  <p class="lede">The style fingerprint above provides a static comparison; these charts render the same measures as time series across all eight earlier strategic plans (2009–2023). The <b>gold star</b> marks the 2026 draft, and the dashed segment indicates the magnitude of the jump from SP-2023. The default view groups complementary or contrasting measures side by side; the dropdown selects any individual series.</p>
+  <div class="view-toggle" id="tviewtoggle">
+    <button data-v="grouped" class="on">grouped</button><button data-v="single">single series</button>
+  </div>
+  <div id="tgrouped">
+    <div class="carousel" id="tcarousel">
+      <div class="carousel-nav">
+        <button id="tprev">← prev</button>
+        <div class="carousel-title" id="tgtitle"></div>
+        <button id="tnext">next →</button>
       </div>
-    </section>
-
-    <section class="content-section subject-section" id="subject">
-      <div class="section-index"><span>03</span><i></i><small>Subject</small></div>
-      <div class="section-body">
-        <p class="eyebrow">Who is named</p>
-        <h2>Autism references fall.<br>Agency mentions rise.</h2>
-        <p class="section-lede">Counts combine references to autism and autistic people, regardless of naming convention, then compare them with federal-agency mentions.</p>
-        <div class="compare-grid">
+      <div class="grp-charts" id="tgrpcharts">
+        <div class="grp-chart"><div class="grp-label" id="tgl0"></div><svg id="tgsvg0" viewBox="0 0 380 320" width="100%" role="img"></svg></div>
+        <div class="grp-chart"><div class="grp-label" id="tgl1"></div><svg id="tgsvg1" viewBox="0 0 380 320" width="100%" role="img"></svg></div>
+      </div>
+      <div class="carousel-dots" id="tdots"></div>
+      <div class="chartnote" id="tgrpnote" style="margin-top:8px"></div>
+    </div>
+  </div>
+  <div id="tsingle" style="display:none">
+    <label class="search-label" for="termsel">Choose a measure</label><select id="termsel"></select>
+    <div class="termnote" id="termnote"></div>
+    <div class="chartbox"><svg id="trendsvg" viewBox="0 0 780 380" width="100%" role="img"></svg>
+    <div class="chartnote" id="trendnote"></div></div>
+  </div>
+</div></section>
+<section class="content-section" id="subject"><div class="section-index"><span>04</span><i></i><small>Who is named</small></div><div class="section-body">
+  
+  <h2>The draft names autism less than half as often as any plan before it</h2>
+  <p class="lede">The stylistic shift documented above would be of limited consequence if the draft continued to address the same subject in comparable proportions. It does not. Which label a document prefers — "people with autism," "autistic people," "on the spectrum" — varies with the field; person-first usage has been declining across autism writing for a decade, reflecting deliberate community preference. Counting all naming conventions together removes that variable: every explicit reference to autism or to autistic people, tallied in one non-overlapping pass regardless of wording. That total occupied a band of <b>199–314 per 10,000 words for seventeen years</b> (mean 268, sd 33). The draft registers <b>108</b> — <b>4.8 standard deviations</b> below the series mean, 2.6× below SP-2023, and 1.8× below the lowest earlier plan (SP-2013, 199 per 10k). Both components decline: references to autistic <i>people</i> fall from 113 to 28 per 10k, and autism-as-a-topic mentions from 164 to 81. The apparent rise in identity-first "share" is an artefact of the collapsing denominator.</p>
+  <p class="lede">The space vacated by autism references is occupied by federal machinery. Every plan from 2009 to 2023 named autism between 8× and 36× more often than it named a federal agency (agency acronyms 8–32 per 10k). The draft contains 167 agency acronyms per 10k and names agencies <b>1.5× more often than it names autism at all</b>.</p>
+  <p class="lede">One newly introduced term accounts for a substantial share of the draft's remaining person-level references: <b>"profound autism"</b> appears approximately 50 times — a rate of 5.5 per 10,000 words — in a record where the term had never previously appeared. The draft proposes its adoption as a "standardized functional designation … for research and policy purposes" and couples it to a prevalence claim: that the share of children meeting the designation "has risen alongside the broader trend."</p>
+  <div class="ctx">
+    <b>The chair and the designation.</b> The committee's chair during drafting, <b>Dr. Sylvia Fogel</b>, is identified in her <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">HHS appointment biography</a> as "the parent of a child with profound autism and PANS" whose clinical work emphasises "regressive autism, more severe presentations, and … co-occurring neuroimmune and medical conditions." Under her leadership the committee <a href="https://www.reuters.com/world/kennedy-names-new-chair-us-autism-advisory-panel-sources-say-2026-09-18/">recommended</a> that the federal government adopt the term "profound autism" for individuals with high support needs. The designation's entry into federal policy language reflects a priority the chair brought to the committee.
+    <div class="src">Sources: <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">HHS press release, 28 Jan 2026</a>; <a href="https://iacc.hhs.gov/about-iacc/members/bios/">IACC member bios</a>; <a href="https://www.reuters.com/world/kennedy-names-new-chair-us-autism-advisory-panel-sources-say-2026-09-18/">Reuters, 18 Sep 2026</a></div>
+  </div>
+  <div class="compare-grid">
           <div class="compare-head"><span>References per 10,000 words</span><span>SP-2023</span><span>2026 draft</span><span>Change</span></div>
           <div class="compare-row"><b>Autism or autistic people</b><span>278</span><strong>108</strong><em>−61%</em></div>
           <div class="compare-row"><b>Federal agency mentions</b><span>12.2</span><strong>167</strong><em>13.7×</em></div>
         </div>
-        <aside class="finding-note"><span class="note-mark">↗</span><p>In the draft, federal agencies are named more often than autism itself — the only plan in the series where the balance flips.</p></aside>
-        <p class="footnote">References per 10,000 words; running headers and reference lists removed. Counts and definitions are documented in the project’s generated CSVs.</p>
-      </div>
-    </section>
+<div id="refbars"></div>
+  <p class="zlegend"><span class="sw" style="background:var(--blue)"></span>references to autism or autistic people, per 10k words<span class="sw" style="background:var(--orange)"></span>federal agency acronyms, per 10k words · same cleaned text, running headers and reference lists removed · full counts in <code>autism_reference_by_plan.csv</code>, regenerated by the notebook</p>
 
-    <section class="content-section" id="trends">
-      <div class="section-index"><span>04</span><i></i><small>Trends</small></div>
-      <div class="section-body">
-        <p class="eyebrow">The record over time</p>
-        <h2>A sharp step in a changing record.</h2>
-        <p class="section-lede">The draft reversed 55 of 80 strong vocabulary trends (68.8%).</p>
-        <div class="timeline" aria-label="Strategic plans included in the comparison"><span>2009</span><span>2011</span><span>2013</span><span>2017</span><span>2019</span><span>2023</span><strong>2026 draft</strong></div>
-        <div class="trend-notes"><div><strong>68.8%</strong><span>of strong trends reversed in the draft</span></div><div><strong>62.2%</strong><span>of fixed-vocabulary terms changed by at least 2× versus SP-2023</span></div></div>
-      </div>
-    </section>
+  <p class="lede"><b>Not only less visible: less agential.</b> A dependency-parse proxy for the semantic proto-role framework of <a href="https://aclanthology.org/volumes/2026.scil-1/">Hoefer &amp; Martin (SCiL 2026)</a> classifies each entity mention as agent (grammatical subject of an active-voice verb) or patient (direct object or passive subject), following Dowty’s (1991) proto-agent properties. Three measures result. <b>Visibility</b> is the existing reference count: agencies appear at 166.9 per 10k in the draft versus 108.2 for autistic people — the only plan in the series where agencies are named more often. <b>Relative agency</b> asks: of all actor-role mentions in the document, what share belongs to each class? In SP-2023, autistic people held <b>57.8%</b> of actor mentions and agencies held 42.2%. The draft reverses this: agencies hold <b>80.2%</b>, autistic people <b>19.8%</b>. <b>Proto-role agency share</b> asks: when each class does appear in a clause, how often is it the actor rather than the acted-upon? In the draft, agencies occupy the agent role <b>82.2%</b> of the time — the highest in the series — while autistic people score 57.4%, mid-range but on a far smaller base. The combined effect: the draft’s autistic people are both less visible and less likely to be the ones acting; federal agencies are both more visible and more agential than in any earlier plan.</p>
+  <div class="chartbox" style="padding:18px 14px 10px;margin:10px 0 20px;max-width:900px">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px">Who acts: share of agent-role mentions, SP-2023 vs 2026 draft</div>
+    <svg viewBox="0 0 780 130" width="100%" role="img" aria-label="Stacked bar chart comparing share of agent-role mentions between agencies and autistic people in SP-2023 versus the 2026 draft">
+      <text x="0" y="14" font-family="var(--mono)" font-size="10" fill="var(--muted)">SP-2023</text>
+      <rect x="70" y="2" width="291" height="22" fill="var(--blue)" opacity="0.75" rx="1"/>
+      <text x="78" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">autistic people 57.8%</text>
+      <rect x="361" y="2" width="209" height="22" fill="var(--orange)" opacity="0.75" rx="1"/>
+      <text x="369" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">agencies 42.2%</text>
+      <text x="0" y="50" font-family="var(--mono)" font-size="10" fill="var(--muted)">Draft</text>
+      <rect x="70" y="38" width="99" height="22" fill="var(--blue)" opacity="0.75" rx="1"/>
+      <text x="78" y="53" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">19.8%</text>
+      <rect x="169" y="38" width="401" height="22" fill="var(--orange)" opacity="0.75" rx="1"/>
+      <text x="177" y="53" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">agencies 80.2%</text>
+      <text x="0" y="84" font-family="var(--mono)" font-size="10" fill="var(--faint)">Proto-role agency share (agent / [agent + patient]) when each class appears in a clause:</text>
+      <text x="0" y="100" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">SP-2023 agencies <b>67.9%</b> · persons <b>53.4%</b>  |  Draft agencies <b>82.2%</b> · persons <b>57.4%</b></text>
+      <text x="0" y="120" font-family="var(--mono)" font-size="9.5" fill="var(--faint)">Method: dependency-parse proxy for Hoefer &amp; Martin (SCiL 2026) semantic proto-role properties. Full data in agency_patiency.csv.</text>
+    </svg>
+  </div>
+  <p class="lede"><b>Widening the non-agency side does not restore the balance.</b> The seventh pair is not agencies versus nonprofits alone. It is federal agencies versus one combined non-agency side: autistic people <i>and</i> the less-profit-motivated organisations the plans themselves name — nonprofits, advocacy groups, community partners and members, families, caregivers, parents, and public stakeholders. Same visibility and actor-role measures as the agency-versus-person pair above. The term list was harvested from the plan texts (full inventory in <code>community_partner_terms.csv</code>); federal “supporting partners,” community-as-setting, and industry partnerships are excluded. Combined visibility sat at a <b>309 per 10k</b> mean across the 2009–2019 plans and <b>335</b> in SP-2023. The draft is at <b>120</b> — below agency visibility (167), the only plan in which agencies out-name that entire coalition. Of actor-role mentions, the combined side held <b>67.8%</b> in SP-2023 and a 50.4% earlier-plan mean; the draft gives it <b>24.9%</b> and agencies <b>75.1%</b>. Existing agency-versus-person figures (166.9 vs 108.2; 80.2% vs 19.8%) are unchanged.</p>
+  <div class="chartbox" style="padding:18px 14px 10px;margin:10px 0 20px;max-width:900px">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px">Who acts: federal agencies vs autistic people + nonprofits, partners, families</div>
+    <svg viewBox="0 0 780 110" width="100%" role="img" aria-label="Stacked bar chart comparing share of agent-role mentions between federal agencies and the combined non-agency side (autistic people plus nonprofits, partners, families, advocacy groups) in SP-2023 versus the 2026 draft">
+      <text x="0" y="14" font-family="var(--mono)" font-size="10" fill="var(--muted)">SP-2023</text>
+      <rect x="70" y="2" width="339" height="22" fill="var(--blue)" opacity="0.75" rx="1"/>
+      <text x="78" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">people + orgs 67.8%</text>
+      <rect x="409" y="2" width="161" height="22" fill="var(--orange)" opacity="0.75" rx="1"/>
+      <text x="417" y="17" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">32.2%</text>
+      <text x="0" y="50" font-family="var(--mono)" font-size="10" fill="var(--muted)">Draft</text>
+      <rect x="70" y="38" width="125" height="22" fill="var(--blue)" opacity="0.75" rx="1"/>
+      <text x="78" y="53" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">24.9%</text>
+      <rect x="195" y="38" width="375" height="22" fill="var(--orange)" opacity="0.75" rx="1"/>
+      <text x="203" y="53" font-family="var(--mono)" font-size="11" fill="#fff" font-weight="600">agencies 75.1%</text>
+      <text x="0" y="84" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">Visibility: SP-2023 agencies 12.2 / combined 335.4 per 10k &nbsp;|&nbsp; Draft agencies 166.9 / combined 119.6</text>
+      <text x="0" y="102" font-family="var(--mono)" font-size="9.5" fill="var(--faint)">Same two measures as the agency-versus-person pair. Term list and counts in community_partner_terms.csv and agency_patiency.csv.</text>
+    </svg>
+  </div>
+</div></section>
+<section class="content-section" id="reversals"><div class="section-index"><span>05</span><i></i><small>Reversals</small></div><div class="section-body">
+  
+  <h2>Fifty-five of eighty trends reversed</h2>
+  <p class="lede">Of the 80 content words with a strong monotonic trend in the 2007–2023 record (|Spearman ρ| ≥ 0.5), the draft reverses <b>55 — 68.8%</b>. The chart applies the same scoring rule to each earlier document against its own preceding record and trailing eight-year window. The draft ranks <b>second of 29 documents and highest among the strategic plans</b>: SP-2013 25%, SP-2019 42%, SP-2023 48%, SP-2017 61%. The 28 earlier documents range from 25% to 76%, with a median of 48%.</p>
+  <div id="ctlbars"></div>
+  <p class="lede"><b>The largest consecutive-plan change.</b> On one fixed vocabulary of 386 terms, <b>62.2%</b> change by a factor of two or more between SP-2023 and the 2026 draft — compared with 50.5% between SP-2017 and SP-2019 and 13–35% across the annual-update era. <b>45.1% of terms are at least halved</b>; the median term falls to <b>0.60×</b> its SP-2023 rate.</p>
+        <details class="metric-detail"><summary>Pairwise reversal definition and figures</summary><p>A separate measure counts reversals of the plan-series trend relative to the preceding plan’s level, requiring at least a 2× change. Under that rule, SP-2023 scores 42.8% and the 2026 draft scores 32.4%. SP-2023 increases reversed falling trends; the 2026 draft predominantly moves already-falling terms further down. The 62.2% figure above measures the size of changes in either direction. <a href="../outputs/iacc_linguistic/consecutive_plan_change.csv">Full consecutive-plan table ↗</a></p></details>
+  <p class="zlegend">red = the 2026 draft · each document scored by the draft's rule against its own past · per-term detail in <code>reversal_control_by_term.csv</code> and <code>trend_reversal_walkforward.csv</code></p>
+  <p class="lede">The <b>substantial reversals</b> view applies a floor: the term was used at least 5 times per 10,000 words in the 2018+ documents <i>and</i> the draft at least halves it. Thirteen terms clear that threshold, including <b>health, disparities, adulthood, racial, suicide, sex,</b> and <b>justice</b>. The controls below show this subset, all 80 terms, or the terms grouped by reversal and continuation.</p>
+  <div class="ctx">
+    <b>"Vaccine": from 4.5 per 10k to zero.</b> The word <i>vaccine</i> (and its inflections) appeared in the committee's record at 4.5 per 10,000 words across earlier plans, predominantly in debunking or research-review contexts. The draft contains zero occurrences. Three public members of the reconstituted committee have documented histories of vaccine-causation advocacy: <b>John Gilmore</b>, who co-founded the <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">New York Alliance for Vaccine Rights and the New York Chapter of Children's Health Defense</a> and whose advocacy led to <a href="https://www.nytimes.com/2008/03/08/us/08vaccine.html">New York's thimerosal restrictions</a>; <b>Ginger Taylor</b>, co-author of <i>Vaccine Epidemic</i>, founder of the Maine Coalition for Vaccine Choice, and a member of the <a href="https://gingertaylor.org/">Children's Health Defense Spiritual Advisory Committee</a>; and <b>Dr. Toby Rogers</b>, whose doctoral thesis, <a href="https://ses.library.usyd.edu.au/handle/2123/20198">"The Political Economy of Autism"</a> (University of Sydney, 2018), argues that pharmaceutical products including vaccines contribute to autism prevalence and that regulatory capture prevents their restriction. The complete disappearance of a term the committee previously used to address — and refute — vaccine-related claims warrants examination in this context.
+    <div class="src">Sources: <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">HHS press release, 28 Jan 2026</a>; <a href="https://www.nytimes.com/2008/03/08/us/08vaccine.html">New York Times, 8 Mar 2008</a>; <a href="https://gingertaylor.org/">gingertaylor.org</a>; <a href="https://ses.library.usyd.edu.au/handle/2123/20198">Rogers, Univ. of Sydney thesis, 2018</a></div>
+  </div>
+  <div class="toggle" id="ttoggle">
+    <button data-t="strong" class="on">substantial reversals</button><button data-t="all">all 80</button><button data-t="reverses trend">reversed</button><button data-t="continues trend">continued</button>
+  </div>
+  <div id="ttable"></div>
+</div></section>
+<section class="content-section" id="keyness"><div class="section-index"><span>06</span><i></i><small>Keyness</small></div><div class="section-body">
+  
+  <h2>What the draft says more and what it stopped saying</h2>
+  <p class="lede">The trend reversals above identify <i>which direction</i> terms moved; keyness quantifies <i>how statistically distinctive</i> each word is in the draft relative to the earlier plans. The measure is weighted log-odds with an informative Dirichlet prior (Monroe et al. 2008). Positive z indicates the draft over-uses a term; negative z indicates under-use. All 3,579 measured words and 4,939 bigrams are searchable and sortable below. Rare newly introduced terms (leucovorin, NAPTI, dashboard) carry modest z-scores by design of the estimator; they appear under <i>coined &amp; retired</i> in the following section.</p>
+  <div class="ctx">
+    <b>Medication vocabulary and the pharmaceutical sector.</b> The draft's most distinctive vocabulary cluster includes <i>medication, prescribing, dose, treatment,</i> and <i>comparative-effectiveness</i> — a tenfold increase in medication-related terms relative to SP-2023 (see critique memo §2.4). IACC member <b>Bill Oldham</b> is chairman and president of <a href="https://ascellahealth.com/ascellaone">AscellaHealth</a>, a specialty-pharmacy and pharmacy-benefit-management company that provides drug-access platforms, formulary management, and specialty-drug commercialisation services to health plans and pharmaceutical manufacturers. A committee member with a commercial position in the specialty-pharmacy supply chain sits on a panel whose draft substantially elevates pharmacological treatment vocabulary.
+    <div class="src">Sources: <a href="https://ascellahealth.com/who-we-serve">AscellaHealth, Who We Serve</a>; <a href="https://www.businesswire.com/news/home/20240613343186/en/">BusinessWire, 13 Jun 2024</a>; <a href="https://www.hhs.gov/press-room/hhs-kennedy-appoints-new-interagency-autism-coordinating-committee.html">HHS press release, 28 Jan 2026</a></div>
+  </div>
+  <div class="toggle" id="ktoggle">
+    <button data-k="words" class="on">words vs plans 2009–2023</button><button data-k="bigrams">bigrams</button><button data-k="vs2023">words vs SP-2023 alone</button>
+  </div>
+  <label class="search-label" for="ksearch">Search keyness terms</label><input type="text" id="ksearch" placeholder="filter terms…" style="width:260px;margin:0 0 12px">
+  <div id="ktable"></div>
+</div></section>
+<section class="content-section" id="vocab"><div class="section-index"><span>07</span><i></i><small>Vocabulary</small></div><div class="section-body">
+  
+  <h2>Coined here. Retired here.</h2>
+  <p class="lede">Keyness measures relative emphasis; vocabulary turnover measures absolute novelty. <b>Coined:</b> words used 5 or more times in the draft that never appeared in any earlier IACC publication. <b>Retired:</b> words used in at least 3 earlier strategic plans that the draft never uses. Dashed-border chips denote names of people or organisations. Among the coined terms, several carry substantial policy weight: <b>leucovorin</b> (24 occurrences in a record where the term had never appeared), <b>NAPTI</b> (a proposed National Autism Precision Therapeutics Initiative), <b>biomarker-defined</b>, and <b>implementation-ready</b>. Among the retired: <b>evidence-based</b>, <b>scientists</b>, <b>advocates</b>, <b>vaccine</b>, and <b>collaborative</b>.</p>
+  <div class="ctx">
+    <b>Leucovorin and committee affiliations.</b> IACC member <b>Dr. Daniel Rossignol</b> coauthored a <a href="https://www.mdpi.com/2075-4426/11/11/1141">2021 systematic review and meta-analysis</a> of leucovorin (folinic acid) treatment in autism spectrum disorders. The committee's incoming chair as of September 2026, <b>Dr. John Gaitanis</b>, <a href="https://www.medicaldaily.com/gaitanis-autism-committee-chair-leucovorin-meadow-biosciences-478976">co-founded a telehealth company</a> built around facilitating leucovorin access for autistic children. IACC member <b>Dr. Elizabeth Mumper</b>, founder and CEO of the <a href="https://ahrp.org/elizabeth/">Rimland Center for Integrative Medicine</a>, coauthored the <a href="https://pubmed.ncbi.nlm.nih.gov/18005455/">2007 hyperbaric oxygen pilot study</a> with Rossignol that initiated the HBOT-in-autism research line. All three serve on the <a href="https://www.medmaps.org/about-us/">MAPS medical board</a>. That a compound researched or commercialised by multiple committee members appears 24 times in a plan where the committee's entire prior record contains zero occurrences constitutes a material disclosure consideration under FACA balanced-membership requirements.
+    <div class="src">Sources: <a href="https://www.mdpi.com/2075-4426/11/11/1141">Rossignol et al., J Pers Med 2021</a>; <a href="https://www.medicaldaily.com/gaitanis-autism-committee-chair-leucovorin-meadow-biosciences-478976">Medical Daily, Sep 2026</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/18005455/">Rossignol et al., BMC Pediatrics 2007</a>; <a href="https://ahrp.org/elizabeth/">Alliance for Human Research Protection, Mumper bio</a>; <a href="https://www.medmaps.org/about-us/">MAPS website</a></div>
+  </div>
+  <label class="search-label" for="vsearch">Search the complete coined and retired vocabularies</label><input type="text" id="vsearch" placeholder="filter…" style="width:220px;margin-bottom:6px">
+  <div class="vocab-grid"><div><div class="vhead">Earlier plans · retired <span class="n" id="dropn"></span></div><div class="chips" id="dropchips"></div></div><div><div class="vhead">2026 draft · coined <span class="n" id="newn"></span></div><div class="chips" id="newchips"></div></div></div>
+</div></section>
+<section class="content-section" id="memory"><div class="section-index"><span>08</span><i></i><small>Text reuse</small></div><div class="section-body">
+  
+  <h2>Almost nothing carried forward</h2>
+  <p class="lede">This measures verbatim text reuse: the share of the draft’s <b>eight-word sequences</b> that also appear in earlier publications. The draft inherits <b>0.02% from SP-2023</b> and <b>0.03% from the full earlier record</b>. For the preceding comparison, SP-2023 inherited <b>0.94% from SP-2019</b>. SP-2017 inherited 1.1% from SP-2013. The chart includes every plan and both reuse measures; its values retain two decimal places so the draft’s reuse remains visible.</p>
+  <blockquote>"Our drafting process did not have the benefit of a complete institutional record or formal handoff from the prior planning cycle."</blockquote>
+  <div id="carrybars"></div>
+  <p class="zlegend"><span class="sw" style="background:var(--blue)"></span>inherited from the immediately preceding plan<span class="sw" style="background:var(--orange)"></span>inherited from any earlier publication</p>
+</div></section>
+<section class="content-section" id="sections"><div class="section-index"><span>09</span><i></i><small>Inside the draft</small></div><div class="section-body">
+  
+  <h2>Thirty-seven sections, all of it new text</h2>
+  <p class="lede">The preceding measures treat the draft as a single document. This table disaggregates it into its 37 outline sections, each profiled identically: readability (FK grade), prescriptiveness ("should" per 1,000 words), share of text found nowhere in the earlier record, and nearest earlier document by content. Click a column header to sort.</p>
+  <div id="sectable"></div>
+</div></section>
+<section class="content-section" id="funding"><div class="section-index"><span>10</span><i></i><small>Funding</small></div><div class="section-body">
+  
+  <h2>What was removed, what was added back, and what remains lost</h2>
+  <p class="lede" style="max-width:none">
+  The linguistic changes documented above did not occur in a vacuum. They coincide with the largest disruption to U.S. federal science funding in the modern era. Three questions situate the IACC draft within that broader context: how much science funding was removed, how much was directed specifically to autism research, and what the difference represents.</p>
 
-    <section class="content-section vocabulary-section" id="vocabulary">
-      <div class="section-index"><span>05</span><i></i><small>Key terms</small></div>
-      <div class="section-body">
-        <p class="eyebrow">Vocabulary turnover</p>
-        <h2>Terms enter.<br>Others disappear.</h2>
-        <p class="section-lede">Search a sample of terms newly introduced or absent in the 2026 draft.</p>
-        <label class="search-label" for="term-search">Filter terms</label>
-        <input id="term-search" type="search" placeholder="Try “community” or “federal”" autocomplete="off">
-        <div class="term-groups">
-        <div><h3>New in draft <span>sample</span></h3><ul class="term-list" id="new-terms"><li data-term="leucovorin">leucovorin</li><li data-term="napti">NAPTI</li><li data-term="biomarker-defined">biomarker-defined</li><li data-term="implementation-ready">implementation-ready</li><li data-term="comparative-effectiveness">comparative-effectiveness</li><li data-term="post-meal">post-meal</li><li data-term="high-support">high-support</li><li data-term="interoceptive">interoceptive</li></ul></div>
-          <div><h3>Absent in draft <span>sample</span></h3><ul class="term-list retired" id="retired-terms"><li data-term="community">community</li><li data-term="research">research</li><li data-term="people">people</li><li data-term="evidence-based">evidence-based</li><li data-term="advocates">advocates</li><li data-term="collaborative">collaborative</li><li data-term="vaccine">vaccine</li><li data-term="services">services</li></ul></div>
-        </div>
-        <p class="search-status" id="search-status" aria-live="polite">Showing all sample terms.</p>
-      </div>
-    </section>
+  <p class="lede"><b>1. Science funding removed.</b> Between February and June 2025, the NIH obligated approximately <b>$8 billion less</b> in grant awards than it had in the same period of FY 2024 — 62% of the prior year’s level — and terminated over 1,800 grants, in what the Government Accountability Office <a href="https://www.gao.gov/products/b-337203">determined</a> violated the Impoundment Control Act of 1974 (GAO decision B-337203, 5 August 2025). A <a href="https://jamanetwork.com/journals/jama/fullarticle/2833880">JAMA analysis</a> of the first wave (February–April 2025) documented 694 terminated NIH grants with a cumulative award value of $1.81 billion, of which $544 million had not yet been expended. At the National Science Foundation, over 1,300 grants totalling approximately <b>$700 million</b> in unspent funds were terminated or frozen in 2025 (<a href="https://www.sciencenews.org/article/nih-nsf-cuts-2025-data">Science News</a>, citing <a href="https://grantwitness.org/">Grant Witness</a> data). In October 2026, the New York Times <a href="https://www.dailygazette.com/nyt-feed/agency-diverted-1-4-billion-in-science-funds-mandated-by-congress/article_458d6ea6-1d18-501d-9e02-6dc5321be92d.html">reported</a> that NSF had carried over an additional <b>$1.4 billion</b> — approximately one-fifth of its primary research budget — that Congress had appropriated for research, redirecting it toward administration priorities including AI and quantum computing. By <a href="https://www.nature.com/immersive/d41586-026-00088-9/index.html">Nature’s January 2026 accounting</a>, more than 7,800 NIH and NSF grants had been terminated or frozen in total (5,844 NIH; 1,996 NSF), with roughly 2,600 not reinstated, representing <b>$1.4 billion in unspent funding</b> still cancelled. The <a href="https://www.brennancenter.org/our-work/research-reports/cost-trump-administrations-attacks-research-funding">Brennan Center for Justice</a> places the combined NIH and NSF total at over <b>$3 billion</b> frozen or terminated in 2025, with approximately $1.4 billion remaining cancelled or frozen as of early 2026. These figures measure money actually withheld or terminated from congressionally appropriated funds, not merely proposed budget reductions. The administration’s proposed FY 2026 budget sought far larger cuts — <a href="https://cen.acs.org/policy/research-funding/Proposed-White-House-budget-slash/103/web/2025/05">41% at NIH, 57% at NSF, 24% at NASA</a> — but Congress largely <a href="https://eos.org/research-and-developments/science-escapes-largest-cuts-in-latest-budget-bills">rejected those proposals</a> in the enacted FY 2026 appropriations.</p>
 
-    <section class="content-section memory-section" id="memory">
-      <div class="section-index"><span>06</span><i></i><small>Memory</small></div>
-      <div class="section-body memory-body">
-        <p class="eyebrow">Institutional memory</p>
-        <h2>Almost no text carried forward.</h2>
-        <div class="memory-stat"><strong>0.02<span>%</span></strong><p>of the draft’s eight-word sequences appear in SP-2023.<br><span>Recent-plan comparison: SP-2023 inherited 0.94% from SP-2019.</span></p></div>
-      </div>
-    </section>
+  <p class="lede"><b>2. Autism funding added back.</b> The <a href="https://www.congress.gov/bill/118th-congress/house-bill/7213/text">Autism CARES Act of 2024</a> (P.L. 118-180) authorised <b>$28.1 million per year</b> for CDC autism programmes and <b>$56.344 million per year</b> for HRSA autism research and training programmes for FY 2025–2029. The FY 2026 appropriations bill funded both lines at their authorised levels and restored <b>$8 million</b> in Department of Defense autism research (<a href="https://www.autismspeaks.org/advocacy-news/congress-passes-critical-autism-funding-fiscal-year-2026-federal-package">Autism Speaks summary</a>). NIH received a total programme level of <b>$47.493 billion</b> for FY 2026 (<a href="https://www.congress.gov/crs-product/R43341">CRS report R43341</a>), a $458 million (1.0%) increase over FY 2025; the enacted bill directed NIH to “maintain and enhance investments in [autism] research” and to implement Autism CARES Act requirements, but did not specify a dollar amount for the autism-research increase within the NIH total. Autism Speaks <a href="https://www.autismspeaks.org/advocacy-news/congress-passes-critical-autism-funding-fiscal-year-2026-federal-package">characterised</a> the combined federal autism allocation as “nearly $400 million.”</p>
 
-    <section class="content-section methods-section" id="methods">
-      <div class="section-index"><span>07</span><i></i><small>Methods</small></div>
+  <p class="lede"><b>3. The net.</b> The two figures are not directly comparable: the science-funding removals above represent money withheld or terminated from existing appropriations across NIH and NSF during 2025, while the autism-specific figures are enacted annual authorisations for FY 2025–2029. With that qualification, the scale is clear. The GAO-documented NIH obligation shortfall alone — $8 billion in five months — exceeds twenty years of combined CDC and HRSA autism authorisations at the Autism CARES Act’s new rates. The approximately $3 billion in NIH and NSF grants frozen or terminated in 2025 is roughly eight times the “nearly $400 million” in annual federal autism funding. Congress rejected the administration’s proposed structural cuts and provided a modest NIH increase for FY 2026, but the grants already terminated or frozen during 2025 represent research capacity — laboratories, personnel, multi-year protocols — that a subsequent appropriation does not automatically restore.</p>
+
+  <div class="chartbox" style="padding:22px 18px 14px;margin:10px 0 26px;max-width:900px">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:14px">Science funding removed vs. autism funding added</div>
+    <svg viewBox="0 0 1100 310" width="100%" style="display:block" role="img" aria-label="Bar chart comparing science funding removed (billions) with autism research funding added (millions per year)">
+      <!-- Left group: science funding removed (2025 actuals) -->
+      <text x="0" y="16" font-family="var(--mono)" font-size="10" fill="var(--muted)" letter-spacing=".08em" text-transform="uppercase">SCIENCE FUNDING REMOVED (2025)</text>
+
+      <!-- $8.0B NIH obligation shortfall -->
+      <rect x="0" y="28" width="720" height="24" fill="var(--red)" opacity="0.85" rx="1"/>
+      <text x="8" y="44" font-family="var(--mono)" font-size="11.5" fill="#fff" font-weight="600">$8.0 B</text>
+      <text x="730" y="44" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">NIH obligation shortfall, Feb–Jun 2025 (GAO)</text>
+
+      <!-- $3.0B+ NIH+NSF frozen/terminated -->
+      <rect x="0" y="58" width="270" height="24" fill="var(--red)" opacity="0.7" rx="1"/>
+      <text x="8" y="74" font-family="var(--mono)" font-size="11.5" fill="#fff" font-weight="600">$3.0 B+</text>
+      <text x="280" y="74" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">NIH+NSF grants frozen or terminated (Brennan Center)</text>
+
+      <!-- $1.81B JAMA-documented terminated grants -->
+      <rect x="0" y="88" width="163" height="24" fill="var(--red)" opacity="0.6" rx="1"/>
+      <text x="8" y="104" font-family="var(--mono)" font-size="11.5" fill="#fff" font-weight="600">$1.81 B</text>
+      <text x="173" y="104" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">694 NIH grants terminated, Feb–Apr 2025 (JAMA)</text>
+
+      <!-- $1.4B NSF diverted -->
+      <rect x="0" y="118" width="126" height="24" fill="var(--red)" opacity="0.5" rx="1"/>
+      <text x="8" y="134" font-family="var(--mono)" font-size="11.5" fill="#fff" font-weight="600">$1.4 B</text>
+      <text x="136" y="134" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">NSF funds diverted from research (NYT)</text>
+
+      <!-- Scale note -->
+      <line x1="0" y1="155" x2="780" y2="155" stroke="var(--line)" stroke-width="1"/>
+
+      <!-- Right group: autism funding added (annual authorisations) -->
+      <text x="0" y="175" font-family="var(--mono)" font-size="10" fill="var(--muted)" letter-spacing=".08em" text-transform="uppercase">AUTISM FUNDING ADDED (ANNUAL AUTHORISATIONS, FY 2025–2029)</text>
+
+      <!-- $56.3M HRSA -->
+      <rect x="0" y="187" width="5" height="24" fill="var(--blue)" opacity="0.85" rx="1"/>
+      <text x="13" y="203" font-family="var(--mono)" font-size="11.5" fill="var(--ink)" font-weight="600">$56.3 M</text>
+      <text x="80" y="203" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">HRSA autism research and training (Autism CARES Act)</text>
+
+      <!-- $28.1M CDC -->
+      <rect x="0" y="217" width="2.5" height="24" fill="var(--blue)" opacity="0.7" rx="1"/>
+      <text x="13" y="233" font-family="var(--mono)" font-size="11.5" fill="var(--ink)" font-weight="600">$28.1 M</text>
+      <text x="80" y="233" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">CDC autism programmes (Autism CARES Act)</text>
+
+      <!-- $8.0M DoD -->
+      <rect x="0" y="247" width="0.72" height="24" fill="var(--blue)" opacity="0.6" rx="1"/>
+      <text x="13" y="263" font-family="var(--mono)" font-size="11.5" fill="var(--ink)" font-weight="600">$8.0 M</text>
+      <text x="80" y="263" font-family="var(--mono)" font-size="10.5" fill="var(--muted)">DoD autism research restored, FY 2026</text>
+
+      <!-- Scale reference -->
+      <text x="0" y="295" font-family="var(--mono)" font-size="10" fill="var(--faint)">Scale: full chart width = $8.0 billion. The largest autism bar ($56.3M) is 0.7% of the NIH shortfall.</text>
+    </svg>
+    <div style="font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.5"><span style="display:inline-block;width:10px;height:10px;background:var(--red);margin:0 5px -1px 0"></span>money withheld or terminated from existing appropriations (2025 actuals) &nbsp; <span style="display:inline-block;width:10px;height:10px;background:var(--blue);margin:0 5px -1px 0"></span>enacted annual authorisations (not restored science spending) &middot; bars are on the same linear dollar scale</div>
+  </div>
+
+  <p class="lede" style="font-size:14px;max-width:none"><b>Selected reporting.</b> The following articles substantiate the figures above; each is linked to its original source.</p>
+  <div style="font-size:13px;line-height:1.7;max-width:900px;margin:0 0 26px">
+    <b>•</b> <a href="https://www.gao.gov/products/b-337203">Trump administration illegally axed NIH grants, government watchdog says</a> — GAO, 5 Aug 2025. Determined NIH violated the Impoundment Control Act; $8 billion obligation shortfall February–June 2025; over 1,800 grants terminated.<br>
+    <b>•</b> <a href="https://jamanetwork.com/journals/jama/fullarticle/2833880">Characterization of Research Grant Terminations at the National Institutes of Health</a> — JAMA, 2025. 694 grants terminated February–April 2025; $1.81 billion cumulative award value; $544 million unexpended.<br>
+    <b>•</b> <a href="https://www.nature.com/immersive/d41586-026-00088-9/index.html">US science after a year of Trump: what has been lost and what remains</a> — Nature, 20 Jan 2026. 7,800+ grants terminated or frozen; ~25,000 staff departed; proposed 35% non-defence R&amp;D cut.<br>
+    <b>•</b> <a href="https://www.brennancenter.org/our-work/research-reports/cost-trump-administrations-attacks-research-funding">The Cost of the Trump Administration’s Attacks on Research Funding</a> — Brennan Center for Justice. Over $3 billion in NIH/NSF grants frozen or terminated; $1.4 billion remaining cancelled as of early 2026.<br>
+    <b>•</b> <a href="https://www.dailygazette.com/nyt-feed/agency-diverted-1-4-billion-in-science-funds-mandated-by-congress/article_458d6ea6-1d18-501d-9e02-6dc5321be92d.html">Agency Diverted $1.4 Billion in Science Funds Mandated by Congress</a> — New York Times (via Daily Gazette), 2 Oct 2026. NSF withheld one-fifth of its primary research budget; funds redirected toward AI and quantum priorities.<br>
+    <b>•</b> <a href="https://www.science.org/content/article/exclusive-nsf-faces-radical-shake-officials-abolish-its-37-divisions">NSF faces radical shake-up as officials abolish its 37 divisions</a> — Science, 5 Aug 2025. ~1,400 NSF grants worth over $1 billion terminated; 37 divisions abolished.<br>
+    <b>•</b> <a href="https://www.statnews.com/2026/01/20/nih-funding-deal-trump-cuts-rejected-budget-boosted-415-million/">House and Senate appropriators endorse NIH budget increase, reject Trump’s proposed cuts</a> — STAT, 20 Jan 2026. January report of the House and Senate appropriators’ proposal and endorsement at that time ($415 million increase; NIH total exceeding $49 billion), not the final enacted CRS figures cited in the body.<br>
+    <b>•</b> <a href="https://eos.org/research-and-developments/science-escapes-largest-cuts-in-latest-budget-bills">Science Escapes Largest Cuts in Latest Budget Bills</a> — Eos, 1 May 2026. FY 2026 appropriations largely rejected proposed science cuts; $24.44 billion for NASA, $8.75 billion for NSF.<br>
+    <b>•</b> <a href="https://www.govexec.com/workforce/2026/03/report-nearly-95k-science-employees-left-government-trump-downsized-agency-workforces/411888/">Nearly 95k science employees left government as Trump downsized agency workforces</a> — Government Executive, 3 Apr 2026. 95,000 science employees (11.9% of the federal science workforce) departed September 2024–December 2025.<br>
+    <b>•</b> <a href="https://arstechnica.com/health/2026/02/trump-admin-is-destroying-medical-research-senate-report-finds/">Trump admin is “destroying medical research,” Senate report finds</a> — Ars Technica, 2 Apr 2026. Senate HELP Committee report: $561 million cut from research on the four leading causes of death; at least 304 defunded clinical trials.
+  </div>
+</div></section>
+</div>
+<section class="content-section methods-section" id="methods">
+      <div class="section-index"><span>11</span><i></i><small>Methods</small></div>
       <div class="section-body">
         <p class="eyebrow">Methods and source materials</p>
         <h2>Every figure starts with the same record.</h2>
-        <p class="section-lede">The interactive explorer is generated from a reproducible notebook and precomputed CSVs. It includes style profiles, domain vocabulary, keyness, text reuse, trends, and section-by-section comparisons.</p>
-        <div class="method-links"><a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison" target="_blank" rel="noreferrer">View repository <span>↗</span></a><a href="https://colab.research.google.com/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb" target="_blank" rel="noreferrer">Run in Colab <span>↗</span></a><a href="https://academicemail.org/outputs/iacc_linguistic/report.md" target="_blank" rel="noreferrer">Read full report <span>↗</span></a></div>
+        <p class="section-lede">The interactive explorer is generated from a reproducible notebook and precomputed CSVs. It includes style profiles, domain vocabulary, keyness, text reuse, trends, and section-by-section comparisons. <a href="https://iacc.hhs.gov/publications/">Browse the IACC source archive ↗</a>.</p>
+        <div class="method-links"><a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison" target="_blank" rel="noreferrer">View repository <span>↗</span></a><a href="https://colab.research.google.com/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb" target="_blank" rel="noreferrer">Run in Colab <span>↗</span></a><a href="https://academicemail.org/outputs/iacc_linguistic/report.md" target="_blank" rel="noreferrer">Read full report <span>↗</span></a><a href="../outputs/iacc_linguistic/critique_memo.md">Read critique memo <span>↗</span></a></div>
       </div>
     </section>
-  </main>
-  <footer class="footer"><span>IACC × 2026 · Pastel archive concept</span><a href="#top">Back to top ↑</a></footer>
-  <script src="app.js"></script>
-</body>
-</html>
+</main><footer class="footer"><span>IACC × 2026 · Pastel archive</span><a href="#tldr">Back to top ↑</a></footer><div class="err" id="err" role="alert"></div><script src="data.js"></script><script src="app.js"></script></body></html>
