@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f8f4">
+  <meta name="description" content="An interactive, reproducible linguistic comparison of the 2026 IACC draft against the committee's earlier record.">
+  <title>The 2026 draft, measured — IACC Pastel Archive</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="IACC 2026, back to top">IACC <span>×</span> 2026</a>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#tldr">TL;DR</a><a href="#background">Background</a><a href="#style">Style</a><a href="#subject">Subject</a>
+      <a href="#trends">Trends</a><a href="#vocabulary">Vocabulary</a><a href="#methods">Methods</a>
+    </nav>
+    <span class="topnote">A linguistic comparison explorer</span>
+  </header>
+
+  <aside class="chapter-rail" aria-label="Page chapters">
+    <span class="rail-mark" aria-hidden="true">●</span>
+    <a class="active" href="#top"><b>00</b><span>Overview</span></a>
+    <a href="#tldr"><b>01</b><span>TL;DR</span></a>
+    <a href="#background"><b>02</b><span>The IACC</span></a>
+    <a href="#style"><b>03</b><span>Style</span></a>
+    <a href="#subject"><b>04</b><span>Who is named</span></a>
+    <a href="#trends"><b>05</b><span>Trends</span></a>
+    <a href="#vocabulary"><b>06</b><span>Key terms</span></a>
+    <a href="#memory"><b>07</b><span>Institutional memory</span></a>
+    <a href="#methods"><b>08</b><span>Methods</span></a>
+  </aside>
+
+  <main id="main">
+    <section class="tldr-section" id="tldr" aria-labelledby="tldr-title">
+      <div class="tldr-heading"><p class="eyebrow">For readers in a hurry</p><h2 id="tldr-title">What the report argues</h2></div>
+      <div class="tldr-content">
+        <p class="tldr-deck">The page argues that the 2026 IACC draft marks a break in both process and priorities. It was produced without the public RFI, workshop, and handoff cycle used for earlier plans, after all public members were replaced at once.</p>
+        <div class="tldr-grid">
+          <article><strong>−61%</strong><p>Autism references per 10,000 words, compared with SP-2023.</p></article>
+          <article><strong>13.7×</strong><p>Federal-agency mentions per 10,000 words, compared with SP-2023.</p></article>
+          <article><strong>62.2%</strong><p>Of fixed-vocabulary terms changed by at least 2× versus SP-2023.</p></article>
+          <article><strong>68.8%</strong><p>55 of 80 strong vocabulary trends reversed in the 2026 draft.</p></article>
+        </div>
+        <p class="tldr-criticism">The report argues that autistic people and community partners become less visible as federal agencies and therapeutic or medication priorities take up more space. It also examines committee members’ professional affiliations that overlap with those priorities, raising questions about representation, balance, and disclosure.</p>
+        <p class="tldr-source"><a href="#methods">Methods and sources ↓</a></p>
+      </div>
+    </section>
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A linguistic comparison of federal autism policy</p>
+        <h1 id="hero-title">The 2026 draft,<br>measured.</h1>
+        <p class="intro">The Interagency Autism Coordinating Committee published eight strategic plans between 2009 and 2023, producing a seventeen-year record of how federal autism policy is framed, whom it names, and what it promises.</p>
+        <p class="intro">In July 2026, a reconstituted committee released a working draft intended to replace that record. This project compares the draft with the 46 documents that preceded it.</p>
+        <div class="actions"><a class="button" href="#subject">Explore the evidence <span aria-hidden="true">↗</span></a><a class="text-link" href="https://nbviewer.org/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb" target="_blank" rel="noreferrer">Open the notebook ↗</a></div>
+        <p class="corpus-note"><span class="tiny-dot"></span> 46 documents · 2009–2023 record · July 2026 working draft</p>
+      </div>
+      <div class="map-panel" aria-label="Relative frequency of autism references and federal agency mentions in the 2026 draft">
+        <img class="map-art" src="assets/archive-background.webp" alt="">
+        <div class="map-kicker">Relative frequency <span>per 10,000 words</span></div>
+        <div class="map-label map-old"><b>Autism references</b><span>in the 2026 draft</span><strong>108</strong><span>SP-2023: 278 per 10k</span></div>
+        <div class="map-label map-new"><b>Federal agency mentions</b><span>in the 2026 draft</span><strong>167</strong><span>SP-2023: 12.2 per 10k</span></div>
+        <p class="map-caption">Language<br>shapes policy.</p>
+      </div>
+    </section>
+
+    <section class="corpus-shelf" aria-label="Source corpus">
+      <div class="shelf-copy"><p class="eyebrow">The source corpus</p><h2>46 strategic plans,<br>one continuity record.</h2><p>The draft is compared with 46 IACC documents from 2009–2023, including eight strategic plans. Results default to SP-2023, with historical baselines available throughout.</p></div>
+      <div class="archive-strip"><img src="assets/archive-books.webp" alt="Seven softly colored report covers representing earlier IACC plans and the 2026 working draft"><div class="archive-years"><span>2009</span><span>2011</span><span>2013</span><span>2016</span><span>2018</span><span>2021–23</span><span>2026</span></div></div>
+    </section>
+
+    <section class="content-section background" id="background">
+      <div class="section-index"><span>01</span><i></i><small>Context</small></div>
+      <div class="section-body">
+        <p class="eyebrow">The committee and its plans</p>
+        <h2>Language leaves a record.</h2>
+        <div class="prose-columns"><p>The IACC is a federal advisory committee within the U.S. Department of Health and Human Services. Its statutory mandate is to coordinate federal autism activities, monitor research and services, make recommendations, and develop an autism strategic plan.</p><p>Across eight strategic plans, the committee produced a seventeen-year record of how federal autism policy is framed, whom it names, and what it promises. The 2026 working draft is measured against that record, with comparisons available to SP-2023 and the earlier-plan baseline.</p></div>
+        <p class="source-line">Sources: <a href="https://iacc.hhs.gov/about-iacc/" target="_blank" rel="noreferrer">IACC overview</a> · <a href="https://iacc.hhs.gov/publications/" target="_blank" rel="noreferrer">Strategic plans</a> · <a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison" target="_blank" rel="noreferrer">Project repository</a></p>
+      </div>
+    </section>
+
+    <section class="content-section" id="style">
+      <div class="section-index"><span>02</span><i></i><small>Style</small></div>
+      <div class="section-body">
+        <p class="eyebrow">Style fingerprint</p>
+        <h2>More obligation.<br>Less plain language.</h2>
+        <p class="section-lede">Compared with SP-2023, the draft uses more “should” language and longer, more polysyllabic vocabulary.</p>
+        <div class="signal-table" role="table" aria-label="Selected style comparisons">
+          <div class="signal-head" role="row"><span role="columnheader">Measure</span><span role="columnheader">2026 draft</span><span role="columnheader">SP-2023</span><span role="columnheader">Difference</span></div>
+          <div role="row"><span role="cell">“Should” per 1,000 words</span><strong role="cell">10.5</strong><span role="cell">1.4</span><em role="cell">7.8× higher</em></div>
+          <div role="row"><span role="cell">Words per sentence</span><strong role="cell">19.2</strong><span role="cell">28.4</span><em role="cell">1.5× shorter</em></div>
+          <div role="row"><span role="cell">Polysyllabic words</span><strong role="cell">35.4%</strong><span role="cell">26.4%</span><em role="cell">1.3× higher</em></div>
+          <div role="row"><span role="cell">Flesch Reading Ease</span><strong role="cell">0.6</strong><span role="cell">13.3</span><em role="cell">Both difficult</em></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section subject-section" id="subject">
+      <div class="section-index"><span>03</span><i></i><small>Subject</small></div>
+      <div class="section-body">
+        <p class="eyebrow">Who is named</p>
+        <h2>Autism references fall.<br>Agency mentions rise.</h2>
+        <p class="section-lede">Counts combine references to autism and autistic people, regardless of naming convention, then compare them with federal-agency mentions.</p>
+        <div class="compare-grid">
+          <div class="compare-head"><span>References per 10,000 words</span><span>SP-2023</span><span>2026 draft</span><span>Change</span></div>
+          <div class="compare-row"><b>Autism or autistic people</b><span>278</span><strong>108</strong><em>−61%</em></div>
+          <div class="compare-row"><b>Federal agency mentions</b><span>12.2</span><strong>167</strong><em>13.7×</em></div>
+        </div>
+        <aside class="finding-note"><span class="note-mark">↗</span><p>In the draft, federal agencies are named more often than autism itself — the only plan in the series where the balance flips.</p></aside>
+        <p class="footnote">References per 10,000 words; running headers and reference lists removed. Counts and definitions are documented in the project’s generated CSVs.</p>
+      </div>
+    </section>
+
+    <section class="content-section" id="trends">
+      <div class="section-index"><span>04</span><i></i><small>Trends</small></div>
+      <div class="section-body">
+        <p class="eyebrow">The record over time</p>
+        <h2>A sharp step in a changing record.</h2>
+        <p class="section-lede">The draft reversed 55 of 80 strong vocabulary trends (68.8%).</p>
+        <div class="timeline" aria-label="Strategic plans included in the comparison"><span>2009</span><span>2011</span><span>2013</span><span>2017</span><span>2019</span><span>2023</span><strong>2026 draft</strong></div>
+        <div class="trend-notes"><div><strong>68.8%</strong><span>of strong trends reversed in the draft</span></div><div><strong>62.2%</strong><span>of fixed-vocabulary terms changed by at least 2× versus SP-2023</span></div></div>
+      </div>
+    </section>
+
+    <section class="content-section vocabulary-section" id="vocabulary">
+      <div class="section-index"><span>05</span><i></i><small>Key terms</small></div>
+      <div class="section-body">
+        <p class="eyebrow">Vocabulary turnover</p>
+        <h2>Terms enter.<br>Others disappear.</h2>
+        <p class="section-lede">Search a sample of terms newly introduced or absent in the 2026 draft.</p>
+        <label class="search-label" for="term-search">Filter terms</label>
+        <input id="term-search" type="search" placeholder="Try “community” or “federal”" autocomplete="off">
+        <div class="term-groups">
+        <div><h3>New in draft <span>sample</span></h3><ul class="term-list" id="new-terms"><li data-term="leucovorin">leucovorin</li><li data-term="napti">NAPTI</li><li data-term="biomarker-defined">biomarker-defined</li><li data-term="implementation-ready">implementation-ready</li><li data-term="comparative-effectiveness">comparative-effectiveness</li><li data-term="post-meal">post-meal</li><li data-term="high-support">high-support</li><li data-term="interoceptive">interoceptive</li></ul></div>
+          <div><h3>Absent in draft <span>sample</span></h3><ul class="term-list retired" id="retired-terms"><li data-term="community">community</li><li data-term="research">research</li><li data-term="people">people</li><li data-term="evidence-based">evidence-based</li><li data-term="advocates">advocates</li><li data-term="collaborative">collaborative</li><li data-term="vaccine">vaccine</li><li data-term="services">services</li></ul></div>
+        </div>
+        <p class="search-status" id="search-status" aria-live="polite">Showing all sample terms.</p>
+      </div>
+    </section>
+
+    <section class="content-section memory-section" id="memory">
+      <div class="section-index"><span>06</span><i></i><small>Memory</small></div>
+      <div class="section-body memory-body">
+        <p class="eyebrow">Institutional memory</p>
+        <h2>Almost no text carried forward.</h2>
+        <div class="memory-stat"><strong>0.02<span>%</span></strong><p>of the draft’s eight-word sequences appear in SP-2023.<br><span>Recent-plan comparison: SP-2023 inherited 0.94% from SP-2019.</span></p></div>
+      </div>
+    </section>
+
+    <section class="content-section methods-section" id="methods">
+      <div class="section-index"><span>07</span><i></i><small>Methods</small></div>
+      <div class="section-body">
+        <p class="eyebrow">Methods and source materials</p>
+        <h2>Every figure starts with the same record.</h2>
+        <p class="section-lede">The interactive explorer is generated from a reproducible notebook and precomputed CSVs. It includes style profiles, domain vocabulary, keyness, text reuse, trends, and section-by-section comparisons.</p>
+        <div class="method-links"><a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison" target="_blank" rel="noreferrer">View repository <span>↗</span></a><a href="https://colab.research.google.com/github/IMAF-and-H-Consulting/iacc-linguistic-comparison/blob/main/iacc_linguistic_comparison.ipynb" target="_blank" rel="noreferrer">Run in Colab <span>↗</span></a><a href="https://academicemail.org/outputs/iacc_linguistic/report.md" target="_blank" rel="noreferrer">Read full report <span>↗</span></a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>IACC × 2026 · Pastel archive concept</span><a href="#top">Back to top ↑</a></footer>
+  <script src="/app.js"></script>
+</body>
+</html>
