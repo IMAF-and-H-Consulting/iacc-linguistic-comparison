@@ -45,5 +45,68 @@ class NavigationTests(unittest.TestCase):
                 self.assertEqual(matches[0].get("href"), "how-it-was-done.html")
 
 
+class IdParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.ids = set()
+        self.node_count = 0
+        self.flow_count = 0
+        self.scripts = 0
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if "id" in attrs:
+            self.ids.add(attrs["id"])
+        classes = set(attrs.get("class", "").split())
+        self.node_count += tag == "a" and "dag-node" in classes
+        self.flow_count += tag == "a" and "flow-step" in classes
+        self.scripts += tag == "script"
+
+
+class MethodologyPageTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.html = read("how-it-was-done.html")
+        cls.parser = IdParser()
+        cls.parser.feed(cls.html)
+        cls.hrefs = [attrs.get("href", "") for attrs, text in links(cls.html)
+                     if "dag-node" in attrs.get("class", "").split()]
+
+    def test_page_has_stable_explanatory_anchors(self):
+        expected = {"sources", "inventory", "extraction", "cleaning",
+                    "measurements", "validation", "outputs", "publication"}
+        self.assertTrue(expected.issubset(self.parser.ids))
+
+    def test_all_sixteen_dag_nodes_have_real_destinations(self):
+        self.assertEqual(self.parser.node_count, 16)
+        self.assertEqual(self.parser.flow_count, 16)
+        self.assertEqual(len(self.hrefs), 16)
+        self.assertTrue(all(href and not href.startswith("javascript:")
+                            for href in self.hrefs))
+        local_anchors = {href[1:] for href in self.hrefs if href.startswith("#")}
+        self.assertTrue(local_anchors.issubset(self.parser.ids))
+
+    def test_analysis_nodes_link_to_matching_explorer_sections(self):
+        expected = {"index.html#style", "index.html#subject",
+                    "index.html#reversals", "index.html#keyness",
+                    "index.html#vocab", "index.html#memory",
+                    "index.html#sections", "index.html#trends"}
+        self.assertTrue(expected.issubset(set(self.hrefs)))
+
+    def test_page_is_dependency_free_and_documents_caveats(self):
+        self.assertEqual(self.parser.scripts, 0)
+        for phrase in ("61 documents", "46 documents", "eight earlier strategic plans",
+                       "working draft", "cannot establish intent", "content-addressed"):
+            self.assertIn(phrase, self.html)
+
+    def test_return_navigation_and_source_links_exist(self):
+        all_hrefs = {attrs.get("href") for attrs, text in links(self.html)}
+        self.assertIn("index.html#top", all_hrefs)
+        self.assertIn("iacc_linguistic_comparison.ipynb", all_hrefs)
+        self.assertIn("agency_analysis.py", all_hrefs)
+        self.assertIn("build_explorer.py", all_hrefs)
+        self.assertIn("iac/IACC_Publications/INDEX.csv", all_hrefs)
+
+
 if __name__ == "__main__":
     unittest.main()
