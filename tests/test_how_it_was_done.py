@@ -44,6 +44,16 @@ class NavigationTests(unittest.TestCase):
                 self.assertEqual(len(matches), 1)
                 self.assertEqual(matches[0].get("href"), "how-it-was-done.html")
 
+    def test_existing_section_ids_and_annotation_loader_are_preserved(self):
+        template = read("explorer_template.html")
+        generated = read("index.html")
+        for section_id in ("tldr", "background", "style", "trends", "subject",
+                           "reversals", "keyness", "vocab", "memory", "sections", "funding"):
+            self.assertIn(f'id="{section_id}"', template)
+            self.assertIn(f'id="{section_id}"', generated)
+        self.assertIn("https://mike.nothelp.help/page-notes/overlay.js", template)
+        self.assertIn("https://mike.nothelp.help/page-notes/overlay.js", generated)
+
 
 class IdParser(HTMLParser):
     def __init__(self):
