@@ -102,14 +102,19 @@ class MethodologyPageTests(unittest.TestCase):
         self.assertIn("dag-info", self.parser.ids)
         self.assertIn("querySelectorAll('.dag-node, .flow-step')", self.html)
 
-    def test_info_panel_has_live_regions_and_stage_details(self):
+    def test_info_modal_has_close_control_and_does_not_scroll(self):
+        self.assertIn('<dialog id="dag-info"', self.html)
         self.assertIn('id="dag-info-title"', self.html)
         self.assertIn('id="dag-info-body"', self.html)
         self.assertIn('id="dag-info-links"', self.html)
-        self.assertIn('aria-live="polite"', self.html)
+        self.assertIn('id="dag-info-close"', self.html)
+        self.assertIn('aria-label="Close stage details"', self.html)
+        self.assertIn("showModal", self.html)
+        self.assertIn(".close()", self.html)
+        self.assertNotIn("scrollIntoView", self.html)
+        self.assertNotIn('history.replaceState(null, "", "#dag-info")', self.html)
         for stage in ("sources", "style", "trends", "validation", "publication"):
             self.assertIn(f'{stage}:', self.html)
-        self.assertIn("scrollIntoView", self.html)
         self.assertIn("preventDefault", self.html)
 
     def test_page_has_no_external_dependencies_and_documents_caveats(self):
