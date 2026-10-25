@@ -8,11 +8,11 @@
 <style>
 :root{--paper:#f7f4ec;--ink:#2c2639;--muted:#6b6570;--line:#d9d4c9;--hair:#e7e1d2;--red:#bd7f76;--blue:#8099b8;--mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;--serif:Georgia,"Iowan Old Style","Times New Roman",serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.55}a{color:#5477a0;text-decoration:none;border-bottom:1px solid #c6c2ce}a:hover{border-bottom-color:#5477a0}a:focus-visible{outline:3px solid var(--red);outline-offset:4px}.wrap{max-width:1100px;margin:auto;padding:0 28px}nav{position:sticky;top:0;background:rgba(247,244,236,.96);border-bottom:1px solid var(--line);z-index:10;backdrop-filter:blur(3px)}nav .wrap{display:flex;align-items:baseline;gap:22px;padding-top:11px;padding-bottom:11px;overflow-x:auto}nav a{font:12px var(--mono);white-space:nowrap;border:none;color:var(--muted)}nav a:hover{color:var(--red)}.brand{font-size:19px!important;color:var(--ink)!important}header{padding:64px 0 40px;border-bottom:1px solid var(--line)}.eyebrow,.kicker{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}h1{font-size:clamp(46px,6vw,70px);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:850px;margin:14px 0 20px}.sub{font-size:18px;line-height:1.65;color:var(--muted);max-width:800px}.header-links{font:12px var(--mono);line-height:2}.header-links a{margin-right:18px}.section-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.section-jump a{padding:5px 10px;border:1px solid var(--line);font:10px var(--mono);letter-spacing:.05em;color:var(--muted);background:rgba(255,255,255,.25)}.section-jump a:hover{border-color:var(--red);color:var(--red)}
-.dag-shell{margin:34px 0 16px;padding:20px 14px 12px;border:1px solid var(--line);background:#f3efe4}.dag{display:block;width:100%;height:auto}.dag-edge{stroke:#aa9fac;stroke-width:1.5;fill:none;marker-end:url(#arrow)}.dag-bus{stroke:#c7bdc5;stroke-width:1.2;fill:none}.dag-node rect{fill:#fbf8f0;stroke:#c9bec8;stroke-width:1.2}.dag-node.infra rect{fill:#e7d9df}.dag-node.analysis rect{fill:#dde6ee}.dag-node.output rect{fill:#e9e2c9}.dag-node.validation rect{fill:#e1e7dc}.dag-node text{fill:var(--ink);font:12px var(--mono);pointer-events:none}.dag-node .small{font-size:9px;fill:var(--muted);letter-spacing:.06em}.dag-node:hover rect,.dag-node:focus-visible rect{stroke:var(--red);stroke-width:3}.dag-node:focus-visible{outline:none}.graph-note{max-width:780px;margin:0 0 40px;color:var(--muted);font-size:13px;font-style:italic}.mobile-flow{display:none}
+.guided-shell{margin:32px 0 18px;padding:22px;border:1px solid var(--line);background:#f3efe4}.guided-meta{display:flex;justify-content:space-between;gap:16px;font:11px var(--mono);letter-spacing:.04em;color:var(--muted)}#dag-counter{font-variant-numeric:tabular-nums;color:var(--ink)}.guided-row{display:grid;grid-template-columns:90px minmax(0,1fr) 90px;gap:24px;align-items:center;margin-top:18px}.guided-center{min-width:0}.guided-connector{display:flex;align-items:center;gap:10px;width:min(520px,100%);margin:0 auto 12px;color:var(--red)}.guided-connector span{height:1px;flex:1;background:#c9bec8}.guided-connector b{font:18px var(--mono)}.guided-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.guided-shell.is-guided .guided-stage{display:block;min-height:238px}.guided-shell.is-guided .dag-node{max-width:520px;min-height:238px;margin:auto}.dag-node{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:210px;padding:28px;border:1px solid #c9bec8;border-bottom:3px solid #aa9fac;border-radius:3px;background:#fbf8f0;color:var(--ink);box-shadow:0 8px 22px rgba(44,38,57,.05);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.dag-node.infra{background:#e7d9df}.dag-node.analysis{background:#dde6ee}.dag-node.validation{background:#e1e7dc}.dag-node.output{background:#e9e2c9}.dag-node[hidden]{display:none}.dag-node:hover,.dag-node:focus-visible,.dag-node.selected{border-color:var(--red);box-shadow:0 12px 28px rgba(44,38,57,.12);transform:translateY(-2px)}.dag-node:focus-visible{outline:3px solid var(--red);outline-offset:4px}.node-index{font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#815f68}.dag-node strong{margin:18px 0 8px;font-size:clamp(25px,3vw,34px);font-weight:400;line-height:1.12;letter-spacing:-.025em}.dag-node small{font:12px/1.5 var(--mono);color:var(--muted)}.details-cue{margin-top:24px;font:11px var(--mono);color:#815f68}.dag-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:90px;height:100px;padding:10px;border:1px solid #c9bec8;border-radius:3px;background:var(--paper);color:var(--ink);cursor:pointer}.dag-arrow span{font:32px/1 var(--mono)}.dag-arrow small{font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em}.dag-arrow:hover:not(:disabled),.dag-arrow:focus-visible{border-color:var(--red);color:var(--red);outline:2px solid var(--red);outline-offset:3px}.dag-arrow:disabled{opacity:.32;cursor:not-allowed}.guided-hint{margin:15px auto 0;text-align:center;font:11px/1.5 var(--mono);color:var(--muted)}.guided-progress{height:3px;margin-top:20px;background:#ddd5cf;overflow:hidden}#guided-progress-bar{display:block;width:6.25%;height:100%;background:var(--red);transition:width .2s ease}.graph-note{max-width:780px;margin:0 0 40px;color:var(--muted);font-size:13px;font-style:italic}@media(max-width:760px){.guided-shell{padding:16px 14px}.guided-meta{font-size:9px}.guided-row{grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.guided-center{grid-column:1/-1;grid-row:1}.dag-arrow{width:100%;height:64px;flex-direction:row;gap:12px}.dag-arrow span{font-size:25px}#dag-prev{grid-column:1;grid-row:2}#dag-next{grid-column:2;grid-row:2}.guided-stage{grid-template-columns:1fr}.guided-shell.is-guided .guided-stage,.guided-shell.is-guided .dag-node{min-height:250px}.dag-node{padding:24px}.dag-node strong{font-size:27px}.guided-hint{font-size:10px}.details-cue{margin-top:20px}}
 section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:60px}#pipeline{border-top:none;padding-top:34px}h2{font-size:31px;font-weight:400;letter-spacing:-.02em;margin:8px 0 12px}h3{font-size:20px;font-weight:400;margin:24px 0 8px}.lede,li{color:var(--muted)}.lede{max-width:850px}.io{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.io div{padding:15px;background:rgba(255,255,255,.3);border-top:1px solid var(--line)}.io strong{display:block;font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#9b6463;margin-bottom:7px}.io p{margin:0;font-size:14px;color:var(--muted)}.note{border-left:3px solid var(--blue);padding:8px 0 8px 16px;color:var(--muted);max-width:850px}.links{font:12px var(--mono);line-height:2}.links a{margin-right:18px}.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.method-card{display:block;padding:17px;border:1px solid var(--line);background:rgba(255,255,255,.24);color:var(--ink)}.method-card:hover{border-color:var(--red)}.method-card b{display:block;font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#9b6463;margin-bottom:7px}.method-card span{font-size:14px;color:var(--muted)}.caveats{padding-left:20px;max-width:880px}.caveats li{margin:0 0 12px}.caveats strong{color:var(--ink);font-weight:400}footer{padding:34px 0 64px;color:var(--muted);border-top:1px solid var(--line)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:12px var(--mono)}
-@media(max-width:760px){.wrap{padding:0 18px}header{padding-top:44px}.dag-shell{display:none}.mobile-flow{display:block;margin:26px 0 34px}.flow-step{display:block;position:relative;margin:0 0 14px;padding:13px 15px;border:1px solid var(--line);background:#f3efe4;color:var(--ink);font:12px var(--mono)}.flow-step:after{content:"↓";position:absolute;left:50%;bottom:-20px;color:var(--red)}.flow-step:last-child:after{content:""}.flow-branch{margin:24px 0 14px;font:10px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:#9b6463}.io,.method-grid{grid-template-columns:1fr}h1{font-size:46px}.sub{font-size:16px}}
-.dag-info{width:min(680px,calc(100vw - 32px));max-height:calc(100dvh - 48px);margin:auto;padding:30px 32px 26px;border:1px solid #c9bec8;border-left:4px solid var(--red);border-radius:4px;background:#fbf8f0;color:var(--ink);box-shadow:0 24px 80px rgba(44,38,57,.24);overflow:auto}.dag-info::backdrop{background:rgba(44,38,57,.48);backdrop-filter:blur(3px)}#dag-info-close{position:absolute;top:14px;right:14px;padding:6px 10px;border:1px solid var(--line);border-radius:3px;background:var(--paper);color:var(--ink);font:11px var(--mono);cursor:pointer}#dag-info-close:hover,#dag-info-close:focus-visible{border-color:var(--red);color:var(--red);outline:none}#dag-info-close span{font-size:18px;line-height:1;vertical-align:-1px;margin-right:3px}.dag-info-kicker{font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}.dag-info h3{margin:12px 80px 12px 0;font-size:28px;line-height:1.15}.dag-info p{max-width:850px}.dag-info-body{color:var(--muted);font-size:17px;line-height:1.65}.dag-info .links{margin:20px 0 0}.dag-node.selected rect,.flow-step.selected{stroke:var(--red);stroke-width:3;border-color:var(--red)}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dag-info.selected{animation:none}}
+@media(max-width:760px){.wrap{padding:0 18px}header{padding-top:44px}.io,.method-grid{grid-template-columns:1fr}h1{font-size:46px}.sub{font-size:16px}}
+.dag-info{width:min(680px,calc(100vw - 32px));max-height:calc(100dvh - 48px);margin:auto;padding:30px 32px 26px;border:1px solid #c9bec8;border-left:4px solid var(--red);border-radius:4px;background:#fbf8f0;color:var(--ink);box-shadow:0 24px 80px rgba(44,38,57,.24);overflow:auto}.dag-info::backdrop{background:rgba(44,38,57,.48);backdrop-filter:blur(3px)}#dag-info-close{position:absolute;top:14px;right:14px;padding:6px 10px;border:1px solid var(--line);border-radius:3px;background:var(--paper);color:var(--ink);font:11px var(--mono);cursor:pointer}#dag-info-close:hover,#dag-info-close:focus-visible{border-color:var(--red);color:var(--red);outline:none}#dag-info-close span{font-size:18px;line-height:1;vertical-align:-1px;margin-right:3px}.dag-info-kicker{font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}.dag-info h3{margin:12px 80px 12px 0;font-size:28px;line-height:1.15}.dag-info p{max-width:850px}.dag-info-body{color:var(--muted);font-size:17px;line-height:1.65}.dag-info .links{margin:20px 0 0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dag-node,#guided-progress-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -26,61 +26,47 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
 </div></header>
 <main class="wrap">
 <section id="pipeline" aria-labelledby="pipeline-title">
-  <div class="kicker">The directed acyclic graph · select a node</div>
+  <div class="kicker">The guided pipeline · left to right</div>
   <h2 id="pipeline-title">From source documents to an interactive comparison.</h2>
-  <p class="lede">The first four stages establish one consistent corpus. Nine measurement branches then run against that cleaned text before their outputs are checked, exported, and selectively embedded in the explorer.</p>
-  <div class="dag-shell">
-  <svg class="dag" viewBox="0 0 1040 1030" role="img" aria-labelledby="dag-title dag-desc">
-    <title id="dag-title">Analysis and publication pipeline</title>
-    <desc id="dag-desc">Sources feed a 61-document inventory and 46-document analysis set, extraction or cache reuse, and cleaning. Nine parallel analyses feed smoke tests and exported tables and figures. The build script selects outputs for the interactive explorer. Every node is a link.</desc>
-    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#aa9fac"/></marker></defs>
-    <!-- infrastructure -->
-    <path class="dag-edge" d="M520 78 V106"/><path class="dag-edge" d="M520 168 V196"/><path class="dag-edge" d="M520 258 V286"/>
-    <a class="dag-node infra" href="#sources" aria-label="Sources: read about the source archive and draft"><rect x="405" y="20" width="230" height="58" rx="3"/><text x="520" y="45" text-anchor="middle">Source archive + draft</text><text class="small" x="520" y="62" text-anchor="middle">60 PUBLICATIONS + 1 DRAFT</text></a>
-    <a class="dag-node infra" href="#inventory" aria-label="Inventory: read inclusion and exclusion rules"><rect x="405" y="110" width="230" height="58" rx="3"/><text x="520" y="135" text-anchor="middle">Inventory 61 → analyze 46</text><text class="small" x="520" y="152" text-anchor="middle">15 SHORT / EASY-READ EXCLUDED</text></a>
-    <a class="dag-node infra" href="#extraction" aria-label="Extraction: read about PDF extraction and the cache"><rect x="405" y="200" width="230" height="58" rx="3"/><text x="520" y="225" text-anchor="middle">Extract or reuse cache</text><text class="small" x="520" y="242" text-anchor="middle">SHA-256 CONTENT-ADDRESSED</text></a>
-    <a class="dag-node infra" href="#cleaning" aria-label="Cleaning: read about the shared cleaned corpus"><rect x="405" y="290" width="230" height="58" rx="3"/><text x="520" y="315" text-anchor="middle">Clean shared corpus</text><text class="small" x="520" y="332" text-anchor="middle">HEADERS · TOC · REFERENCES OUT</text></a>
-    <!-- fan-out bus -->
-    <path class="dag-bus" d="M520 348 V373 M160 373 H880 M160 373 V392 M520 373 V392 M880 373 V392"/>
-    <path class="dag-edge" d="M160 380 V396"/><path class="dag-edge" d="M520 380 V396"/><path class="dag-edge" d="M880 380 V396"/>
-    <!-- analysis row 1 -->
-    <a class="dag-node analysis" href="index.html#style" aria-label="Style and z-scores: open style results"><rect x="45" y="400" width="230" height="62" rx="3"/><text x="160" y="426" text-anchor="middle">Style + z-scores</text><text class="small" x="160" y="445" text-anchor="middle">READABILITY · VOICE · BASELINES</text></a>
-    <a class="dag-node analysis" href="index.html#subject" aria-label="Lexicon and subject references: open subject results"><rect x="405" y="400" width="230" height="62" rx="3"/><text x="520" y="426" text-anchor="middle">Lexicon + subject</text><text class="small" x="520" y="445" text-anchor="middle">NAMING · REFERENCE COUNTS</text></a>
-    <a class="dag-node analysis" href="index.html#subject" aria-label="Agency and community roles: open subject results"><rect x="765" y="400" width="230" height="62" rx="3"/><text x="880" y="426" text-anchor="middle">Agency + community</text><text class="small" x="880" y="445" text-anchor="middle">AGENT AND PATIENT ROLES</text></a>
-    <path class="dag-edge" d="M160 462 V496"/><path class="dag-edge" d="M520 462 V496"/><path class="dag-edge" d="M880 462 V496"/>
-    <!-- analysis row 2 -->
-    <a class="dag-node analysis" href="index.html#keyness" aria-label="Keyness: open distinctive vocabulary results"><rect x="45" y="500" width="230" height="62" rx="3"/><text x="160" y="526" text-anchor="middle">Keyness</text><text class="small" x="160" y="545" text-anchor="middle">WEIGHTED LOG-ODDS</text></a>
-    <a class="dag-node analysis" href="index.html#vocab" aria-label="Vocabulary turnover: open coined and retired results"><rect x="405" y="500" width="230" height="62" rx="3"/><text x="520" y="526" text-anchor="middle">Vocabulary turnover</text><text class="small" x="520" y="545" text-anchor="middle">NEW AND DROPPED TERMS</text></a>
-    <a class="dag-node analysis" href="index.html#memory" aria-label="Similarity and text reuse: open memory results"><rect x="765" y="500" width="230" height="62" rx="3"/><text x="880" y="526" text-anchor="middle">Similarity + text reuse</text><text class="small" x="880" y="545" text-anchor="middle">TF-IDF · DELTA · 8-WORD SHINGLES</text></a>
-    <path class="dag-edge" d="M160 562 V596"/><path class="dag-edge" d="M520 562 V596"/><path class="dag-edge" d="M880 562 V596"/>
-    <!-- analysis row 3 -->
-    <a class="dag-node analysis" href="index.html#trends" aria-label="Longitudinal trends: open trend results"><rect x="45" y="600" width="230" height="62" rx="3"/><text x="160" y="626" text-anchor="middle">Longitudinal trends</text><text class="small" x="160" y="645" text-anchor="middle">SPEARMAN · PLAN-TO-PLAN</text></a>
-    <a class="dag-node analysis" href="index.html#reversals" aria-label="Reversal controls: open reversal results"><rect x="405" y="600" width="230" height="62" rx="3"/><text x="520" y="626" text-anchor="middle">Reversal controls</text><text class="small" x="520" y="645" text-anchor="middle">WALK-FORWARD COMPARISON</text></a>
-    <a class="dag-node analysis" href="index.html#sections" aria-label="Draft sections: open section-level results"><rect x="765" y="600" width="230" height="62" rx="3"/><text x="880" y="626" text-anchor="middle">Draft sections</text><text class="small" x="880" y="645" text-anchor="middle">37 OUTLINE SECTIONS</text></a>
-    <!-- reconvergence -->
-    <path class="dag-bus" d="M160 662 V695 M520 662 V695 M880 662 V695 M160 695 H880 M520 695 V716"/><path class="dag-edge" d="M520 704 V724"/>
-    <a class="dag-node validation" href="#validation" aria-label="Smoke tests: read about validation"><rect x="405" y="730" width="230" height="58" rx="3"/><text x="520" y="755" text-anchor="middle">Smoke tests</text><text class="small" x="520" y="772" text-anchor="middle">MEASUREMENT-CODE CHECKS</text></a>
-    <path class="dag-edge" d="M520 788 V826"/>
-    <a class="dag-node output" href="#outputs" aria-label="Outputs: read about CSV and figure exports"><rect x="405" y="830" width="230" height="58" rx="3"/><text x="520" y="855" text-anchor="middle">CSVs + figures</text><text class="small" x="520" y="872" text-anchor="middle">NOTEBOOK SECTION 11</text></a>
-    <path class="dag-edge" d="M520 888 V926"/>
-    <a class="dag-node output" href="#publication" aria-label="Publication: read about payload selection and the explorer build"><rect x="405" y="930" width="230" height="62" rx="3"/><text x="520" y="956" text-anchor="middle">Payload → explorer</text><text class="small" x="520" y="975" text-anchor="middle">SELF-CONTAINED INDEX.HTML</text></a>
-  </svg>
-  </div>
-  <div class="mobile-flow" aria-label="Analysis pipeline">
-    <a class="flow-step" href="#sources">Source archive + draft</a><a class="flow-step" href="#inventory">Inventory 61 → analyze 46</a><a class="flow-step" href="#extraction">Extract or reuse cache</a><a class="flow-step" href="#cleaning">Clean shared corpus</a>
-    <div class="flow-branch">Nine parallel measurement branches ↓</div>
-    <a class="flow-step" href="index.html#style">Style + z-scores</a><a class="flow-step" href="index.html#subject">Lexicon + subject</a><a class="flow-step" href="index.html#subject">Agency + community</a><a class="flow-step" href="index.html#keyness">Keyness</a><a class="flow-step" href="index.html#vocab">Vocabulary turnover</a><a class="flow-step" href="index.html#memory">Similarity + text reuse</a><a class="flow-step" href="index.html#trends">Longitudinal trends</a><a class="flow-step" href="index.html#reversals">Reversal controls</a><a class="flow-step" href="index.html#sections">Draft sections</a>
-    <div class="flow-branch">Branches reconverge at validation and export ↓</div>
-    <a class="flow-step" href="#validation">Smoke tests</a><a class="flow-step" href="#outputs">CSVs + figures</a><a class="flow-step" href="#publication">Payload → explorer</a>
+  <p class="lede">Advance through the process with the arrows. Select the current box at any point to open a more detailed explanation without leaving your place.</p>
+  <div class="guided-shell">
+    <div class="guided-meta"><span>Analysis and publication sequence</span><span id="dag-counter" aria-live="polite">1 / 16</span></div>
+    <div class="guided-row">
+      <button type="button" class="dag-arrow" id="dag-prev" aria-label="Previous stage"><span aria-hidden="true">←</span><small>Previous</small></button>
+      <div class="guided-center">
+        <div class="guided-connector" aria-hidden="true"><span></span><b>→</b><span></span></div>
+        <div id="guided-stage" class="guided-stage">
+          <a class="dag-node infra" data-stage="sources" href="#sources"><span class="node-index">01 · Source record</span><strong>Source archive + draft</strong><small>60 publications + 1 draft</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="inventory" href="#inventory"><span class="node-index">02 · Corpus inventory</span><strong>Inventory 61 → analyze 46</strong><small>15 short / easy-read excluded</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="extraction" href="#extraction"><span class="node-index">03 · Extraction</span><strong>Extract or reuse cache</strong><small>SHA-256 content-addressed</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="cleaning" href="#cleaning"><span class="node-index">04 · Cleaned corpus</span><strong>Clean shared corpus</strong><small>Headers · contents · references out</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="style" href="index.html#style"><span class="node-index">05 · Measurement</span><strong>Style + z-scores</strong><small>Readability · voice · baselines</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="lexicon" href="index.html#subject"><span class="node-index">06 · Measurement</span><strong>Lexicon + subject</strong><small>Naming · reference counts</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="agency" href="index.html#subject"><span class="node-index">07 · Measurement</span><strong>Agency + community</strong><small>Agent and patient roles</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="keyness" href="index.html#keyness"><span class="node-index">08 · Measurement</span><strong>Keyness</strong><small>Weighted log-odds</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="vocab" href="index.html#vocab"><span class="node-index">09 · Measurement</span><strong>Vocabulary turnover</strong><small>New and dropped terms</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="similarity" href="index.html#memory"><span class="node-index">10 · Measurement</span><strong>Similarity + text reuse</strong><small>TF-IDF · Delta · 8-word shingles</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="trends" href="index.html#trends"><span class="node-index">11 · Measurement</span><strong>Longitudinal trends</strong><small>Spearman · plan-to-plan</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="reversals" href="index.html#reversals"><span class="node-index">12 · Control</span><strong>Reversal controls</strong><small>Walk-forward comparison</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node analysis" data-stage="sections" href="index.html#sections"><span class="node-index">13 · Measurement</span><strong>Draft sections</strong><small>37 outline sections</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node validation" data-stage="validation" href="#validation"><span class="node-index">14 · Validation</span><strong>Smoke tests</strong><small>Measurement-code checks</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node output" data-stage="outputs" href="#outputs"><span class="node-index">15 · Exported evidence</span><strong>CSVs + figures</strong><small>Notebook section 11</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node output" data-stage="publication" href="#publication"><span class="node-index">16 · Publication</span><strong>Payload → explorer</strong><small>Self-contained index.html</small><span class="details-cue">Select for details ↗</span></a>
+        </div>
+        <p class="guided-hint">Use the arrows to advance · select the box for a detailed explanation</p>
+      </div>
+      <button type="button" class="dag-arrow" id="dag-next" aria-label="Next stage"><span aria-hidden="true">→</span><small>Next</small></button>
+    </div>
+    <div class="guided-progress" aria-hidden="true"><span id="guided-progress-bar"></span></div>
   </div>
   <dialog id="dag-info" class="dag-info" aria-labelledby="dag-info-title" aria-describedby="dag-info-body">
     <button type="button" id="dag-info-close" aria-label="Close stage details"><span aria-hidden="true">×</span> Close</button>
     <div class="dag-info-kicker">Stage details</div>
-    <h3 id="dag-info-title">Select a box in the graph.</h3>
+    <h3 id="dag-info-title">Select a box in the pipeline.</h3>
     <p id="dag-info-body">Its method, inputs, and outputs will appear here without moving the page.</p>
     <p id="dag-info-links" class="links"></p>
   </dialog>
-  <p class="graph-note">Arrows show data and build dependencies, not a claim that every analysis appears in every panel. The explorer’s build script selects a curated payload from the exported results.</p>
+  <p class="graph-note">The guided sequence follows the analysis and publication handoffs. The detailed explanations below remain available as a linear text alternative.</p>
 </section>
 
 <section id="sources">
@@ -185,12 +171,38 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
     outputs: {title: "CSVs + figures", body: "Notebook section 11 exports analysis tables, PNG figures, and report.md to outputs/iacc_linguistic/. The exported evidence remains inspectable independently of the browser presentation.", links: [["Generated report", "outputs/iacc_linguistic/report.md"], ["Critique memo", "outputs/iacc_linguistic/critique_memo.md"]]},
     publication: {title: "Payload → interactive explorer", body: "build_explorer.py selects and rounds values from the CSVs, serializes them as JSON, injects the payload into explorer_template.html, and writes the self-contained index.html.", links: [["Build script", "build_explorer.py"], ["Explorer template", "explorer_template.html"], ["Open explorer", "index.html#top"]]}
   };
-  const order = ["sources", "inventory", "extraction", "cleaning", "style", "lexicon", "agency", "keyness", "vocab", "similarity", "trends", "reversals", "sections", "validation", "outputs", "publication"];
+  const shell = document.querySelector(".guided-shell");
+  const nodes = [...document.querySelectorAll(".dag-node")];
+  const previous = document.getElementById("dag-prev");
+  const next = document.getElementById("dag-next");
+  const counter = document.getElementById("dag-counter");
+  const progress = document.getElementById("guided-progress-bar");
   const panel = document.getElementById("dag-info");
   const title = document.getElementById("dag-info-title");
   const body = document.getElementById("dag-info-body");
   const links = document.getElementById("dag-info-links");
   const closeButton = document.getElementById("dag-info-close");
+  let currentIndex = 0;
+
+  function renderStage() {
+    nodes.forEach((node, index) => {
+      node.hidden = index !== currentIndex;
+      node.classList.toggle("selected", index === currentIndex);
+      if (index === currentIndex) node.setAttribute("aria-current", "step");
+      else node.removeAttribute("aria-current");
+    });
+    counter.textContent = `${currentIndex + 1} / ${nodes.length}`;
+    progress.style.width = `${(currentIndex + 1) / nodes.length * 100}%`;
+    previous.disabled = currentIndex === 0;
+    next.disabled = currentIndex === nodes.length - 1;
+  }
+
+  function moveStage(change) {
+    const newIndex = Math.max(0, Math.min(nodes.length - 1, currentIndex + change));
+    if (newIndex === currentIndex) return;
+    currentIndex = newIndex;
+    renderStage();
+  }
 
   function showStage(key) {
     const detail = details[key];
@@ -204,18 +216,23 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
       a.href = href;
       links.append(a, document.createTextNode(" "));
     });
-    const selectedIndex = order.indexOf(key);
-    document.querySelectorAll(".dag-node, .flow-step").forEach((node, index) => {
-      node.classList.toggle("selected", index % order.length === selectedIndex);
-    });
     if (!panel.open) panel.showModal();
   }
 
-  document.querySelectorAll('.dag-node, .flow-step').forEach((node, index) => {
+  nodes.forEach(node => {
     node.addEventListener("click", event => {
       event.preventDefault();
-      showStage(order[index % order.length]);
+      showStage(node.dataset.stage);
     });
+  });
+  previous.addEventListener("click", () => moveStage(-1));
+  next.addEventListener("click", () => moveStage(1));
+  shell.addEventListener("keydown", event => {
+    if (panel.open) return;
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      moveStage(event.key === "ArrowLeft" ? -1 : 1);
+    }
   });
   closeButton.addEventListener("click", () => panel.close());
   document.addEventListener("keydown", event => {
@@ -224,6 +241,8 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
       panel.close();
     }
   });
+  shell.classList.add("is-guided");
+  renderStage();
   panel.addEventListener("click", event => {
     const rect = panel.getBoundingClientRect();
     if (event.target === panel && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) panel.close();

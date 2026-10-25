@@ -93,14 +93,22 @@ class MethodologyPageTests(unittest.TestCase):
                     "measurements", "validation", "outputs", "publication"}
         self.assertTrue(expected.issubset(self.parser.ids))
 
-    def test_all_sixteen_dag_nodes_have_progressive_fallbacks(self):
+    def test_guided_flow_has_sixteen_stages_and_arrow_controls(self):
         self.assertEqual(self.parser.node_count, 16)
-        self.assertEqual(self.parser.flow_count, 16)
+        self.assertEqual(self.parser.flow_count, 0)
         self.assertEqual(len(self.hrefs), 16)
+        self.assertEqual(len(self.parser.stages), 16)
+        self.assertEqual(len(set(self.parser.stages)), 16)
+        self.assertNotIn(None, self.parser.stages)
         self.assertTrue(all(href and not href.startswith("javascript:")
                             for href in self.hrefs))
         self.assertIn("dag-info", self.parser.ids)
-        self.assertIn("querySelectorAll('.dag-node, .flow-step')", self.html)
+        for element_id in ("dag-prev", "dag-next", "dag-counter", "guided-stage"):
+            self.assertIn(element_id, self.parser.ids)
+        self.assertIn('aria-label="Previous stage"', self.html)
+        self.assertIn('aria-label="Next stage"', self.html)
+        self.assertIn("currentIndex", self.html)
+        self.assertIn("node.hidden", self.html)
 
     def test_info_modal_has_close_control_and_does_not_scroll(self):
         self.assertIn('<dialog id="dag-info"', self.html)
