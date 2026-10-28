@@ -7,22 +7,21 @@
 <title>How the IACC Linguistic Comparison Was Done</title>
 <style>
 :root{--paper:#f7f4ec;--ink:#2c2639;--muted:#6b6570;--line:#d9d4c9;--hair:#e7e1d2;--red:#bd7f76;--blue:#8099b8;--mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;--serif:Georgia,"Iowan Old Style","Times New Roman",serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.55}a{color:#5477a0;text-decoration:none;border-bottom:1px solid #c6c2ce}a:hover{border-bottom-color:#5477a0}a:focus-visible{outline:3px solid var(--red);outline-offset:4px}.wrap{max-width:1100px;margin:auto;padding:0 28px}nav{position:sticky;top:0;background:rgba(247,244,236,.96);border-bottom:1px solid var(--line);z-index:10;backdrop-filter:blur(3px)}nav .wrap{display:flex;align-items:baseline;gap:22px;padding-top:11px;padding-bottom:11px;overflow-x:auto}nav a{font:12px var(--mono);white-space:nowrap;border:none;color:var(--muted)}nav a:hover{color:var(--red)}.brand{font-size:19px!important;color:var(--ink)!important}header{padding:64px 0 40px;border-bottom:1px solid var(--line)}.eyebrow,.kicker{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}h1{font-size:clamp(46px,6vw,70px);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:850px;margin:14px 0 20px}.sub{font-size:18px;line-height:1.65;color:var(--muted);max-width:800px}.header-links{font:12px var(--mono);line-height:2}.header-links a{margin-right:18px}.section-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.section-jump a{padding:5px 10px;border:1px solid var(--line);font:10px var(--mono);letter-spacing:.05em;color:var(--muted);background:rgba(255,255,255,.25)}.section-jump a:hover{border-color:var(--red);color:var(--red)}
-.guided-shell{margin:32px 0 18px;padding:22px;border:1px solid var(--line);background:#f3efe4}.guided-meta{display:flex;justify-content:space-between;gap:16px;font:11px var(--mono);letter-spacing:.04em;color:var(--muted)}#dag-counter{font-variant-numeric:tabular-nums;color:var(--ink)}.guided-row{display:grid;grid-template-columns:90px minmax(0,1fr) 90px;gap:24px;align-items:center;margin-top:18px}.guided-center{min-width:0}.guided-connector{display:flex;align-items:center;gap:10px;width:min(520px,100%);margin:0 auto 12px;color:var(--red)}.guided-connector span{height:1px;flex:1;background:#c9bec8}.guided-connector b{font:18px var(--mono)}.guided-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.guided-shell.is-guided .guided-stage{display:block;min-height:238px}.guided-shell.is-guided .dag-node{max-width:520px;min-height:238px;margin:auto}.dag-node{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:210px;padding:28px;border:1px solid #c9bec8;border-bottom:3px solid #aa9fac;border-radius:3px;background:#fbf8f0;color:var(--ink);box-shadow:0 8px 22px rgba(44,38,57,.05);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.dag-node.infra{background:#e7d9df}.dag-node.analysis{background:#dde6ee}.dag-node.validation{background:#e1e7dc}.dag-node.output{background:#e9e2c9}.dag-node[hidden]{display:none}.dag-node:hover,.dag-node:focus-visible,.dag-node.selected{border-color:var(--red);box-shadow:0 12px 28px rgba(44,38,57,.12);transform:translateY(-2px)}.dag-node:focus-visible{outline:3px solid var(--red);outline-offset:4px}.node-index{font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#815f68}.dag-node strong{margin:18px 0 8px;font-size:clamp(25px,3vw,34px);font-weight:400;line-height:1.12;letter-spacing:-.025em}.dag-node small{font:12px/1.5 var(--mono);color:var(--muted)}.details-cue{margin-top:24px;font:11px var(--mono);color:#815f68}.dag-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:90px;height:100px;padding:10px;border:1px solid #c9bec8;border-radius:3px;background:var(--paper);color:var(--ink);cursor:pointer}.dag-arrow span{font:32px/1 var(--mono)}.dag-arrow small{font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em}.dag-arrow:hover:not(:disabled),.dag-arrow:focus-visible{border-color:var(--red);color:var(--red);outline:2px solid var(--red);outline-offset:3px}.dag-arrow:disabled{opacity:.32;cursor:not-allowed}.guided-hint{margin:15px auto 0;text-align:center;font:11px/1.5 var(--mono);color:var(--muted)}.guided-progress{height:3px;margin-top:20px;background:#ddd5cf;overflow:hidden}#guided-progress-bar{display:block;width:6.25%;height:100%;background:var(--red);transition:width .2s ease}.graph-note{max-width:780px;margin:0 0 40px;color:var(--muted);font-size:13px;font-style:italic}@media(max-width:760px){.guided-shell{padding:16px 14px}.guided-meta{font-size:9px}.guided-row{grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.guided-center{grid-column:1/-1;grid-row:1}.dag-arrow{width:100%;height:64px;flex-direction:row;gap:12px}.dag-arrow span{font-size:25px}#dag-prev{grid-column:1;grid-row:2}#dag-next{grid-column:2;grid-row:2}.guided-stage{grid-template-columns:1fr}.guided-shell.is-guided .guided-stage,.guided-shell.is-guided .dag-node{min-height:250px}.dag-node{padding:24px}.dag-node strong{font-size:27px}.guided-hint{font-size:10px}.details-cue{margin-top:20px}}
-section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:60px}#pipeline{border-top:none;padding-top:34px}h2{font-size:31px;font-weight:400;letter-spacing:-.02em;margin:8px 0 12px}h3{font-size:20px;font-weight:400;margin:24px 0 8px}.lede,li{color:var(--muted)}.lede{max-width:850px}.io{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.io div{padding:15px;background:rgba(255,255,255,.3);border-top:1px solid var(--line)}.io strong{display:block;font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#9b6463;margin-bottom:7px}.io p{margin:0;font-size:14px;color:var(--muted)}.note{border-left:3px solid var(--blue);padding:8px 0 8px 16px;color:var(--muted);max-width:850px}.links{font:12px var(--mono);line-height:2}.links a{margin-right:18px}.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}.method-card{display:block;padding:17px;border:1px solid var(--line);background:rgba(255,255,255,.24);color:var(--ink)}.method-card:hover{border-color:var(--red)}.method-card b{display:block;font:11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#9b6463;margin-bottom:7px}.method-card span{font-size:14px;color:var(--muted)}.caveats{padding-left:20px;max-width:880px}.caveats li{margin:0 0 12px}.caveats strong{color:var(--ink);font-weight:400}footer{padding:34px 0 64px;color:var(--muted);border-top:1px solid var(--line)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:12px var(--mono)}
-@media(max-width:760px){.wrap{padding:0 18px}header{padding-top:44px}.io,.method-grid{grid-template-columns:1fr}h1{font-size:46px}.sub{font-size:16px}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.55}a{color:#5477a0;text-decoration:none;border-bottom:1px solid #c6c2ce}a:hover{border-bottom-color:#5477a0}a:focus-visible{outline:3px solid var(--red);outline-offset:4px}.wrap{max-width:1100px;margin:auto;padding:0 28px}nav{position:sticky;top:0;background:rgba(247,244,236,.96);border-bottom:1px solid var(--line);z-index:10;backdrop-filter:blur(3px)}nav .wrap{display:flex;align-items:baseline;gap:22px;padding-top:11px;padding-bottom:11px;overflow-x:auto}nav a{font:12px var(--mono);white-space:nowrap;border:none;color:var(--muted)}nav a:hover{color:var(--red)}.brand{font-size:19px!important;color:var(--ink)!important}header{padding:64px 0 40px;border-bottom:1px solid var(--line)}.eyebrow,.kicker{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}h1{font-size:clamp(46px,6vw,70px);font-weight:400;line-height:1.02;letter-spacing:-.035em;max-width:850px;margin:14px 0 20px}.sub{font-size:18px;line-height:1.65;color:var(--muted);max-width:800px}.header-links{font:12px var(--mono);line-height:2}.header-links a{margin-right:18px}
+.guided-shell{margin:32px 0 18px;padding:22px;border:1px solid var(--line);background:#f3efe4}.guided-meta{display:flex;justify-content:space-between;gap:16px;font:11px var(--mono);letter-spacing:.04em;color:var(--muted)}#dag-counter{font-variant-numeric:tabular-nums;color:var(--ink)}.guided-row{display:grid;grid-template-columns:90px minmax(0,1fr) 90px;gap:24px;align-items:center;margin-top:18px}.guided-center{min-width:0}.guided-connector{display:flex;align-items:center;gap:10px;width:min(520px,100%);margin:0 auto 12px;color:var(--red)}.guided-connector span{height:1px;flex:1;background:#c9bec8}.guided-connector b{font:18px var(--mono)}.guided-stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.guided-shell.is-guided .guided-stage{display:block;position:relative;min-height:238px;overflow:hidden}.guided-shell.is-guided .dag-node{max-width:520px;min-height:238px;margin:auto}.dag-node{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:210px;padding:28px;border:1px solid #c9bec8;border-bottom:3px solid #aa9fac;border-radius:3px;background:#fbf8f0;color:var(--ink);box-shadow:0 8px 22px rgba(44,38,57,.05);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.dag-node.infra{background:#e7d9df}.dag-node.analysis{background:#dde6ee}.dag-node.validation{background:#e1e7dc}.dag-node.output{background:#e9e2c9}.dag-node[hidden]{display:none}.dag-node:hover,.dag-node:focus-visible,.dag-node.selected{border-color:var(--red);box-shadow:0 12px 28px rgba(44,38,57,.12);transform:translateY(-2px)}.dag-node:focus-visible{outline:3px solid var(--red);outline-offset:4px}.node-index{font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#815f68}.dag-node strong{margin:18px 0 8px;font-size:clamp(25px,3vw,34px);font-weight:400;line-height:1.12;letter-spacing:-.025em}.dag-node small{font:12px/1.5 var(--mono);color:var(--muted)}.details-cue{margin-top:24px;font:11px var(--mono);color:#815f68}.dag-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:90px;height:100px;padding:10px;border:1px solid #c9bec8;border-radius:3px;background:var(--paper);color:var(--ink);cursor:pointer}.dag-arrow span{font:32px/1 var(--mono)}.dag-arrow small{font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em}.dag-arrow:hover:not(:disabled),.dag-arrow:focus-visible{border-color:var(--red);color:var(--red);outline:2px solid var(--red);outline-offset:3px}.dag-arrow:disabled{opacity:.32;cursor:not-allowed}.guided-hint{margin:15px auto 0;text-align:center;font:11px/1.5 var(--mono);color:var(--muted)}.guided-progress{height:3px;margin-top:20px;background:#ddd5cf;overflow:hidden}#guided-progress-bar{display:block;width:6.25%;height:100%;background:var(--red);transition:width .2s ease}.dag-node.outgoing{z-index:2;max-width:none;margin:0;pointer-events:none}.dag-node.entering{z-index:1}@media(max-width:760px){.guided-shell{padding:16px 14px}.guided-meta{font-size:9px}.guided-row{grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.guided-center{grid-column:1/-1;grid-row:1}.dag-arrow{width:100%;height:64px;flex-direction:row;gap:12px}.dag-arrow span{font-size:25px}#dag-prev{grid-column:1;grid-row:2}#dag-next{grid-column:2;grid-row:2}.guided-stage{grid-template-columns:1fr}.guided-shell.is-guided .guided-stage,.guided-shell.is-guided .dag-node{min-height:250px}.dag-node{padding:24px}.dag-node strong{font-size:27px}.guided-hint{font-size:10px}.details-cue{margin-top:20px}}
+section{padding:40px 0 26px;scroll-margin-top:60px}#pipeline{padding-top:34px;padding-bottom:70px}h2{font-size:31px;font-weight:400;letter-spacing:-.02em;margin:8px 0 12px}h3{font-size:20px;font-weight:400;margin:24px 0 8px}.lede{max-width:850px;color:var(--muted)}.links{font:12px var(--mono);line-height:2}.links a{margin-right:18px}
+@media(max-width:760px){.wrap{padding:0 18px}header{padding-top:44px}h1{font-size:46px}.sub{font-size:16px}}
 .dag-info{width:min(680px,calc(100vw - 32px));max-height:calc(100dvh - 48px);margin:auto;padding:30px 32px 26px;border:1px solid #c9bec8;border-left:4px solid var(--red);border-radius:4px;background:#fbf8f0;color:var(--ink);box-shadow:0 24px 80px rgba(44,38,57,.24);overflow:auto}.dag-info::backdrop{background:rgba(44,38,57,.48);backdrop-filter:blur(3px)}#dag-info-close{position:absolute;top:14px;right:14px;padding:6px 10px;border:1px solid var(--line);border-radius:3px;background:var(--paper);color:var(--ink);font:11px var(--mono);cursor:pointer}#dag-info-close:hover,#dag-info-close:focus-visible{border-color:var(--red);color:var(--red);outline:none}#dag-info-close span{font-size:18px;line-height:1;vertical-align:-1px;margin-right:3px}.dag-info-kicker{font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#9b6463}.dag-info h3{margin:12px 80px 12px 0;font-size:28px;line-height:1.15}.dag-info p{max-width:850px}.dag-info-body{color:var(--muted);font-size:17px;line-height:1.65}.dag-info .links{margin:20px 0 0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dag-node,#guided-progress-bar{transition:none}}
 </style>
 </head>
 <body>
-<nav aria-label="Primary"><div class="wrap"><a class="brand" href="index.html#top">IACC × 2026</a><a href="index.html#tldr">explorer</a><a href="#pipeline">pipeline</a><a href="#measurements">measurements</a><a href="#caveats">caveats</a></div></nav>
+<nav aria-label="Primary"><div class="wrap"><a class="brand" href="index.html#top">IACC × 2026</a><a href="index.html#tldr">explorer</a><a href="#pipeline">pipeline</a></div></nav>
 <header><div class="wrap">
   <div class="eyebrow">Reproducible methods · source archive to interactive evidence</div>
   <h1>How it was done.</h1>
   <p class="sub">Follow the 61-document inventory through extraction, cleaning, parallel linguistic measurements, exported evidence, and the 46-document interactive comparison. Select any stage to inspect its method or see its results.</p>
   <p class="header-links"><a href="iacc_linguistic_comparison.ipynb">analysis notebook</a><a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison">GitHub repository</a><a href="outputs/iacc_linguistic/report.md">full report</a></p>
-  <div class="section-jump" aria-label="Method sections"><a href="#sources">01 sources</a><a href="#inventory">02 inventory</a><a href="#extraction">03 extraction</a><a href="#cleaning">04 cleaning</a><a href="#measurements">05 measurements</a><a href="#validation">06 validation</a><a href="#outputs">07 outputs</a><a href="#publication">08 publication</a></div>
 </div></header>
 <main class="wrap">
 <section id="pipeline" aria-labelledby="pipeline-title">
@@ -36,10 +35,10 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
       <div class="guided-center">
         <div class="guided-connector" aria-hidden="true"><span></span><b>→</b><span></span></div>
         <div id="guided-stage" class="guided-stage">
-          <a class="dag-node infra" data-stage="sources" href="#sources"><span class="node-index">01 · Source record</span><strong>Source archive + draft</strong><small>60 publications + 1 draft</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node infra" data-stage="inventory" href="#inventory"><span class="node-index">02 · Corpus inventory</span><strong>Inventory 61 → analyze 46</strong><small>15 short / easy-read excluded</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node infra" data-stage="extraction" href="#extraction"><span class="node-index">03 · Extraction</span><strong>Extract or reuse cache</strong><small>SHA-256 content-addressed</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node infra" data-stage="cleaning" href="#cleaning"><span class="node-index">04 · Cleaned corpus</span><strong>Clean shared corpus</strong><small>Headers · contents · references out</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="sources" href="iac/IACC_Publications/INDEX.csv"><span class="node-index">01 · Source record</span><strong>Source archive + draft</strong><small>60 publications + 1 draft</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="inventory" href="outputs/iacc_linguistic/documents.csv"><span class="node-index">02 · Corpus inventory</span><strong>Inventory 61 → analyze 46</strong><small>15 short / easy-read excluded</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="extraction" href="iacc_linguistic_comparison.ipynb"><span class="node-index">03 · Extraction</span><strong>Extract or reuse cache</strong><small>SHA-256 content-addressed</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node infra" data-stage="cleaning" href="outputs/iacc_linguistic/report.md"><span class="node-index">04 · Cleaned corpus</span><strong>Clean shared corpus</strong><small>Headers · contents · references out</small><span class="details-cue">Select for details ↗</span></a>
           <a class="dag-node analysis" data-stage="style" href="index.html#style"><span class="node-index">05 · Measurement</span><strong>Style + z-scores</strong><small>Readability · voice · baselines</small><span class="details-cue">Select for details ↗</span></a>
           <a class="dag-node analysis" data-stage="lexicon" href="index.html#subject"><span class="node-index">06 · Measurement</span><strong>Lexicon + subject</strong><small>Naming · reference counts</small><span class="details-cue">Select for details ↗</span></a>
           <a class="dag-node analysis" data-stage="agency" href="index.html#subject"><span class="node-index">07 · Measurement</span><strong>Agency + community</strong><small>Agent and patient roles</small><span class="details-cue">Select for details ↗</span></a>
@@ -49,9 +48,9 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
           <a class="dag-node analysis" data-stage="trends" href="index.html#trends"><span class="node-index">11 · Measurement</span><strong>Longitudinal trends</strong><small>Spearman · plan-to-plan</small><span class="details-cue">Select for details ↗</span></a>
           <a class="dag-node analysis" data-stage="reversals" href="index.html#reversals"><span class="node-index">12 · Control</span><strong>Reversal controls</strong><small>Walk-forward comparison</small><span class="details-cue">Select for details ↗</span></a>
           <a class="dag-node analysis" data-stage="sections" href="index.html#sections"><span class="node-index">13 · Measurement</span><strong>Draft sections</strong><small>37 outline sections</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node validation" data-stage="validation" href="#validation"><span class="node-index">14 · Validation</span><strong>Smoke tests</strong><small>Measurement-code checks</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node output" data-stage="outputs" href="#outputs"><span class="node-index">15 · Exported evidence</span><strong>CSVs + figures</strong><small>Notebook section 11</small><span class="details-cue">Select for details ↗</span></a>
-          <a class="dag-node output" data-stage="publication" href="#publication"><span class="node-index">16 · Publication</span><strong>Payload → explorer</strong><small>Self-contained index.html</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node validation" data-stage="validation" href="outputs/iacc_linguistic/dashboard_review_checks.csv"><span class="node-index">14 · Validation</span><strong>Smoke tests</strong><small>Measurement-code checks</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node output" data-stage="outputs" href="outputs/iacc_linguistic/report.md"><span class="node-index">15 · Exported evidence</span><strong>CSVs + figures</strong><small>Notebook section 11</small><span class="details-cue">Select for details ↗</span></a>
+          <a class="dag-node output" data-stage="publication" href="index.html#top"><span class="node-index">16 · Publication</span><strong>Payload → explorer</strong><small>Self-contained index.html</small><span class="details-cue">Select for details ↗</span></a>
         </div>
         <p class="guided-hint">Use the arrows to advance · select the box for a detailed explanation</p>
       </div>
@@ -66,99 +65,16 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
     <p id="dag-info-body">Its method, inputs, and outputs will appear here without moving the page.</p>
     <p id="dag-info-links" class="links"></p>
   </dialog>
-  <p class="graph-note">The guided sequence follows the analysis and publication handoffs. The detailed explanations below remain available as a linear text alternative.</p>
-</section>
-
-<section id="sources">
-  <div class="kicker">01 · Source record</div><h2>One archive, plus the working draft.</h2>
-  <p class="lede">The comparison begins with the IACC’s public publication record and the July 2026 Strategic Plan working draft. The archive index preserves each publication’s source URL and local series classification.</p>
-  <div class="io"><div><strong>Input</strong><p>60 earlier IACC publications and one July 2026 working draft.</p></div><div><strong>Transformation</strong><p>Inventory the latest posted versions across strategic plans, annual summaries, reports to Congress, portfolio analyses, letters, and statements.</p></div><div><strong>Output</strong><p>A traceable document index with source URLs, years, series, variants, and file metadata.</p></div></div>
-  <p class="links"><a href="iac/IACC_Publications/INDEX.csv">archive index</a><a href="iac/IACC_Publications/README.md">archive notes</a><a href="iacc_linguistic_comparison.ipynb">notebook</a></p>
-</section>
-
-<section id="inventory">
-  <div class="kicker">02 · Corpus inventory</div><h2>Define the comparison set before measuring.</h2>
-  <p class="lede">The notebook inventories 61 documents. The analysis set contains 46 documents: eight earlier strategic plans, 37 other publications, and the draft. Fifteen inventoried items are excluded because they are under 2,000 words or are easy-read/at-a-glance editions.</p>
-  <div class="io"><div><strong>Input</strong><p>Archive files, the draft, and document metadata.</p></div><div><strong>Transformation</strong><p>Detect document variants and apply the same inclusion rules throughout the analysis.</p></div><div><strong>Output</strong><p><code>documents.csv</code>, a corpus timeline, and stable document IDs used by later stages.</p></div></div>
-  <p class="links"><a href="outputs/iacc_linguistic/documents.csv">document inventory</a><a href="outputs/iacc_linguistic/report.md">corpus summary</a></p>
-</section>
-
-<section id="extraction">
-  <div class="kicker">03 · Extraction and cache</div><h2>Extract once; reuse exactly what matches.</h2>
-  <p class="lede">PyMuPDF is the primary PDF extractor, with pypdf, pdfplumber, and pdftotext as fallbacks. A content-addressed cache lets the notebook reproduce the analysis without the original PDFs.</p>
-  <div class="io"><div><strong>Input</strong><p>Source PDFs when present, otherwise the repository’s extracted-text cache.</p></div><div><strong>Transformation</strong><p>Hash each PDF with SHA-256. Reuse matching cached pages; re-extract a document if its bytes change while retaining valid cache entries for the rest.</p></div><div><strong>Output</strong><p>Page-level text, table-of-contents metadata, and a cache manifest keyed by content hash.</p></div></div>
-  <p class="note">The shipped cache is what makes the one-click Colab route and a fresh local clone practical: the full analysis can run without downloading every source PDF again.</p>
-  <p class="links"><a href="iacc_linguistic_comparison.ipynb">notebook sections 1–2</a><a href=".pdf_cache/iacc_linguistic/cache_manifest.json">cache manifest</a></p>
-</section>
-
-<section id="cleaning">
-  <div class="kicker">04 · Shared cleaned corpus</div><h2>Remove apparatus, not evidence.</h2>
-  <p class="lede">Running headers and footers, tables of contents, and reference lists are removed before linguistic measurement. Citation density helps identify reference-list boundaries, and cleaning details are reported for the draft and earlier strategic plans.</p>
-  <div class="io"><div><strong>Input</strong><p>Page text and extraction metadata for every included document.</p></div><div><strong>Transformation</strong><p>Normalize ligatures and line breaks, detect repeated running lines, exclude contents pages, and identify trailing references.</p></div><div><strong>Output</strong><p>Consistent cleaned prose and document-level cleaning metadata shared by all measurement branches.</p></div></div>
-  <p class="note">Using the same cleaned corpus is the crucial dependency: readability, vocabulary, similarity, reuse, and section comparisons are not calculated from different versions of the documents.</p>
-</section>
-
-<section id="measurements">
-  <div class="kicker">05 · Parallel measurements</div><h2>Different questions, one cleaned text.</h2>
-  <p class="lede">The notebook’s sections 3–10 calculate complementary views of the record. A supplementary script adds agency/community role analysis. Select a card to open the corresponding evidence.</p>
-  <div class="method-grid">
-    <a class="method-card" href="index.html#style"><b>Style + z-scores</b><span>Six readability formulas, sentence and word length, MATTR lexical diversity, passives, modality, hedges, boosters, nominalisation, and acronyms. Z-scores locate the draft against the earlier plans and broader record.</span></a>
-    <a class="method-card" href="index.html#subject"><b>Lexicon + subject references</b><span>Domain terms, person-first and identity-first naming, ASD/autism usage, and one non-overlapping count of explicit references to autism or autistic people.</span></a>
-    <a class="method-card" href="index.html#subject"><b>Agency + community roles</b><span>Dependency parsing classifies matched agency, autistic-person, and community mentions by agent and patient proto-roles. Visibility rates remain separate from role shares.</span></a>
-    <a class="method-card" href="index.html#keyness"><b>Keyness</b><span>Weighted log-odds with informative Dirichlet priors identify words and bigrams that are distinctive against earlier strategic plans and SP-2023 alone.</span></a>
-    <a class="method-card" href="index.html#vocab"><b>Vocabulary turnover</b><span>New terms used at least five times but absent from the earlier record, and dropped terms previously used across at least three strategic plans.</span></a>
-    <a class="method-card" href="index.html#memory"><b>Similarity + text reuse</b><span>TF-IDF cosine similarity, Burrows’ Delta stylometry, and 8-word-shingle inheritance distinguish topical/style similarity from verbatim textual carryover.</span></a>
-    <a class="method-card" href="index.html#trends"><b>Longitudinal trends</b><span>Spearman correlations describe term movement through 2007–2023; pairwise plan comparisons measure how far each strategic plan moves from its predecessor.</span></a>
-    <a class="method-card" href="index.html#reversals"><b>Reversal controls</b><span>Walk-forward controls refit trends on each document’s own past and trailing eight-year window, avoiding a future-fitted baseline for earlier documents.</span></a>
-    <a class="method-card" href="index.html#sections"><b>Draft sections</b><span>Thirty-seven outline sections of at least 300 words are profiled for readability, prescriptiveness, naming, novelty, and nearest earlier document.</span></a>
-  </div>
-  <p class="links"><a href="agency_analysis.py">agency/community analysis script</a><a href="outputs/iacc_linguistic/agency_patiency_note.md">role-analysis method note</a><a href="outputs/iacc_linguistic/critique_memo.md">interpretation and caveats</a></p>
-</section>
-
-<section id="validation">
-  <div class="kicker">06 · Validation branch</div><h2>Check the measurement code.</h2>
-  <p class="lede">Notebook section 12 runs smoke tests against the measurement functions. Separate dashboard review checks record consistency checks for the published presentation.</p>
-  <div class="io"><div><strong>Input</strong><p>Measurement functions, known test cases, and exported analysis values.</p></div><div><strong>Transformation</strong><p>Exercise parsing and metric behavior, then check dashboard values and expected output relationships.</p></div><div><strong>Output</strong><p>Executable smoke-test results and <code>dashboard_review_checks.csv</code>.</p></div></div>
-  <p class="note">These checks can catch implementation and consistency errors. They cannot establish intent, prove causation, or remove the interpretive limits of the underlying measures.</p>
-  <p class="links"><a href="outputs/iacc_linguistic/dashboard_review_checks.csv">dashboard checks</a><a href="outputs/iacc_linguistic/dashboard_review.md">dashboard review</a></p>
-</section>
-
-<section id="outputs">
-  <div class="kicker">07 · Exported evidence</div><h2>Keep the numbers outside the page.</h2>
-  <p class="lede">Notebook section 11 writes the analysis tables, figures, and generated report into <code>outputs/iacc_linguistic/</code>. This makes the values inspectable without reading embedded browser code.</p>
-  <div class="io"><div><strong>Input</strong><p>Data frames and figures produced by the analysis branches.</p></div><div><strong>Transformation</strong><p>Export normalized CSV tables, PNG figures, headline findings, and methodological notes.</p></div><div><strong>Output</strong><p>CSVs, figures, <code>report.md</code>, and the consolidated critique memo.</p></div></div>
-  <p class="links"><a href="outputs/iacc_linguistic/report.md">generated report</a><a href="outputs/iacc_linguistic/style_features.csv">example: style table</a><a href="outputs/iacc_linguistic/term_trends.csv">example: trend table</a></p>
-</section>
-
-<section id="publication">
-  <div class="kicker">08 · Publication build</div><h2>Select a payload; ship one readable page.</h2>
-  <p class="lede"><code>build_explorer.py</code> reads selected CSVs, converts their values into a curated JSON payload, replaces <code>/*__PAYLOAD__*/null</code> in <code>explorer_template.html</code>, and writes the self-contained <code>index.html</code>.</p>
-  <div class="io"><div><strong>Input</strong><p>Exported CSVs plus the explorer’s HTML, CSS, and browser code template.</p></div><div><strong>Transformation</strong><p>Round values for display, choose comparison series and headline measures, serialize the payload, and inject it at the template token.</p></div><div><strong>Output</strong><p>A standalone interactive explorer that works from GitHub Pages or a local <code>file://</code> view, with no CDN dependency.</p></div></div>
-  <p class="note">This final selection stage is why the DAG reconverges without implying that every computed table becomes a separate panel. The generated page is a presentation of the analysis, not the analysis itself.</p>
-  <p class="links"><a href="build_explorer.py">explorer build script</a><a href="explorer_template.html">explorer template</a><a href="index.html#top">open the explorer</a></p>
-</section>
-
-<section id="caveats">
-  <div class="kicker">Interpretation</div><h2>What the method can—and cannot—show.</h2>
-  <ul class="caveats">
-    <li><strong>Heuristic measurements.</strong> Sentence splitting, syllable counting, and passive detection are approximate, but the same rules are applied to every document so comparisons remain consistent.</li>
-    <li><strong>Small z-score baseline.</strong> Z-scores use only eight earlier strategic plans. Their directions are useful; their magnitudes are inflated and should not be treated as effect sizes.</li>
-    <li><strong>Comparator matters.</strong> SP-2023 is the primary comparator because it is the plan the draft replaces. The eight-plan mean and full prior record answer different questions.</li>
-    <li><strong>Different document status.</strong> The 2026 source is a working draft released for public comment, while the earlier record consists largely of finished publications.</li>
-    <li><strong>No inference of motive.</strong> Linguistic comparison cannot establish intent. Genre change, deadline pressure, and a committee working without an institutional handoff can produce observable language differences without revealing why they occurred.</li>
-  </ul>
-  <p class="links"><a href="outputs/iacc_linguistic/critique_memo.md">read the full critique memo</a><a href="outputs/iacc_linguistic/report.md">read the generated report</a></p>
 </section>
 </main>
-<footer><div class="wrap"><a href="index.html#top">← Back to the interactive explorer</a><a href="https://github.com/IMAF-and-H-Consulting/iacc-linguistic-comparison">Source on GitHub ↗</a></div></footer>
 <script>
 (() => {
   const details = {
-    sources: {title: "Source archive + draft", body: "The inputs are 60 earlier IACC publications and the July 2026 working draft. The archive index preserves each document’s source URL, year, series, and variant so the comparison remains traceable.", links: [["Archive index", "iac/IACC_Publications/INDEX.csv"], ["Analysis notebook", "iacc_linguistic_comparison.ipynb"]]},
-    inventory: {title: "Inventory 61 → analyze 46", body: "The notebook inventories 61 documents and analyzes 46. Fifteen are excluded because they are under 2,000 words or are easy-read/at-a-glance editions. Stable document IDs carry through every later stage.", links: [["Document inventory", "outputs/iacc_linguistic/documents.csv"]]},
+    sources: {title: "Source archive + draft", body: "The inputs are 60 earlier IACC publications and the July 2026 working draft. The archive index preserves each document’s source URL, year, series, and variant so the comparison remains traceable. The draft was released for public comment, while the earlier record consists largely of finished publications.", links: [["Archive index", "iac/IACC_Publications/INDEX.csv"], ["Analysis notebook", "iacc_linguistic_comparison.ipynb"]]},
+    inventory: {title: "Inventory 61 → analyze 46", body: "The notebook inventories 61 documents, and the analysis set contains 46 documents. Fifteen are excluded because they are under 2,000 words or are easy-read/at-a-glance editions. Stable document IDs carry through every later stage.", links: [["Document inventory", "outputs/iacc_linguistic/documents.csv"]]},
     extraction: {title: "Extract or reuse the content-addressed cache", body: "PyMuPDF extracts page text, with pypdf, pdfplumber, and pdftotext as fallbacks. SHA-256 hashes identify exact PDF versions: matching documents reuse cached text, while changed documents are extracted again.", links: [["Cache manifest", ".pdf_cache/iacc_linguistic/cache_manifest.json"], ["Notebook", "iacc_linguistic_comparison.ipynb"]]},
-    cleaning: {title: "Clean one shared corpus", body: "Running headers and footers, tables of contents, and reference lists are removed before measurement. Every analysis branch uses this same cleaned prose, keeping comparisons consistent.", links: [["Method details", "#cleaning"], ["Generated report", "outputs/iacc_linguistic/report.md"]]},
-    style: {title: "Style + z-scores", body: "Readability, sentence and word length, lexical diversity, passives, modality, hedges, boosters, nominalisation, and acronyms are measured consistently. Z-scores locate the draft against the eight earlier strategic plans and the broader record.", links: [["Style results", "index.html#style"], ["Style table", "outputs/iacc_linguistic/style_features.csv"]]},
+    cleaning: {title: "Clean one shared corpus", body: "Running headers and footers, tables of contents, and reference lists are removed before measurement. Every analysis branch uses this same cleaned prose, keeping comparisons consistent.", links: [["Analysis notebook", "iacc_linguistic_comparison.ipynb"], ["Generated report", "outputs/iacc_linguistic/report.md"]]},
+    style: {title: "Style + z-scores", body: "Readability, sentence and word length, lexical diversity, passives, modality, hedges, boosters, nominalisation, and acronyms are measured consistently. Sentence splitting, syllable counting, and passive detection are approximate, but the same rules apply to every document. Z-scores use only eight earlier strategic plans: their directions are useful, but their magnitudes are not effect sizes. SP-2023 is the primary comparator; the eight-plan mean and full prior record answer different questions.", links: [["Style results", "index.html#style"], ["Style table", "outputs/iacc_linguistic/style_features.csv"]]},
     lexicon: {title: "Lexicon + subject references", body: "Domain lexicon counts cover naming conventions, ASD/autism, services, causes, equity, governance, and modality. A separate non-overlapping pass counts every explicit reference to autism or autistic people.", links: [["Subject results", "index.html#subject"], ["Reference counts", "outputs/iacc_linguistic/autism_reference_by_plan.csv"]]},
     agency: {title: "Agency + community roles", body: "The supplementary analysis identifies federal agencies, autistic people, and community organizations, then classifies their agent and patient proto-roles. Visibility per 10,000 words remains distinct from role share.", links: [["Subject results", "index.html#subject"], ["Analysis script", "agency_analysis.py"], ["Method note", "outputs/iacc_linguistic/agency_patiency_note.md"]]},
     keyness: {title: "Keyness", body: "Weighted log-odds with informative Dirichlet priors identify distinctive words and bigrams. Comparisons are made against earlier strategic plans and SP-2023 alone.", links: [["Keyness results", "index.html#keyness"], ["Word keyness table", "outputs/iacc_linguistic/keyness_words_vs_prior_plans.csv"]]},
@@ -182,7 +98,9 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
   const body = document.getElementById("dag-info-body");
   const links = document.getElementById("dag-info-links");
   const closeButton = document.getElementById("dag-info-close");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let currentIndex = 0;
+  let transition = null;
 
   function renderStage() {
     nodes.forEach((node, index) => {
@@ -197,11 +115,62 @@ section{padding:40px 0 26px;border-top:1px solid var(--hair);scroll-margin-top:6
     next.disabled = currentIndex === nodes.length - 1;
   }
 
+  function cancelTransition() {
+    if (!transition) return;
+    const current = transition;
+    transition = null;
+    current.animations.forEach(animation => animation.cancel());
+    current.outgoing.hidden = true;
+    current.outgoing.classList.remove("outgoing");
+    current.incoming.classList.remove("entering");
+    ["position", "left", "top", "width", "height"].forEach(property => {
+      current.outgoing.style.removeProperty(property);
+    });
+  }
+
   function moveStage(change) {
+    cancelTransition();
     const newIndex = Math.max(0, Math.min(nodes.length - 1, currentIndex + change));
     if (newIndex === currentIndex) return;
+    const outgoing = nodes[currentIndex];
+    const incoming = nodes[newIndex];
+    const direction = change > 0 ? 1 : -1;
+    const geometry = {
+      left: outgoing.offsetLeft,
+      top: outgoing.offsetTop,
+      width: outgoing.offsetWidth,
+      height: outgoing.offsetHeight
+    };
     currentIndex = newIndex;
     renderStage();
+    if (reducedMotion.matches) return;
+
+    outgoing.hidden = false;
+    outgoing.classList.add("outgoing");
+    incoming.classList.add("entering");
+    Object.assign(outgoing.style, {
+      position: "absolute",
+      left: `${geometry.left}px`,
+      top: `${geometry.top}px`,
+      width: `${geometry.width}px`,
+      height: `${geometry.height}px`
+    });
+    const options = {duration: 250, easing: "cubic-bezier(.22,.61,.36,1)"};
+    const animations = [
+      outgoing.animate([
+        {transform: "translateX(0)", opacity: 1},
+        {transform: `translateX(${-direction * 56}px)`, opacity: 0}
+      ], options),
+      incoming.animate([
+        {transform: `translateX(${direction * 56}px)`, opacity: 0},
+        {transform: "translateX(0)", opacity: 1}
+      ], options)
+    ];
+    const current = {animations, outgoing, incoming};
+    transition = current;
+    Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+      if (transition === current) cancelTransition();
+    });
   }
 
   function showStage(key) {

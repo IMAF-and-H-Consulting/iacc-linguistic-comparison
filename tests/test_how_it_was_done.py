@@ -64,11 +64,14 @@ class IdParser(HTMLParser):
         self.scripts = 0
         self.external_scripts = 0
         self.stages = []
+        self.section_ids = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if "id" in attrs:
             self.ids.add(attrs["id"])
+        if tag == "section" and "id" in attrs:
+            self.section_ids.append(attrs["id"])
         classes = set(attrs.get("class", "").split())
         is_stage = tag == "a" and ({"dag-node", "flow-step"} & classes)
         self.node_count += tag == "a" and "dag-node" in classes
@@ -88,10 +91,12 @@ class MethodologyPageTests(unittest.TestCase):
         cls.hrefs = [attrs.get("href", "") for attrs, text in links(cls.html)
                      if "dag-node" in attrs.get("class", "").split()]
 
-    def test_page_has_stable_explanatory_anchors(self):
-        expected = {"sources", "inventory", "extraction", "cleaning",
-                    "measurements", "validation", "outputs", "publication"}
-        self.assertTrue(expected.issubset(self.parser.ids))
+    def test_page_contains_only_the_guided_pipeline(self):
+        self.assertEqual(self.parser.section_ids, ["pipeline"])
+        self.assertNotIn('class="section-jump"', self.html)
+        self.assertNotIn("<footer", self.html)
+        self.assertIn("translateX", self.html)
+        self.assertIn("prefers-reduced-motion", self.html)
 
     def test_guided_flow_has_sixteen_stages_and_arrow_controls(self):
         self.assertEqual(self.parser.node_count, 16)
@@ -109,6 +114,11 @@ class MethodologyPageTests(unittest.TestCase):
         self.assertIn('aria-label="Next stage"', self.html)
         self.assertIn("currentIndex", self.html)
         self.assertIn("node.hidden", self.html)
+        self.assertIn("let transition = null", self.html)
+        self.assertIn("cancelTransition", self.html)
+        self.assertIn("outgoing.animate", self.html)
+        self.assertIn("incoming.animate", self.html)
+        self.assertIn("matchMedia", self.html)
 
     def test_info_modal_has_close_control_and_does_not_scroll(self):
         self.assertIn('<dialog id="dag-info"', self.html)
@@ -135,10 +145,9 @@ class MethodologyPageTests(unittest.TestCase):
     def test_return_navigation_and_source_links_exist(self):
         all_hrefs = {attrs.get("href") for attrs, text in links(self.html)}
         self.assertIn("index.html#top", all_hrefs)
-        self.assertIn("iacc_linguistic_comparison.ipynb", all_hrefs)
-        self.assertIn("agency_analysis.py", all_hrefs)
-        self.assertIn("build_explorer.py", all_hrefs)
-        self.assertIn("iac/IACC_Publications/INDEX.csv", all_hrefs)
+        for source in ("iacc_linguistic_comparison.ipynb", "agency_analysis.py",
+                       "build_explorer.py", "iac/IACC_Publications/INDEX.csv"):
+            self.assertIn(source, self.html)
 
 
 if __name__ == "__main__":
